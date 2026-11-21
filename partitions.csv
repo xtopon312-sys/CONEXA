@@ -1,0 +1,6 @@
+# Name, Type, SubType, Offset, Size, Flags
+nvs, data, nvs, 0x9000, 0x6000,
+phy_init, data, phy, 0xf000, 0x1000,
+factory, app, factory, 0x10000, 0x300000,
+# P0.1 leaves the remainder of the 16 MB flash unallocated.
+# The compressed page is embedded in the application; no filesystem upload.

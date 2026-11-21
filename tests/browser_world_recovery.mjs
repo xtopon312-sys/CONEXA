@@ -1,0 +1,31 @@
+import {createRequire} from 'node:module';
+import {mkdir,writeFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {startServer} from './v1_server.mjs';
+const require=createRequire(process.env.CONEXA_PLAYWRIGHT_MODULE || import.meta.url);
+const {chromium}=require('playwright');
+const out='evidence/game-v1/recovery';await mkdir(out,{recursive:true});
+const host=await startServer(),browser=await chromium.launch({headless:true});
+const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'});
+const report={provenance:'Chromium and native C loopback; synthetic codes; no ESP32',checks:[],errors:[]};page.on('pageerror',e=>report.errors.push(e.message));
+const check=(name,data={})=>{console.log('PASS '+name);report.checks.push({name,...data});};
+const get=async(token='BTESTSTUDENT07')=>(await fetch(host.baseURL+'/api/session',{headers:{Authorization:'Bearer '+token}})).json();
+const post=async(path,body,token='BTESTTEACHER')=>{const r=await fetch(host.baseURL+path,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body)});assert.equal(r.status,200);return r.json();};
+const control=async(op)=>{const s=(await get('BTESTTEACHER')).world;return post('/api/world/action',{boot:s.boot,epoch:s.epoch,seq:s.teacher.seq+1,op,arg:0});};
+const confirmed=async(x,y)=>page.waitForFunction(t=>document.querySelector('#iso-world').dataset.confirmed===t,x+','+y,{timeout:25000});
+const login=async()=>{await page.goto(host.baseURL);await page.locator('#interact').click();await page.locator('#student-code').fill('BTESTSTUDENT07');await page.locator('#student-login-button').click();await page.waitForFunction(()=>document.body.dataset.authenticated==='true');await page.locator('#account-dialog [data-close]').click();};
+try{
+ await login();await control('start');await page.waitForFunction(()=>document.querySelector('#iso-world').dataset.phase==='open');await confirmed(7,9);
+ const before=host.requests.filter(r=>r.body?.op==='move').length;await page.locator('#iso-world').focus();await page.keyboard.press('ArrowUp');await page.waitForTimeout(1400);assert.equal((await get()).world.me.x,7);assert.equal((await get()).world.me.y,9);assert.equal(host.requests.filter(r=>r.body?.op==='move').length,before);check('keyboard collision stops at fountain without network movement');
+ host.controls.loseNextResponse();await page.keyboard.press('ArrowRight');await confirmed(8,9);const moved=(await get()).world.me;assert.equal(moved.seq,1);check('lost movement ACK recovers by snapshot without duplicate progression',{seq:moved.seq});
+ await page.waitForTimeout(1300);await control('pause');await page.waitForFunction(()=>document.querySelector('#iso-world').dataset.phase==='paused');await page.keyboard.press('ArrowRight');await page.waitForTimeout(1200);assert.equal((await get()).world.me.x,8);check('pause blocks exploration authoritatively');
+ await control('resume');await page.waitForFunction(()=>document.querySelector('#iso-world').dataset.phase==='open');host.controls.offline(true);const n=host.requests.length;await page.waitForTimeout(6000);assert(host.requests.length-n<10,'offline must use backoff, not 150ms retry storm');assert.equal(await page.locator('#iso-world').getAttribute('data-confirmed'),'8,9');host.controls.offline(false);await confirmed(8,9);await page.waitForFunction(()=>document.querySelector('#connection-short').textContent==='LAN',{timeout:25000});check('offline blocks writes and backs off; same execution restores confirmed position');
+ // Touch a free floor tile using the public canvas camera transform.
+ const point=await page.locator('#iso-world').evaluate(e=>{const [cx,cy]=e.dataset.camera.split(',').map(Number),z=+e.dataset.zoom;return{x:e.clientWidth/2+((9-9)*48-cx)*z,y:e.clientHeight/2+((9+9)*24-cy)*z};});
+ await page.touchscreen.tap(point.x,point.y);await confirmed(9,9);check('touch floor navigation works with reduced motion');await page.screenshot({path:out+'/touch-reduced-motion.png'});
+ await page.reload();await page.waitForFunction(()=>document.querySelector('#iso-world').dataset.ownId==='0');assert.equal(await page.locator('#student-code').inputValue(),'');await page.locator('#interact').click();await page.locator('#student-code').fill('BTESTSTUDENT07');await page.locator('#student-login-button').click();await confirmed(9,9);await page.locator('#account-dialog [data-close]').click();check('reload requires same code and restores server position without credential storage');
+ await host.controls.restart('fedcba9876543210');await page.waitForFunction(()=>document.querySelector('#iso-world').dataset.phase==='lobby',{timeout:25000});await confirmed(7,9);assert.equal((await get()).world.me.seq,0);assert.equal((await get()).world.me.done,0);check('new board boot clears RAM progress and cancels old operations');
+ const avatarHost=await startServer({avatarDir:'evidence/game-v1/avatar-test'});try{const avatarPage=await browser.newPage({viewport:{width:390,height:844}});await avatarPage.goto(avatarHost.baseURL);await avatarPage.waitForFunction(()=>document.querySelector('#iso-world').dataset.avatarIds==='7');await avatarPage.locator('#interact').click();await avatarPage.locator('#student-code').fill('BTESTSTUDENT07');await avatarPage.locator('#student-login-button').click();await avatarPage.waitForFunction(()=>document.querySelector('#iso-world').dataset.ownId==='7');await avatarPage.locator('#account-dialog [data-close]').click();if(await avatarPage.locator('#dismiss-button').isVisible())await avatarPage.locator('#dismiss-button').click();await avatarPage.screenshot({path:out+'/avatar-007-test.png'});check('generated WebP replaces only ID7 through production loader; rule state unchanged');await avatarPage.close();}finally{await avatarHost.close();}
+ assert.equal(report.errors.length,0);report.ok=true;
+}catch(e){report.ok=false;report.error=String(e.stack);report.state=await page.locator('#iso-world').evaluate(e=>({...e.dataset})).catch(()=>null);report.requests=host.requests.slice(-20);await page.screenshot({path:out+'/failure.png'}).catch(()=>{});console.error(e);process.exitCode=1;}
+finally{await writeFile(out+'/results.json',JSON.stringify(report,null,2));await browser.close();await host.close();}

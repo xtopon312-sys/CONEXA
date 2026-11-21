@@ -1,0 +1,1646 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#163d39">
+  <title>CONEXA 200 · Praça Conexa · Uma cidade em rede</title>
+  <link rel="icon" href="data:,">
+
+  <style>
+:root{--ink:#163d39;--muted:#697a74;--paper:#fffdf5;--coral:#ef6f48;--mint:#daf1cf;--line:#dfE7db;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);font-size:15px}*{box-sizing:border-box}body{margin:0;overflow:hidden;background:#b3d8b1}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer;color:inherit}button:disabled{cursor:default;opacity:.45}button:focus-visible,a:focus-visible,canvas:focus-visible{outline:3px solid #ffb04a;outline-offset:3px}button{touch-action:manipulation}a{color:inherit;text-decoration:none}[hidden]{display:none!important}h1,h2,h3,p{margin:0}.game{position:relative;width:100%;height:100dvh;min-height:360px;overflow:hidden}#iso-world{display:block;width:100%;height:100%;touch-action:none;outline-offset:-4px}.hud{position:absolute;inset:22px 26px auto;display:flex;justify-content:space-between;align-items:center;pointer-events:none;gap:16px;z-index:3}.brand{display:flex;align-items:center;gap:11px;background:var(--paper);border:1px solid #fff;border-radius:18px;padding:11px 17px 11px 11px;box-shadow:0 7px 25px #2b583b1a}.brand-symbol{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--ink);color:#f8db7a;font-size:29px;font-weight:800}.brand strong{font-size:18px;letter-spacing:.1em}.brand strong span{font-size:12px;font-weight:500;letter-spacing:0}.brand small{display:block;font-size:9px;font-weight:750;letter-spacing:.16em;margin-top:3px}.hud-actions{display:flex;align-items:center;gap:10px;pointer-events:auto}.presence{font-size:12px;background:var(--paper);border-radius:30px;padding:13px 17px;box-shadow:0 5px 20px #2b583b19}.presence i,.phase-pill i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#37a579;margin-right:7px}.icon-button{border:1px solid #fff;background:var(--paper);width:45px;height:45px;border-radius:14px;box-shadow:0 5px 16px #264c3c15;font-size:23px;display:grid;place-items:center}.view-menu{position:absolute;right:26px;top:93px;background:var(--paper);border:1px solid white;border-radius:15px;z-index:8;padding:7px;box-shadow:0 14px 35px #23493726}.view-menu a{display:block;padding:11px 23px;border-radius:10px;font-size:13px;font-weight:650}.view-menu a:hover{background:var(--mint)}.preview-tag{position:absolute;top:101px;left:28px;font-size:9px;letter-spacing:.07em;font-weight:750;background:#173d39dc;color:white;padding:6px 10px;border-radius:7px;z-index:2}.preview-tag span{font-weight:400;letter-spacing:0;opacity:.85}.quest-peek{position:absolute;top:157px;left:28px;padding:15px;max-width:320px;border:1px solid #ffffffcf;border-radius:18px;background:#fffdf5ef;box-shadow:0 12px 40px #20442e16;display:flex;gap:12px;align-items:flex-start;z-index:2}.quest-icon{display:grid;place-items:center;flex:none;width:36px;height:36px;background:#fce4ad;color:#9c5b21;border-radius:11px;font-size:26px}.quest-peek small{display:block;font-size:8px;letter-spacing:.09em;font-weight:750;color:#a36635;margin:0 0 5px}.quest-peek strong{font-size:14px;line-height:1.25;display:block}.quest-peek p{font-size:11px;color:var(--muted);margin:5px 0 0}.quest-peek button{border:0;background:#f1f3e9;border-radius:9px;min-width:33px;height:33px;font-size:22px;flex:none}.camera-controls{position:absolute;right:27px;bottom:143px;display:flex;flex-direction:column;gap:7px;z-index:2}.camera-controls .icon-button{width:41px;height:41px;border-radius:12px;background:#fffdf5ed}.destination-dock{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:5px;padding:7px;background:#fffdf5f5;border:1px solid white;border-radius:23px;box-shadow:0 12px 38px #173d3926;z-index:3}.destination-dock button{min-width:90px;min-height:58px;border:0;background:transparent;border-radius:16px;display:grid;place-items:center;align-content:center;gap:2px;font-size:11px;font-weight:700;padding:7px 13px}.destination-dock button span{font-size:24px;line-height:1}.destination-dock button[aria-pressed=true]{background:var(--ink);color:#fff}.destination-dock button:hover:not([aria-pressed=true]){background:#e7efdc}.context-action{position:absolute;bottom:112px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:24px;border:1px solid #fff;background:#fffdf5f7;box-shadow:0 8px 30px #23493822;border-radius:17px;padding:12px 13px 12px 18px;z-index:2;min-width:360px;max-width:calc(100% - 40px)}.context-action small{display:block;font-size:8px;color:#a36530;letter-spacing:.15em;font-weight:800;margin-bottom:3px}.context-action strong{display:block;font-size:13px;white-space:nowrap}.context-action button,.primary{border:0;border-radius:11px;background:var(--coral);color:white;padding:12px 16px;font-size:12px;font-weight:750;white-space:nowrap}.context-action button span{margin-left:8px}.dpad{display:none}.phase-pill{position:absolute;right:28px;top:107px;font-size:11px;font-weight:650;background:#fffdf5e8;border:1px solid white;padding:8px 12px;border-radius:30px;z-index:2}.toast{position:absolute;left:50%;top:112px;transform:translateX(-50%);padding:12px 20px;background:#173d39ef;color:#fff;border:1px solid #ffffff50;border-radius:12px;font-size:12px;max-width:calc(100% - 24px);text-align:center;z-index:5}.sr-only{position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden}.projector-controls{position:absolute;bottom:30px;right:30px;display:flex;gap:8px;z-index:3}.projector-controls button{padding:13px 18px;border-radius:13px;border:1px solid white;background:var(--paper);font-size:13px;font-weight:700}.projector .destination-dock,.projector .dpad,.projector .context-action,.projector .quest-peek{display:none}.projector .hud{inset:26px 32px auto}.projector .brand{padding:14px 23px 14px 14px}.projector .brand strong{font-size:22px}.projector .brand small{font-size:12px}.projector .preview-tag{top:121px;left:34px}.projector .phase-pill{top:113px;right:34px}.projector .presence{font-size:16px}.projector .camera-controls{bottom:101px}.teacher-panel{position:absolute;left:26px;top:150px;bottom:28px;width:355px;padding:25px;background:var(--paper);border:1px solid #fff;border-radius:24px;box-shadow:0 12px 40px #254a3020;z-index:3;overflow:auto}.eyebrow{font-size:9px;font-weight:800;letter-spacing:.13em;color:#a86936}.teacher-panel h1{font-size:29px;line-height:1.1;letter-spacing:-.04em;margin:12px 0}.teacher-panel>p{font-size:13px;line-height:1.6;color:var(--muted)}.teacher-phase{display:flex;justify-content:space-between;gap:10px;background:#eaf1de;border-radius:12px;padding:14px 12px;margin:23px 0 14px;font-size:12px}.teacher-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.teacher-controls button{min-height:45px;background:#fffdf5;border:1px solid #ccd9c4;border-radius:11px;font-size:12px;font-weight:700}.teacher-controls button:first-child{grid-column:1/-1;background:var(--ink);color:white;border-color:var(--ink)}.teacher-controls .reset{grid-column:1/-1;color:#b84b31;border-color:#eac7b5}.teacher-open{width:100%;margin-top:15px;border:0;background:#f5e3c6;padding:13px;border-radius:11px;font-weight:700;font-size:12px}.teacher-note{border-top:1px solid var(--line);margin-top:24px;padding-top:17px;font-size:11px;line-height:1.6}.teacher-note p{margin-top:5px;color:var(--muted)}.teacher .quest-peek,.teacher .dpad,.teacher .destination-dock,.teacher .context-action{display:none}.teacher .camera-controls{bottom:28px}.teacher .preview-tag{top:108px}.teacher .phase-pill{top:108px}
+dialog{color:var(--ink);border:1px solid #ffffff;border-radius:26px;box-shadow:0 25px 100px #173d3955;background:var(--paper);padding:27px;max-height:calc(100dvh - 50px);overflow:auto;width:min(480px,calc(100% - 32px))}dialog::backdrop{background:#163d3975;backdrop-filter:blur(4px)}.close-dialog{position:absolute;right:17px;top:16px;border:0;background:#edf1e5;width:36px;height:36px;border-radius:50%;font-size:26px;line-height:1}.mission-heading{display:flex;gap:11px;align-items:center;margin-bottom:21px;padding-right:26px}.mission-heading small{font-size:9px;letter-spacing:.15em;font-weight:800;color:#a86936}.mission-heading h2{font-size:24px;line-height:1.1;margin-top:4px;letter-spacing:-.04em}.post{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:#fff}.post header{display:flex;gap:9px;align-items:center;padding:12px 15px}.post-avatar{display:grid;place-items:center;width:34px;height:34px;background:#ef9a6b;border-radius:50%;font-weight:750;color:white}.post header strong{font-size:12px}.post header small{display:block;font-size:9px;color:var(--muted);margin-top:2px}.post-dots{margin-left:auto;font-size:12px;letter-spacing:2px;color:#73837a}.post-picture{height:185px;background:radial-gradient(ellipse at 28% 45%,#fae4a2,transparent 70%),#bdddb9;position:relative;overflow:hidden}.ribbon{position:absolute;width:210px;height:75px;border:19px solid #d2e8ba;border-radius:50%;transform:rotate(-36deg)}.r1{left:-60px;top:95px}.r2{right:-115px;top:22px}.trophy{position:absolute;left:44px;top:32px;transform:rotate(-9deg)}.trophy-cup{width:75px;height:70px;background:linear-gradient(110deg,#ffe8a1,#f3b444 60%,#e79930);border-radius:7px 7px 35px 35px;display:grid;place-items:center;color:#fff5ca;font-size:34px;position:relative;border:2px solid #d9922e}.trophy-cup:before,.trophy-cup:after{content:'';position:absolute;width:21px;height:32px;border:6px solid #eaa93f;border-radius:10px;top:5px}.trophy-cup:before{left:-22px}.trophy-cup:after{right:-22px}.trophy-stem{width:12px;height:25px;background:#edb145;margin:auto}.trophy-base{width:58px;height:12px;border-radius:4px;background:#cf8a34;margin:auto}.picture-note{position:absolute;right:24px;top:54px;font-size:15px;font-weight:750;letter-spacing:-.03em;line-height:1.35;color:#355c48;max-width:170px}.confetti{position:absolute;width:7px;height:14px;background:#ee7c5c;transform:rotate(30deg);border-radius:2px}.c1{left:24px;top:22px}.c2{left:140px;top:19px;background:#fff8da;transform:rotate(70deg)}.c3{right:49px;bottom:21px;transform:rotate(-20deg)}.c4{right:18px;top:21px;background:#5b9e84;transform:rotate(-30deg)}.post>p{font-size:12px;line-height:1.6;padding:12px 15px 4px}.post footer{font-size:9px;color:#89958b;padding:4px 15px 12px}.mission-dialog>h3{font-size:16px;line-height:1.4;margin:19px 0 12px;letter-spacing:-.02em}.choices{display:grid;gap:8px}.choices button{display:flex;align-items:center;gap:10px;border:1px solid #dce4d5;background:#f7f8ef;padding:12px;border-radius:12px;text-align:left;font-size:12px;line-height:1.4}.choices b{display:grid;place-items:center;width:27px;height:27px;flex:none;border-radius:8px;background:#e5ebda;font-size:11px}.choices button.selected{border:2px solid #297861;padding:11px;background:#e7f0de}.choices button.selected b{background:#297861;color:#fff}.vote-status,.public-instruction{font-size:11px;line-height:1.5;margin:13px 0 0;color:#63776a}.public-instruction{padding:13px;background:#eaf1de;border-radius:12px}.results{margin-top:17px;border-top:1px solid #dce4d5;padding-top:16px}.results h3{font-size:17px;margin-bottom:13px}.result-row{margin:12px 0;font-size:12px}.result-row div{display:flex;justify-content:space-between;margin-bottom:5px}.result-row i{display:block;height:7px;border-radius:5px;background:#e5ebdc;overflow:hidden}.result-row em{height:100%;display:block;border-radius:5px;background:#5e9d79}.results>p{font-size:12px;line-height:1.65;background:#e9f1dc;padding:13px;border-radius:12px;margin-top:15px}.results>small{display:block;font-size:10px;color:var(--muted);line-height:1.5;margin-top:10px}.info-dialog h2{font-size:27px;line-height:1.1;letter-spacing:-.04em;margin:13px 15px 15px 0}.info-dialog p{font-size:14px;line-height:1.75;color:#5d7266}.info-dialog .primary{margin-top:24px;font-size:13px;width:100%}.projector .mission-dialog{width:650px}.projector .mission-heading h2{font-size:29px}.projector .post-picture{height:210px}.projector .post>p,.projector .public-instruction{font-size:16px}.projector .post header strong{font-size:16px}.projector .post header small,.projector .post footer{font-size:12px}.projector .mission-dialog>h3{font-size:21px}.projector .choices button{font-size:16px}.projector .results>p{font-size:16px}.projector .results>small{font-size:13px}
+@media(max-width:700px){.hud{inset:max(12px,env(safe-area-inset-top)) 13px auto;gap:9px}.brand{gap:8px;padding:8px 11px 8px 8px;border-radius:14px}.brand-symbol{width:33px;height:33px;font-size:24px;border-radius:9px}.brand strong{font-size:13px}.brand strong span{font-size:10px}.brand small{font-size:7px;letter-spacing:.11em}.presence{font-size:10px;padding:10px 11px}.presence i{width:6px;height:6px;margin-right:4px}.hud-actions{gap:7px}.icon-button{width:37px;height:37px;border-radius:11px;font-size:20px}.preview-tag{left:15px;top:75px;font-size:8px;padding:5px 7px}.preview-tag span{font-size:8px}.phase-pill{top:77px;right:15px;font-size:8px;padding:5px 7px}.phase-pill i{width:5px;height:5px;margin-right:4px}.quest-peek{top:115px;left:15px;padding:10px;gap:9px;max-width:260px;border-radius:14px}.quest-peek .quest-icon{width:29px;height:29px;font-size:20px;border-radius:9px}.quest-peek small{font-size:7px;margin-bottom:4px}.quest-peek strong{font-size:12px}.quest-peek p{font-size:10px}.quest-peek button{height:30px;min-width:29px}.destination-dock{bottom:max(13px,env(safe-area-inset-bottom));gap:3px;padding:5px;border-radius:20px;width:calc(100% - 28px);justify-content:space-around}.destination-dock button{min-width:0;flex:1;min-height:51px;padding:5px 7px;font-size:10px;border-radius:14px}.destination-dock button span{font-size:22px}.context-action{bottom:88px;min-width:0;width:calc(100% - 28px);max-width:none;gap:10px;border-radius:14px;padding:10px 10px 10px 13px}.context-action>div{min-width:0;flex:1}.context-action strong{font-size:11px;white-space:normal;line-height:1.3}.context-action small{font-size:7px;margin-bottom:4px}.context-action button{padding:11px 13px;font-size:11px}.context-action button span{margin-left:5px}.camera-controls{right:15px;bottom:167px;gap:6px}.camera-controls .icon-button{width:36px;height:36px;font-size:21px;background:#fffdf5e8}.dpad{display:grid;position:absolute;left:15px;bottom:169px;grid-template-columns:37px 37px 37px;grid-template-rows:35px 35px 35px;background:#fffdf5b8;border:1px solid #ffffffbd;border-radius:50%;padding:6px;box-shadow:0 6px 22px #224a2b15;z-index:2}.dpad button{border:0;background:transparent;border-radius:12px;font-size:22px;font-weight:650}.dpad button:active{background:#b5d5b4}.dpad button:first-child{grid-column:2}.dpad button:nth-child(2){grid-column:1;grid-row:2}.dpad span{grid-column:2;grid-row:2;display:grid;place-items:center;color:#648469}.dpad button:nth-child(4){grid-column:3;grid-row:2}.dpad button:last-child{grid-column:2;grid-row:3}.view-menu{right:15px;top:63px}.toast{top:205px;font-size:11px;padding:10px 15px}.mission-dialog{margin:auto 0 0;width:100%;max-width:none;border-radius:24px 24px 0 0;max-height:83dvh;padding:23px 20px calc(22px + env(safe-area-inset-bottom))}.mission-heading{margin-bottom:15px}.mission-heading h2{font-size:23px}.post-picture{height:165px}.picture-note{right:15px;top:51px;font-size:13px;max-width:145px}.trophy{left:36px;top:21px;transform:rotate(-9deg) scale(.9)}.info-dialog{padding:26px 24px}.teacher-panel{left:14px;right:14px;top:117px;bottom:23px;width:auto;padding:22px}.teacher-panel h1{font-size:27px}.teacher .camera-controls{display:none}.teacher .preview-tag{top:77px}.teacher .phase-pill{top:77px}.projector .hud{inset:13px}.projector .brand{padding:8px 11px}.projector .brand strong{font-size:13px}.projector .brand small{font-size:7px}.projector .preview-tag{top:77px;left:15px}.projector .phase-pill{top:77px;right:15px}.projector .presence{font-size:10px}.projector .camera-controls{bottom:88px}.projector-controls{bottom:17px;right:15px}.projector-controls button{font-size:11px;padding:11px 14px}.projector .mission-dialog{width:100%}}
+@media(max-height:540px) and (min-width:701px){.quest-peek{top:135px;padding:11px}.context-action{bottom:99px}.destination-dock{bottom:17px}.camera-controls{bottom:98px}.teacher-panel{top:138px;bottom:15px}.preview-tag{top:100px}.hud{top:15px}}
+@media(max-height:540px) and (min-width:701px){.context-action{left:auto;right:20px;bottom:100px;transform:none;min-width:0;width:280px}.camera-controls{top:145px;bottom:auto;right:16px;flex-direction:row}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* P2.1 R1: compact exploration HUD; teaching and mission semantics retained. */
+:root{--coral:#c95130;--muted:#566b63}
+.hud{inset:18px 22px auto;gap:10px}.brand{border-radius:14px;padding:8px 13px 8px 8px;gap:9px}.brand-symbol{width:36px;height:36px;font-size:25px;border-radius:10px}.brand strong{font-size:15px}.brand small{font-size:8px}
+.presence{padding:11px 13px;font-size:11px}.presence i{background:#648d7e}.preview-tag{top:83px;left:24px;font-size:9px;background:#244e4ce8;letter-spacing:.02em}
+.quest-peek{top:122px;left:24px;max-width:285px;padding:10px 11px;gap:9px;border-radius:13px;align-items:center}.quest-peek .quest-icon{width:29px;height:29px;font-size:21px}.quest-peek small{font-size:8px;margin-bottom:3px}.quest-peek strong{font-size:13px}.quest-peek p{display:none}.quest-peek button{background:#e4ebde;min-width:40px;height:40px}
+.view-menu{top:83px;right:22px;width:268px;padding:12px;border-radius:15px;z-index:9}.menu-label{display:block;font-size:9px;font-weight:800;letter-spacing:.07em;margin:4px 5px 9px;color:#62796c}.interface-links{display:flex;border-top:1px solid #d7dfd0;padding-top:5px}.interface-links a{padding:10px 8px;font-size:11px;text-align:center;flex:1}.destination-dock{position:static;transform:none;display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:0;margin-bottom:15px;box-shadow:none;border:0;border-radius:0;width:100%;background:transparent}.destination-dock button{min-width:0;min-height:48px;display:flex;justify-content:flex-start;gap:8px;font-size:12px;padding:8px 10px;border-radius:9px;background:#edf1e6}.destination-dock button span{font-size:21px}.student .phase-pill{position:static;border:0;border-top:1px solid #d7dfd0;margin-top:8px;border-radius:0;padding:10px 5px 2px;font-size:10px;background:transparent}
+.camera-toggle{position:absolute;right:23px;top:126px;width:44px;height:44px;z-index:4;color:#275453}.camera-controls,.projector .camera-controls,.teacher .camera-controls{right:23px;top:177px;bottom:auto;display:flex;flex-direction:column;gap:4px;padding:5px;border:1px solid white;border-radius:13px;background:#fffdf5eF;z-index:4}.camera-controls .icon-button{border:0;box-shadow:none;background:transparent;width:44px;height:44px;border-radius:9px}.camera-controls button:hover{background:#e2ecd9}
+.context-action{bottom:24px;left:50%;min-width:0;width:330px;padding:10px 11px 10px 15px;gap:16px}.context-action>div{flex:1;min-width:0}.context-action strong{font-size:12px;white-space:normal}.context-action button{min-height:44px;padding:11px 14px}.toast{top:192px}.projector .preview-tag{top:121px}.projector .camera-toggle{top:160px}.projector .camera-controls{top:210px}.teacher .camera-toggle{top:160px}.teacher .camera-controls{top:210px}.projector .view-menu .menu-label:first-child{display:none}.projector .view-menu{top:111px}.projector .view-menu .destination-dock{display:none}
+@media(max-width:700px){
+  .hud{inset:max(10px,env(safe-area-inset-top)) 12px auto;gap:6px}.brand{padding:7px 9px 7px 7px;gap:7px;border-radius:12px}.brand-symbol{width:30px;height:30px;font-size:21px;border-radius:8px}.brand strong{font-size:12px;letter-spacing:.04em}.brand strong span{font-size:10px}.brand small{display:none}.hud-actions{gap:6px}.presence{padding:10px 9px;font-size:10px}.presence span{display:none}.presence i{width:6px;height:6px;margin-right:5px}.icon-button{width:44px;height:44px;border-radius:12px}.preview-tag{left:13px;top:61px;padding:4px 7px;font-size:8px}.preview-tag span{font-size:8px}.quest-peek{top:91px;left:13px;padding:6px 7px 6px 9px;max-width:calc(100% - 78px);gap:7px;background:#fffdf5eb}.quest-peek .quest-icon{display:none}.quest-peek small{font-size:7px;margin-bottom:2px}.quest-peek strong{font-size:12px}.quest-peek button{height:40px;min-width:40px}.view-menu{top:62px;right:12px;width:264px}.view-menu .destination-dock{width:100%}.destination-dock button{font-size:12px;flex:none;min-height:48px;padding:8px 10px}.interface-links a{font-size:11px;padding:10px 8px}
+  .camera-toggle{top:95px;right:13px}.camera-controls{top:146px;right:13px}.context-action{left:auto;right:13px;bottom:max(17px,env(safe-area-inset-bottom));transform:none;width:155px;max-width:calc(100% - 173px);display:block;border-radius:14px;padding:10px;min-width:0;background:#fffdf5f2}.context-action small{font-size:7px;letter-spacing:.04em;margin-bottom:5px}.context-action strong{display:none}.context-action button{width:100%;padding:10px;font-size:12px;min-height:44px}.context-action button span{margin-left:7px}
+  .dpad{left:13px;bottom:max(17px,env(safe-area-inset-bottom));grid-template-columns:44px 44px 44px;grid-template-rows:44px 44px 44px;padding:1px;border:1px solid #ffffffb0;background:#fffdf5a6;box-shadow:0 5px 20px #294a3220}.dpad button{border-radius:50%;font-size:22px;background:#fffdf5b8}.dpad span{font-size:20px}.toast{top:160px;font-size:11px;padding:10px 13px}.teacher .camera-toggle{display:none}.teacher .view-menu{top:62px}.projector .camera-toggle{top:112px}.projector .camera-controls{top:162px}.projector .view-menu{top:62px}
+}
+@media(max-height:540px) and (min-width:701px){
+  .hud{inset:10px 14px auto}.brand{padding:5px 10px 5px 6px}.brand-symbol{width:31px;height:31px}.brand small{display:none}.preview-tag{top:66px;left:15px}.quest-peek{top:97px;left:15px;padding:6px 8px;max-width:226px}.quest-peek .quest-icon{display:none}.quest-peek button{height:40px;min-width:40px}.quest-peek strong{font-size:12px}.camera-toggle{right:14px;top:72px}.camera-controls{top:122px;right:14px}.context-action{bottom:15px;left:auto;right:15px;transform:none;width:245px;padding:9px;gap:8px}.context-action small{font-size:7px}.context-action strong{font-size:10px}.context-action button{font-size:11px;padding:10px}.view-menu{top:62px;right:14px}.destination-dock{grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px}.view-menu{width:360px}.destination-dock button{display:grid;justify-content:center;padding:6px;font-size:10px;min-height:49px}.view-menu .menu-label{font-size:8px;margin-bottom:5px}.student .phase-pill{padding-top:7px}.dpad{display:grid;position:absolute;left:15px;bottom:15px;width:134px;height:134px;grid-template-columns:44px 44px 44px;grid-template-rows:44px 44px 44px;border-radius:50%;padding:1px;background:#fffdf5a6;z-index:2}.dpad button{border:0;border-radius:50%;background:#fffdf5b8;font-size:22px}.dpad button:first-child{grid-column:2}.dpad button:nth-child(2){grid-column:1;grid-row:2}.dpad span{grid-column:2;grid-row:2;display:grid;place-items:center}.dpad button:nth-child(4){grid-column:3;grid-row:2}.dpad button:last-child{grid-column:2;grid-row:3}.teacher .dpad,.projector .dpad{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* FUNCTIONAL_INTEGRATION_CSS */
+/* Functional styles: reuse P0 form/control semantics and R1 world layout. */
+.connection{display:flex;align-items:center;gap:6px;background:#fffdf5;border-radius:30px;padding:11px 12px;font-size:11px;pointer-events:auto;box-shadow:0 5px 20px #2b583b19;white-space:nowrap}.connection i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#889789}.connection[data-state=online] i{background:#2d8c63}.connection[data-state=offline]{background:#fff0d5;color:#8c3f28}.connection[data-state=offline] i{background:#c45c36}#connection-detail{font-size:10px;line-height:1.5;margin:10px 5px 6px;color:#4a665a}.menu-count{font-size:11px;margin:5px}.view-menu{max-height:calc(100dvh - 100px);overflow:auto}.view-menu .places-panel{border-top:1px solid #d4dfce;padding-top:9px;margin:9px 4px 3px}.places-panel summary{font-size:11px;font-weight:700;cursor:pointer;padding:7px 0}.places-heading h3{font-size:12px;margin:8px 0}.places-heading span{font-size:10px}.places{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin:12px 0}.place{height:28px;border-radius:6px;background:#e9eddf;color:#687b67;font-size:10px;display:grid;place-items:center;border:1px solid #cdd7c3}.place.joined{background:#cce3c9;color:#183d35;border-color:#91b78b}.place.voted{background:#285a4b;color:white}.place.is-me{outline:2px solid #c95130;outline-offset:1px}.legend{font-size:9px;display:flex;flex-wrap:wrap;gap:7px}.legend i{display:inline-block;width:7px;height:7px;background:#e9eddf}.legend .entered{background:#cce3c9}.legend .answered{background:#285a4b}.view-menu a[aria-current=page]{background:#dfebd7;font-weight:800}
+.notice{position:absolute;top:193px;left:50%;transform:translateX(-50%);max-width:min(560px,calc(100% - 28px));width:max-content;padding:12px 14px;background:#fff0d6;border:1px solid #dbb492;color:#6f3926;border-radius:12px;z-index:5;font-size:12px;line-height:1.5;box-shadow:0 8px 24px #23493820}.notice.info{background:#f6f9ed;color:#244b3d;border-color:#c3d4b8}.notice button{background:transparent;color:inherit;border:0;font-weight:700;text-decoration:underline;min-height:38px;padding:7px 9px}#canvas-fallback{position:absolute;top:40%;left:50%;transform:translateX(-50%);max-width:450px;width:calc(100% - 40px);background:#fffdf5;padding:24px;border-radius:16px;font-size:16px;line-height:1.6}.canvas-fallback .camera-toggle{display:none}
+input{font:inherit;width:100%;min-height:48px;border:1px solid #9eafa0;border-radius:10px;background:white;color:#163d39;padding:11px 12px}input:focus-visible{outline:3px solid #e2903b;outline-offset:3px}.auth-block label{display:block;font-size:12px;font-weight:700;margin:17px 0 8px}.field-row{display:flex;gap:8px;align-items:stretch}.field-row input{min-width:0;flex:1}.button{border:0;border-radius:10px;background:#22584b;color:white;font-size:12px;font-weight:700;padding:12px 15px;min-height:44px}.button.secondary{background:#e9efdf;color:#214b3b;border:1px solid #b8cbb2}.button.danger{background:#f5e1cd;color:#8f3f2c}.form-foot,.teacher-tip{font-size:11px;line-height:1.6;color:#526b5c;margin-top:10px}.auth-intro h3{font-size:16px}.auth-intro p{font-size:12px;line-height:1.6;margin-top:6px}.section-rule{border:0;border-top:1px solid #d1ddc7;margin:16px 0}.person-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px 0}.identity{display:flex;align-items:center;gap:9px}.identity-number{background:#23594b;color:#fff8de;width:37px;height:37px;display:grid;place-items:center;border-radius:11px;font-weight:750}.identity-copy strong{display:block;font-size:13px}.identity-copy>span{display:block;font-size:10px;line-height:1.5;color:#5a7060}.quiet-link{border:0;background:transparent;padding:7px;color:#8b462e;font-size:11px;font-weight:700;text-decoration:underline;min-height:44px}.student[data-authenticated=false] .person-bar{display:none}.profile-explanation{font-size:13px!important;line-height:1.65!important}#student-workspace .choice{font-size:12px}#student-workspace .choice-index{display:grid;place-items:center;min-width:27px;height:27px;background:#e3ebd7;border-radius:7px;font-size:11px;font-weight:800}.answer-status{font-size:11px;line-height:1.6;color:#526d5a;margin-top:12px}.answer-status.confirmed{color:#225c42}.public-choices{padding:0;list-style:none;display:grid;gap:9px}.public-choices li{display:flex;gap:9px;font-size:13px;line-height:1.5;background:#edf2e3;border-radius:10px;padding:10px}.public-choices .choice-index{font-weight:800}.visitor-instruction{font-size:12px;line-height:1.6;margin:13px 0;color:#526b5b}.result-line{margin:14px 0}.result-label{display:flex;justify-content:space-between;gap:15px;font-size:13px;line-height:1.5;margin-bottom:7px}.result-label strong{white-space:nowrap}.result-track{height:10px;background:#dde7d4;border-radius:8px;overflow:hidden}.result-fill{height:100%;background:#35775a;border-radius:8px}.interpretation{font-size:13px;line-height:1.7;background:#e9f1db;padding:15px;border-radius:12px;margin-top:18px}.interpretation strong{display:block}.results-foot{font-size:10px;line-height:1.6;margin-top:12px;color:#59705d}
+.teacher-panel{top:150px;bottom:25px;width:355px;padding:22px}.teacher-card h2{font-size:25px;line-height:1.1;margin-bottom:12px}.teacher-card>p{font-size:12px;line-height:1.65;color:#566d5e}.teacher-account{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px}.teacher-state{font-weight:700;color:#285c43}.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.controls button:first-child,.controls button:last-child{grid-column:1/-1}.health-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:22px;border-top:1px solid #d1ddc7;padding-top:18px}.health-head h3{font-size:16px}.health-note{font-size:11px;line-height:1.6;margin-top:10px}.health-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.health-grid dt{font-size:10px;color:#63775f}.health-grid dd{margin:2px 0 0;font-size:12px;font-weight:700;word-break:break-word}.teacher-panel .form-foot{font-size:10px}.teacher-panel .eyebrow{font-size:9px}.teacher-panel .field-row{flex-direction:column}.teacher-grid .card{background:transparent;border:0;padding:0}.teacher-panel .teacher-tip{font-size:11px}.projector .notice{top:170px}.projector .public-choices li{font-size:18px}.projector .visitor-instruction{font-size:17px}
+/* Dedicated collective result view: large counts and room-scale typography. */
+.projector.results-view .mission-dialog{width:min(1440px,calc(100vw - 100px));max-height:calc(100dvh - 100px);padding:38px 46px;border-radius:26px}.projector.results-view .mission-heading{margin-bottom:10px}.projector.results-view .mission-heading h2{font-size:30px}.projector.results-view .post,.projector.results-view .mission-dialog>h3,.projector.results-view #student-section,.projector.results-view #public-section,.projector.results-view #mission-login{display:none}.projector.results-view .results{border-top:0;margin:0;padding:0}.projector.results-view .results h3{font-size:39px;margin:8px 0 24px}.projector.results-view .result-line{margin:24px 0}.projector.results-view .result-label{font-size:25px;align-items:center;gap:30px}.projector.results-view .result-label strong{font-size:39px;min-width:220px;text-align:right}.projector.results-view .result-track{height:21px;border-radius:15px}.projector.results-view .interpretation{font-size:22px;padding:20px 24px;line-height:1.55;margin-top:26px}.projector.results-view .results-foot{font-size:16px;margin-top:14px}.projector.results-view .close-dialog{width:48px;height:48px;font-size:31px}
+@media(max-width:700px){.connection{padding:10px 9px;font-size:10px;gap:5px}#connection-short{font-size:8px}.hud-actions{gap:5px}.preview-tag{font-size:7px}.preview-tag span{font-size:7px}.view-menu{max-height:calc(100dvh - 77px)}.notice{top:159px;font-size:11px;padding:10px 12px}.teacher-panel{left:13px;right:13px;width:auto;top:107px;bottom:16px}.teacher-card h2{font-size:23px}.teacher .preview-tag{top:66px}.projector .public-choices li{font-size:13px}.projector.results-view .mission-dialog{width:100%;padding:24px 18px;max-height:90dvh}.projector.results-view .results h3{font-size:24px}.projector.results-view .result-label{font-size:14px;gap:10px}.projector.results-view .result-label strong{font-size:20px;min-width:0}.projector.results-view .interpretation{font-size:14px;padding:14px}.projector.results-view .results-foot{font-size:11px}}
+
+
+/* MOBILE_FIRST_C: student exploration only; desktop and collective layouts retain R1. */
+.mobile-tools,#camera-return{display:none}
+@media(max-width:900px){
+ .student .hud{inset:max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) auto max(10px,env(safe-area-inset-left));gap:6px;align-items:center}
+ .student .brand{padding:6px 10px;gap:0;min-height:32px;border-radius:10px}.student .brand-symbol,.student .brand small{display:none}.student .brand strong{font-size:11px}.student .brand strong span{font-size:10px}
+ .student .connection{font-size:10px;padding:7px 9px;gap:5px;min-height:28px}.student #connection-short{display:none}.student .hud-actions{gap:6px}.student #views-button{width:44px;height:44px;font-size:22px}
+ .student .preview-tag,.student .quest-peek,.student .camera-toggle{display:none}
+ .student .view-menu{top:60px;right:max(10px,env(safe-area-inset-right));width:280px;max-width:calc(100% - 20px);max-height:calc(100dvh - 72px - env(safe-area-inset-bottom));padding:14px;overflow:auto}
+ .student .destination-dock{grid-template-columns:1fr 1fr}.student .destination-dock button{min-height:48px;font-size:12px;padding:7px 9px;display:flex;justify-content:flex-start}
+ .student .mobile-tools{display:grid;gap:8px;margin:10px 0}.mobile-tools>button{min-height:44px;border:1px solid #cad7c5;border-radius:10px;background:#f0f3e7;color:#244b3d;font-size:12px;font-weight:700;text-align:left;padding:9px 12px}.mobile-tools p{font-size:11px;color:#496253;line-height:1.5;margin:0}
+ .student .view-menu .camera-controls{position:static;inset:auto;display:flex;flex-direction:row;justify-content:space-between;width:100%;padding:3px;box-shadow:none}.student .camera-controls .icon-button{width:60px;height:44px}
+ .student .context-action{bottom:max(16px,env(safe-area-inset-bottom));right:max(12px,env(safe-area-inset-right));left:auto;transform:none;display:block;width:auto;max-width:calc(100% - 174px);padding:0;border:0;background:transparent;box-shadow:none;min-width:0}
+ .student .context-action>div{display:none}.student .context-action button{width:auto;min-width:102px;min-height:44px;padding:10px 14px;font-size:12px;box-shadow:0 4px 15px #23493825;border:1px solid #fff5d6}
+ .student .dpad{left:max(12px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));width:134px;height:134px;grid-template-columns:44px 44px 44px;grid-template-rows:44px 44px 44px;background:#fffdf58c}
+ .student #dpad-close{grid-column:2;grid-row:2;font-size:18px;color:#34594d;background:transparent}.student #camera-return{position:absolute;left:max(12px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));width:44px;height:44px;z-index:3;background:#fffdf5ed;border:1px solid #fff;border-radius:50%;font-size:24px;color:#244b3d}.student #iso-world[data-camera-mode=manual]~#camera-return{display:block}.student:has(#dpad:not([hidden])) #camera-return{bottom:164px}
+ .student .notice{top:65px;font-size:11px;max-height:calc(100dvh - 140px);overflow:auto}.student .toast{top:67px;font-size:11px;padding:8px 12px;max-width:calc(100% - 28px)}
+ .student #canvas-fallback{top:25%;max-height:40%;overflow:auto}
+}
+@media(max-width:900px) and (orientation:landscape){.student .view-menu{width:340px}.student .destination-dock{grid-template-columns:repeat(4,1fr)}.student .destination-dock button{display:grid;justify-content:center;font-size:10px}.student .mobile-tools{grid-template-columns:1fr 1fr}.student .mobile-tools p,.student .mobile-tools .camera-controls{grid-column:1/-1}}
+
+/* EMBED_GAME_V1_CSS_BEGIN */
+/* GAME V1: contextual journal; the world retains the approved mobile viewport. */
+.v1-menu-button{display:block;width:100%;min-height:44px;padding:11px 13px;border:1px solid #cbdcca;background:#e6f0dc;border-radius:10px;text-align:left;font-weight:750;font-size:13px;margin:5px 0;color:#173f39}
+.projector-controls .v1-menu-button{width:auto;margin:0;text-align:center}
+.v1-dialog{width:min(780px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:29px;color:#173f39;background:#fffdf5;border:1px solid #fff;border-radius:22px;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+.v1-dialog::backdrop{background:#163d3975;backdrop-filter:blur(3px)}
+.v1-close{position:sticky;top:0;float:right;z-index:2;min-width:64px;min-height:44px;border:1px solid #cbdcca;border-radius:12px;background:#fffdf5;font:inherit;font-weight:700;font-size:12px;padding:9px}
+.v1-dialog h2{font-size:27px;line-height:1.15;margin:7px 70px 12px 0;letter-spacing:-.02em}.v1-dialog h3{font-size:17px;line-height:1.3;margin:0 0 8px}.v1-dialog h4{font-size:15px;margin:16px 0 7px}.v1-dialog p{line-height:1.55;font-size:14px}.v1-eyebrow{font-size:10px!important;font-weight:800;letter-spacing:.08em;color:#92602c;margin:3px 70px 8px 0!important}.v1-lead{margin:10px 0 15px!important;color:#526b61}.v1-availability{background:#edf1e5;border-left:4px solid #789876;border-radius:6px;padding:11px 13px;margin:12px 0!important;font-size:13px!important}.v1-notice:empty{display:none}.v1-notice{padding:13px 0 2px;font-size:13px!important;font-weight:700}.v1-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:20px 0 24px}.v1-tabs button{padding:10px;font-size:12px;min-width:0;white-space:normal}.v1-tabs [aria-current=true]{background:#173f39;color:white;border-color:#173f39}.v1-button,.v1-text-button{min-height:44px;padding:11px 13px;border:1px solid #c5d6c2;border-radius:11px;background:#f7f9ed;font:inherit;font-size:13px;font-weight:700;line-height:1.35;white-space:normal;color:#173f39;touch-action:manipulation}.v1-button:hover:enabled{background:#e4edda}.v1-primary{background:#d95d39;color:white;border-color:#d95d39}.v1-primary:hover:enabled{background:#bf4c2b}.v1-text-button{background:transparent;border-color:transparent;text-decoration:underline;text-underline-offset:3px}.v1-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.v1-objectives{margin:15px 0 20px;padding-left:24px;font-size:14px;line-height:1.6}.v1-objectives li{padding:3px 0}.v1-done{color:#2e7249;font-weight:700}.v1-clue-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.v1-clue-card{min-width:0;padding:16px;border:1px solid #d5decf;border-radius:15px;background:#f4f5eb}.v1-collected{background:#eaf2e1;border-color:#acc4a5}.v1-clue-card .v1-source{font-size:11px;margin:6px 0 11px}.v1-clue-card p{font-size:13px}.v1-clue-card .v1-button,.v1-clue-card .v1-text-button{font-size:12px}.v1-clue-state{display:block;font-size:10px;font-weight:800;text-transform:uppercase;color:#44684a;margin-bottom:10px}.v1-source{color:#5c7168;font-size:12px!important}.v1-board{border-top:1px solid #ccd9c6;margin-top:24px;padding-top:22px}.v1-board>p{margin-bottom:16px}.v1-match-field{display:block;margin:16px 0;font-size:14px;line-height:1.45}.v1-match-field>span{display:block;margin-bottom:8px;font-weight:700}.v1-match-field select{display:block;width:100%;min-height:46px;font:inherit;font-size:14px;color:#173f39;padding:10px 34px 10px 12px;border:1px solid #bdcdb6;border-radius:9px;background:#fff}.v1-decisions{padding:0;border:0;margin:24px 0 18px}.v1-decisions legend{padding:0 0 10px;font-size:16px;font-weight:750}.v1-decision{display:flex;align-items:flex-start;gap:11px;border:1px solid #d0dac9;border-radius:13px;background:#f3f5ea;margin:9px 0;padding:14px;cursor:pointer;min-height:52px}.v1-decision:has(input:checked){background:#deedda;border-color:#4e8057}.v1-decision input{width:20px;height:20px;flex:0 0 auto;margin:1px 0;accent-color:#36754e}.v1-decision strong,.v1-decision small{display:block}.v1-decision strong{font-size:14px;line-height:1.4}.v1-decision small{font-size:12px;line-height:1.5;color:#536a5e;margin-top:5px}.v1-board>.v1-primary{display:block;width:100%;margin-top:13px}.v1-consequence{padding:19px;background:#dff0d7;border:1px solid #bad4ad;border-radius:15px;margin-top:22px}.v1-facts-note{font-size:12px!important;padding-top:13px;color:#486451}.v1-journal-options{display:flex;flex-wrap:wrap;justify-content:space-between;margin-top:20px;border-top:1px solid #d2ddc8;padding-top:10px}.v1-dialogue{font-size:17px!important;line-height:1.7!important;margin:20px 0!important}.v1-reflection{padding:13px;border-left:3px solid #c78647;background:#faedd3;margin:16px 0!important}.v1-confirmed{padding:12px;background:#e5f0dc;color:#356c43;border-radius:9px;font-weight:700}.v1-confirm-text{margin:18px 0!important}.v1-teacher-panel{border-bottom:1px solid #c8d6bf;padding-bottom:22px;margin-bottom:23px;font-size:12px;line-height:1.5}.v1-teacher-panel h2{font-size:24px;line-height:1.2;margin:8px 0 15px}.v1-teacher-panel p{font-size:12px;line-height:1.6;margin:9px 0}.v1-teacher-phase{font-weight:750;color:#346b43}.v1-teacher-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:15px 0}.v1-teacher-controls button{font-size:11px;padding:10px 7px}.v1-teacher-controls button:first-child,.v1-teacher-controls button:last-child{grid-column:1/-1}.v1-teacher-controls button:last-child{color:#9a432b;background:#fff3e8;border-color:#dfbba2}.v1-teacher-progress{padding:12px 12px 12px 29px;border-radius:10px;background:#edf2e5;font-weight:700;font-size:12px;line-height:1.8}.v1-guide{margin:15px 0}.v1-guide>summary{min-height:44px;display:list-item;cursor:pointer;font-weight:700;padding:10px 0;font-size:12px}.v1-participant-table{border-collapse:collapse;width:100%;font-size:11px}.v1-participant-table caption{text-align:left;font-size:10px;margin:9px 0}.v1-participant-table th,.v1-participant-table td{padding:7px 5px;border-bottom:1px solid #d9e1d3;text-align:left}.v1-summary-status{font-weight:750;margin:20px 0!important}.v1-summary-mission{border-top:1px solid #ccd9c6;padding-top:18px;margin-top:20px}.v1-summary-count{font-weight:750;color:#347347;font-size:19px!important}.v1-event{background:#e7efdd;border-radius:10px;padding:11px 13px;margin-top:11px!important}.v1-decision-results{padding:0;list-style:none;margin:15px 0}.v1-decision-results li{display:flex;justify-content:space-between;gap:18px;padding:10px 0;border-bottom:1px solid #e1e5d8;font-size:14px;line-height:1.4}.v1-decision-results strong{font-size:20px}.projector #v1-summary{width:min(1420px,calc(100vw - 80px));padding:35px;max-height:calc(100dvh - 70px)}.projector #v1-summary h2{font-size:34px}.projector #v1-summary .v1-lead{font-size:18px}.projector #v1-summary .v1-summary-mission{display:block}.projector #v1-summary h3{font-size:25px}.projector #v1-summary p{font-size:19px}.projector #v1-summary .v1-summary-count{font-size:26px!important}.projector #v1-summary .v1-facts-note{font-size:17px!important}.projector #v1-summary .v1-decision-results li{font-size:21px}.projector #v1-summary .v1-decision-results strong{font-size:29px}
+@media(min-width:1200px){.projector .v1-summary-body{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 24px}.projector .v1-summary-body>:not(.v1-summary-mission){grid-column:1/-1}.projector .v1-summary-body>h2{margin-top:5px;margin-bottom:8px}.projector .v1-summary-body>.v1-lead{margin-bottom:5px!important}.projector .v1-summary-body>.v1-summary-status{margin:8px 0!important}.projector #v1-summary .v1-summary-mission{margin-top:12px;padding-top:15px}.projector #v1-summary .v1-summary-mission p{font-size:17px}.projector #v1-summary .v1-decision-results li{font-size:19px}.projector #v1-summary .v1-summary-mission .v1-facts-note{font-size:16px!important}}
+@media(max-width:700px){.v1-dialog{padding:18px;width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:17px}.v1-dialog h2{font-size:23px;margin-right:66px}.v1-tabs{gap:5px;margin:16px 0 20px}.v1-tabs button{font-size:10px;padding:9px 5px}.v1-clue-grid{grid-template-columns:1fr;gap:10px}.v1-clue-card{padding:14px}.v1-dialogue{font-size:16px!important}.v1-match-field{font-size:13px}.v1-match-field select{font-size:13px}.v1-eyebrow{font-size:9px!important;letter-spacing:.03em}.v1-decision{padding:12px}.v1-dialog .v1-lead{font-size:13px}.projector #v1-summary{width:calc(100vw - 16px);padding:18px;max-height:calc(100dvh - 16px)}.projector #v1-summary h2{font-size:23px}.projector #v1-summary h3{font-size:20px}.projector #v1-summary p,.projector #v1-summary .v1-facts-note{font-size:14px!important}.projector #v1-summary .v1-decision-results li{font-size:14px}.projector #v1-summary .v1-decision-results strong{font-size:20px}}
+@media(max-height:500px) and (min-width:701px){.v1-dialog{max-height:calc(100dvh - 16px);padding:20px 24px}.v1-dialog h2{font-size:23px}.v1-dialog .v1-lead{font-size:13px}.v1-tabs{margin:12px 0 16px}.v1-dialogue{font-size:15px!important}.v1-close{top:0}}
+@media(prefers-reduced-motion:reduce){.v1-dialog,.v1-dialog *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* EMBED_GAME_V1_CSS_END */
+</style>
+</head>
+<body>
+  <main class="game" id="game">
+    <canvas id="iso-world" tabindex="0" aria-label="Cidade isométrica. Toque no chão para caminhar, use as setas ou escolha um destino nos controles."></canvas>
+    <header class="hud">
+      <div class="brand"><span class="brand-symbol">C</span><div><strong>CONEXA <span>200</span></strong><small id="place-name">PRAÇA CENTRAL</small></div></div>
+      <div class="hud-actions"><span class="connection" id="connection" data-state="connecting" role="status"><i class="connection-dot" aria-hidden="true"></i><b id="participants-count">—</b><span id="connection-short">Conectando</span><span id="connection-text" class="sr-only">Conectando à placa…</span></span><button id="views-button" class="icon-button" aria-label="Menu de lugares e interfaces" aria-controls="view-menu" aria-expanded="false">☰</button></div>
+    </header>
+    <nav class="view-menu" id="view-menu" aria-label="Lugares e interfaces da atividade" hidden><small class="menu-label">EXPLORAR A PRAÇA</small><nav class="destination-dock" aria-label="Destinos da cidade"><button data-destination="square" aria-pressed="true"><span>⌂</span>Praça</button><button data-destination="school" aria-pressed="false"><span>▤</span>Escola</button><button data-destination="feed" aria-pressed="false"><span>▣</span>Mural</button><button id="profile-button"><span>◉</span>Seu avatar</button></nav><small class="menu-label">ÁREAS DA ATIVIDADE</small><div class="interface-links"><a href="/" id="nav-student">Aluno</a><a href="/projetor" id="nav-projector">Projeção</a><a href="/professor" id="nav-teacher">Professor</a></div><section class="mobile-tools" id="mobile-tools" aria-label="Apoio à exploração"><button id="mission-shortcut">Diário · três investigações ↗</button><button id="dpad-toggle" aria-controls="dpad" aria-expanded="false">Mostrar direcional</button><p>Toque no chão para caminhar. Arraste para olhar ao redor. ◎ volta ao avatar. A placa confirma posições e progresso.</p></section><div id="phase-slot"></div><p id="connection-detail"></p><p class="menu-count">Respostas recebidas: <b id="answers-count">—</b></p><details class="places-panel"><summary>Presenças da turma · ver os 44 lugares</summary><div class="places-heading"><h3>Os 44 lugares da turma</h3><span id="round-label">Aguardando estado</span></div><div class="places" id="places" role="list" aria-label="Lugares dos participantes"></div><div class="legend" aria-label="Legenda dos lugares"><span><i></i>Aguardando entrada</span><span><i class="entered"></i>Entrou</span><span><i class="answered"></i>Respondeu</span></div></details></nav>
+    <div class="preview-tag">CIDADE CONECTADA <span>· posições confirmadas</span></div>
+    <section class="quest-peek" id="quest-peek"><span class="quest-icon">✦</span><div><small>MISSÃO 01</small><strong>Identidade e realidade</strong><p>Encontre o mural da praça.</p></div><button id="quest-button" aria-label="Abrir diário de missões">↗</button></section>
+    <section class="teacher-panel" id="teacher-panel" hidden aria-label="Condução da atividade"><section class="teacher-grid" id="teacher-section" hidden aria-label="Controles do professor">
+            <div class="card teacher-card">
+              <div class="eyebrow">Acesso e enquete de leitura</div><h2>Condução do professor</h2><p>Após entrar, use os controles do jogo acima. Os botões de escolhas abaixo conduzem a enquete de leitura separada.</p>
+              <form id="teacher-auth" class="auth-block" style="margin-top:18px"><label for="teacher-key">Chave de professor</label><div class="field-row"><input type="password" id="teacher-key" autocomplete="off" autocapitalize="none" spellcheck="false" required maxlength="160" placeholder="Sua chave de acesso"><button type="submit" class="button" id="teacher-login-button">Entrar</button></div><p class="form-foot">A chave não aparece na projeção nem nos endereços.</p></form>
+              <div id="teacher-workspace" hidden><hr class="section-rule"><div class="teacher-account"><span class="teacher-state">Acesso de professor confirmado</span><button type="button" class="quiet-link" id="teacher-logout">Sair do acesso</button></div><div class="controls"><button type="button" class="button" data-control="open" id="control-open">Abrir escolhas</button><button type="button" class="button secondary" data-control="pause" id="control-pause">Pausar rodada</button><button type="button" class="button secondary" data-control="resume" id="control-resume">Retomar escolhas</button><button type="button" class="button secondary" data-control="close" id="control-close">Encerrar e revelar</button><button type="button" class="button danger" data-control="reset" id="control-reset">Nova rodada</button></div><p class="teacher-tip" id="control-status">As ações aguardam confirmação da placa.</p></div>
+            </div>
+            <div class="card teacher-card" id="health-card" hidden><div class="health-head"><h3>Saúde da placa</h3><button type="button" class="button secondary compact" id="health-refresh">Consultar</button></div><p class="health-note" id="health-note">As medições são consultadas na ESP32. Nenhum valor de demonstração é usado.</p><dl class="health-grid" id="health-grid" hidden></dl></div>
+          </section><button type="button" class="teacher-open" id="teacher-mission">Visualizar publicação</button></section>
+    <button id="camera-toggle" class="camera-toggle icon-button" aria-label="Abrir controles de câmera" aria-expanded="false" aria-controls="camera-tools">◎</button>
+    <div class="camera-controls" id="camera-tools" hidden><button id="zoom-out" class="icon-button" aria-label="Afastar câmera">−</button><button id="camera-home" class="icon-button" aria-label="Acompanhar personagem">◎</button><button id="zoom-in" class="icon-button" aria-label="Aproximar câmera">+</button></div>
+    <div class="dpad" id="dpad" hidden role="group" aria-label="Direcional de exploração"><button data-step="up" aria-label="Caminhar para cima">↑</button><button data-step="left" aria-label="Caminhar para esquerda">←</button><button id="dpad-close" aria-label="Recolher direcional">×</button><button data-step="right" aria-label="Caminhar para direita">→</button><button data-step="down" aria-label="Caminhar para baixo">↓</button></div>
+    <button id="camera-return" aria-label="Voltar ao avatar e acompanhar">◎</button>
+    <section class="context-action" id="context-action"><div><small id="context-label">PRAÇA CONEXA</small><strong id="context-title">Um lugar para cada voz.</strong></div><button id="interact">Explorar <span>↗</span></button></section>
+
+    <div class="projector-controls" id="projector-controls" hidden><button id="projector-mission">Publicação</button><button id="projector-results">Resultados</button></div>
+    <div class="phase-pill" id="phase-badge"><i></i><span id="phase-label">Aguardando placa</span></div>
+    <div class="notice" id="notice" role="status" hidden><span id="notice-text"></span><button type="button" id="retry-button" hidden>Tentar agora</button><button type="button" id="dismiss-button" aria-label="Fechar aviso">Fechar</button></div><p id="canvas-fallback" hidden>Cena indisponível neste navegador. Use o menu para visitar os locais e ler a missão.</p><p class="toast" id="toast" role="status" hidden></p>
+    <p class="sr-only" id="world-status" role="status">Você está na praça.</p>
+  <p id="location-title" class="sr-only"></p><p id="location-description" class="sr-only"></p><p class="sr-only">Posições e progresso são confirmados pela placa da atividade.</p></main>
+  <dialog id="mission-dialog" class="mission-dialog" aria-labelledby="mission-title">
+    <button class="close-dialog" data-close aria-label="Fechar publicação">×</button>
+    <div class="mission-heading"><span class="quest-icon">✦</span><div><small>MISSÃO 01</small><h2 id="mission-title">Vitrine e contexto</h2></div></div>
+    <article class="post"><header><span class="post-avatar">L</span><div><strong>Lia</strong><small>Um momento para compartilhar</small></div><span class="post-dots">•••</span></header>
+      <div class="post-picture" aria-label="Ilustração fictícia de uma conquista: um troféu, fitas e confetes"><div class="ribbon r1"></div><div class="ribbon r2"></div><div class="trophy"><div class="trophy-cup">★</div><div class="trophy-stem"></div><div class="trophy-base"></div></div><span class="picture-note">pequenas conquistas,<br>grandes motivos pra celebrar.</span><i class="confetti c1"></i><i class="confetti c2"></i><i class="confetti c3"></i><i class="confetti c4"></i></div>
+      <p><strong>Lia</strong> publicou uma foto comemorando uma conquista. A publicação mostra um momento escolhido; não informa como foi todo o seu dia.</p><footer>Situação fictícia para discussão</footer>
+    </article>
+    <h3>O que podemos concluir a partir dessa publicação?</h3>
+    <button id="mission-login" class="primary">Entrar com seu código</button><div id="student-section">
+              
+              <div id="student-workspace" hidden><div class="choices" id="choices"><button type="button" class="choice" data-choice="0" aria-pressed="false"><span class="choice-index" aria-hidden="true">A</span><span>A vida dela é perfeita em todos os momentos.</span></button><button type="button" class="choice" data-choice="1" aria-pressed="false"><span class="choice-index" aria-hidden="true">B</span><span>Vemos um recorte; precisamos de contexto para concluir mais.</span></button><button type="button" class="choice" data-choice="2" aria-pressed="false"><span class="choice-index" aria-hidden="true">C</span><span>O número de curtidas comprova como é a vida dela.</span></button></div><p class="answer-status" id="answer-status" role="status"></p></div>
+            </div><div id="public-section" hidden><ol class="public-choices"><li><span class="choice-index" aria-hidden="true">A</span><span>A vida dela é perfeita em todos os momentos.</span></li><li><span class="choice-index" aria-hidden="true">B</span><span>Vemos um recorte; precisamos de contexto para concluir mais.</span></li><li><span class="choice-index" aria-hidden="true">C</span><span>O número de curtidas comprova como é a vida dela.</span></li></ol><div class="visitor-instruction" id="public-instruction">As escolhas aparecem nos dispositivos dos alunos quando o professor abre a rodada.</div></div><div class="results" id="results" hidden aria-label="Contagens da rodada encerrada"><h3>As escolhas da turma</h3><div class="result-line"><div class="result-label"><span>A · Vida perfeita em todos os momentos</span><strong id="total-0">—</strong></div><div class="result-track"><div class="result-fill" id="bar-0"></div></div></div><div class="result-line"><div class="result-label"><span>B · Recorte que precisa de contexto</span><strong id="total-1">—</strong></div><div class="result-track"><div class="result-fill" id="bar-1"></div></div></div><div class="result-line"><div class="result-label"><span>C · Curtidas como comprovação</span><strong id="total-2">—</strong></div><div class="result-track"><div class="result-fill" id="bar-2"></div></div></div><div class="interpretation"><strong>Um recorte pode ser verdadeiro.</strong>Uma publicação pode representar um momento verdadeiro e ainda assim ser um recorte. Curtidas não comprovam toda a vida de alguém.</div><p class="results-foot">As contagens mostram escolhas da turma e não alteram essa interpretação. Não há ranking individual nem nota automática.</p></div>
+  </dialog>
+<dialog id="account-dialog" class="info-dialog" aria-labelledby="account-title"><button class="close-dialog" data-close aria-label="Fechar seu acesso">×</button><small class="eyebrow">SEU LUGAR NA PRAÇA</small><h2 id="account-title">Sua representação na rede.</h2><form id="student-auth" class="auth-block"><hr class="section-rule"><div class="auth-intro"><h3>Seu lugar na praça</h3><p>Use o código entregue pelo professor.</p></div><label for="student-code">Código de aluno</label><div class="field-row"><input type="password" id="student-code" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" required maxlength="160" placeholder="Digite seu código"><button type="submit" class="button" id="student-login-button">Entrar</button></div><p class="form-foot">Nesta etapa, seu personagem é representado pelo seu número.</p></form><div class="person-bar"><div class="identity"><span class="identity-number" id="student-number">—</span><span class="identity-copy"><strong id="student-name">Seu lugar</strong><span id="student-presence">Aguardando confirmação</span></span></div><button type="button" class="quiet-link" id="student-logout">Trocar código</button></div><p class="profile-explanation">Seu avatar é provisório. Aparência e publicações mostram escolhas, mas não contam toda a sua história.</p></dialog>
+  <dialog id="info-dialog" class="info-dialog" aria-labelledby="info-title"><button class="close-dialog" data-close aria-label="Fechar informações">×</button><small class="eyebrow" id="info-kicker">ESCOLA CONEXA</small><h2 id="info-title">Quem é você na rede?</h2><p id="info-text"></p><button id="info-mural" class="primary">Encontrar o mural <span>↗</span></button></dialog>
+
+  <script id="conexa-app">
+'use strict';
+/* WORLD_CORE_BEGIN */
+/* P2 navigation core copied for the isolated visual lab. Original P2 is untouched. */
+
+  const ConexaWorld = (() => {
+    const size = 14;
+    const locations = Object.freeze({
+      square:{x:7,y:9,title:'Praça · seu ponto de encontro',text:'Explore a cidade, converse com os personagens e reúna evidências. A placa confirma seu progresso e sua posição.'},
+      school:{x:5,y:5,title:'Escola · quem é você na rede?',text:'O avatar é uma representação de você, não sua identidade inteira. Na rede, uma imagem também mostra apenas parte de uma pessoa. Use seu código para ocupar seu lugar na atividade.'},
+      feed:{x:10,y:4,title:'Mural · Vitrine e contexto',text:'Lia compartilhou uma conquista. O que essa publicação permite concluir? Leia a missão e registre sua interpretação quando o professor abrir as escolhas.'}
+    });
+    const trees = [[1,9],[2,11],[3,12],[11,11],[12,9],[7,1],[10,1],[13,1]];
+    function walkable(x,y) {
+      return Number.isInteger(x) && Number.isInteger(y) && x>=0 && y>=0 && x<size && y<size &&
+        !(x>=1 && x<=4 && y>=2 && y<=4) && !(x>=10 && x<=11 && y>=2 && y<=3) &&
+        !(x>=7 && x<=8 && y>=7 && y<=8) && !(x===5 && (y===6 || y===12)) && !(x===10 && y===11) && !(x<=1 && y>=7 && y<=8) && !(x>=12 && y>=11 && y<=12) &&
+        !trees.some(p=>p[0]===x && p[1]===y);
+    }
+    function project(x,y) { return {x:450+(x-y)*26,y:132+(x+y)*13}; }
+    function unproject(x,y) { return {x:Math.round(((x-450)/26+(y-132)/13)/2),y:Math.round(((y-132)/13-(x-450)/26)/2)}; }
+    function path(from,to) {
+      if (!walkable(from.x,from.y) || !walkable(to.x,to.y)) return null;
+      const key=p=>p.y*size+p.x;
+      const queue=[{x:from.x,y:from.y}];
+      const previous=new Map([[key(from),null]]);
+      for(let i=0;i<queue.length;i++) {
+        const p=queue[i];
+        if(p.x===to.x && p.y===to.y) {
+          const route=[];
+          let cursor=p;
+          while(previous.get(key(cursor))!==null) {route.push(cursor);cursor=previous.get(key(cursor));}
+          return route.reverse();
+        }
+        for(const [dx,dy] of [[1,0],[0,1],[-1,0],[0,-1]]) {
+          const next={x:p.x+dx,y:p.y+dy};
+          if(walkable(next.x,next.y) && !previous.has(key(next))) {previous.set(key(next),p);queue.push(next);}
+        }
+      }
+      return null;
+    }
+    // These are illustrative seats, never claimed as remote player coordinates.
+    const seats=[],candidates=[];
+    for(let y=0;y<size;y++) for(let x=0;x<size;x++) if(walkable(x,y) && x+y>=7 && x+y<=24 && !(x<=4&&y<=5) && !(x===7&&y===9)) candidates.push({x,y});
+    // Spread fixed illustrative seats over the square instead of stacking 44 labels.
+    while(seats.length<44){let best=0,distance=-1;for(let i=0;i<candidates.length;i++){const p=candidates[i];const nearest=Math.min(...[...seats,{x:7,y:9}].map(q=>(p.x-q.x)**2+(p.y-q.y)**2));if(nearest>distance){distance=nearest;best=i;}}seats.push(candidates.splice(best,1)[0]);}
+    function seat(id) { return Number.isInteger(id) && id>=1 && id<=44 ? seats[id-1] : null; }
+    return {size,locations,trees,walkable,project,unproject,path,seat};
+  })();
+  
+
+/* WORLD_CORE_END */
+/* AVATAR_SCENE_BEGIN */
+/* Original Canvas artwork for CONEXA P2.1. No image, font, engine or network dependency. */
+'use strict';
+// Appearance/layout is a projection of presence, never an authority for presence.
+const ConexaAvatarVisual=(()=>{
+  const contract=Object.freeze({version:1,anchor:'feet-center',height:106,footprint:Object.freeze({width:34,depth:14}),bounds:Object.freeze({x:-31,y:-106,width:62,height:118}),directions:Object.freeze(['ne','se','sw','nw']),states:Object.freeze(['idle','walk']),source:'procedural-local'});
+  const outfits=['#ed6943','#347f97','#655f96','#d7a23e','#2d7e6a','#a75470','#e1e6d8','#394f68'];
+  function profile(id){return Object.freeze({id,outfit:outfits[(id*5+3)%outfits.length],style:id%5,hairStyle:(id*7)%6,hair:['#272d32','#4f342e','#835338','#b58350','#25222b'][(id*3)%5],skin:['#e8b38b','#af704d','#d49771','#80513f','#f0cba6'][id%5],accessory:(id*3)%7});}
+  function layout(flags){
+    if(typeof flags!=='string'||!/^[01]{44}$/.test(flags))throw new TypeError('Expected 44 presence flags.');
+    const points=[],spawn={x:7,y:9},available=[];
+    for(let y=0;y<14;y++)for(let x=0;x<14;x++)if(ConexaWorld.walkable(x,y)&&x+y>=6&&x+y<=24&&!(x<5&&y<5)&&!(Math.abs((x-y)*48)<115&&(x+y)*24>255&&(x+y)*24<425)&&!Object.values(ConexaWorld.locations).some(l=>l.x===x&&l.y===y))available.push({x,y});
+    const distance=(a,b)=>(((a.x-a.y)-(b.x-b.y))*48/59)**2+(((a.x+a.y)-(b.x+b.y))*24/85)**2;
+    while(points.length<44){let best=0,score=-1;for(let i=0;i<available.length;i++){const d=Math.min(...[...points,spawn].map(p=>distance(p,available[i])));if(d>score){score=d;best=i;}}points.push(available.splice(best,1)[0]);}
+    // Stable ID-to-slot mapping. Removing an ID never moves the other IDs.
+    return points.flatMap((p,i)=>flags[i]==='1'?[Object.freeze({id:i+1,...p,appearance:profile(i+1)})]:[]);
+  }
+  return Object.freeze({contract,profile,layout});
+})();
+function createCity(canvas,onArrival,onHint) {
+  const W=ConexaWorld,main=canvas.getContext('2d');if(!main)return null;
+  let c=main,width=0,height=0,dpr=1,view='student',zoom=1,zoomBias=1;
+  let tile={x:7,y:9},route=[],segment=null,destination='square',point={...tile},last=0,frame=null,elapsed=0;
+  let camera={x:-96,y:270},ready=false,manualUntil=0,pointer=null,clickPulse=null;
+  let pose=1,modal=false,landmarkHits=[],avatarHits=[],identified=null,dirty=true,renderCount=0;
+  let presences=[],ownId=0,session=null,confirmed=null,predicted=[],canMove=false,worldState=null,questPoints=[],atlas=null;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  const P=(x,y,z=0)=>({x:(x-y)*48,y:(x+y)*24-z});
+  const color={outline:'#294b4026',stone:'#f3d9a8'};
+  const caches=new Map();
+  function poly(points,fill,stroke=color.outline,line=1.5){c.beginPath();points.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.closePath();c.fillStyle=fill;c.fill();if(stroke){c.strokeStyle=stroke;c.lineWidth=line;c.stroke();}}
+  function line(points,stroke,width=2){c.beginPath();points.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.strokeStyle=stroke;c.lineWidth=width;c.lineCap='round';c.lineJoin='round';c.stroke();}
+  function oval(x,y,rx,ry,fill){c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fillStyle=fill;c.fill();}
+  function round(x,y,w,h,r,fill,stroke){c.beginPath();c.roundRect(x,y,w,h,r);c.fillStyle=fill;c.fill();if(stroke){c.lineWidth=2;c.strokeStyle=stroke;c.stroke();}}
+  function gradient(x,y,x2,y2,a,b){const g=c.createLinearGradient(x,y,x2,y2);g.addColorStop(0,a);g.addColorStop(1,b);return g;}
+  function tilePoly(x,y,fill){poly([P(x-.5,y-.5),P(x+.5,y-.5),P(x+.5,y+.5),P(x-.5,y+.5)],fill,null);}
+  function prism(x,y,w,d,h,top,left,right){const a=P(x-.5,y-.5),b=P(x+w-.5,y-.5),e=P(x-.5,y+d-.5),f=P(x+w-.5,y+d-.5),up=p=>({x:p.x,y:p.y-h});poly([e,f,up(f),up(e)],left);poly([b,f,up(f),up(b)],right);poly([up(a),up(b),up(f),up(e)],top);return{a,b,e,f};}
+  function windowAt(x,y,z,side=1,w=26,h=43){const p=P(x,y,z);c.save();c.transform(1,side*.5,0,1,p.x,p.y);round(-w/2,-h,w,h,3,'#fcf5d9','#fdf7e8');round(-w/2+4,-h+4,w-8,h-8,1,gradient(0,-h,0,0,'#385e6c','#8fc9c6'));line([{x:-w/2+4,y:-h/2},{x:w/2-4,y:-h/2}],'#fcf5d9',3);line([{x:0,y:-h+4},{x:0,y:-4}],'#fcf5d9',2);line([{x:-w/2-2,y:2},{x:w/2+2,y:2}],'#c3b795',4);c.restore();}
+  function plant(x,y,scale=1,flowers=false){const p=P(x,y);c.save();c.translate(p.x,p.y);c.scale(scale,scale);oval(0,3,25,10,'#315b3630');round(-20,-17,40,22,8,'#e6b47c','#b98e62');oval(0,-17,20,9,'#467853');for(let i=0;i<6;i++){const a=i*1.05;oval(Math.cos(a)*13,-22+Math.sin(a)*8,10,13,i%2?'#72aa63':'#568b52');if(flowers)oval(Math.cos(a)*14,-31+Math.sin(a)*7,4,4,i%2?'#f9d782':'#ee896b');}c.restore();}
+  function school(){
+    // The existing school footprint, reworked as two contemporary campus volumes.
+    const shadow=P(3,3);oval(shadow.x+32,shadow.y+29,207,65,'#244b3d28');
+    prism(1,2,4,3,164,'#e7eeea',gradient(-200,-70,60,160,'#fbf6e9','#d9c7ac'),gradient(0,-70,150,160,'#518f92','#28646d'));
+    prism(1,2,4,3,13,'#d5c9b5','#b4a18b','#8a9e95');
+    // Warm terracotta rainscreen, slim windows and a continuous upper cornice.
+    const face=[P(.5,4.5,18),P(4.5,4.5,18),P(4.5,4.5,85),P(.5,4.5,85)];poly(face,'#c87858');
+    for(let i=0;i<4;i++){
+      windowAt(.95+i*.98,4.5,109,1,34,40);
+      if(i!==2)windowAt(.95+i*.98,4.5,32,1,31,38);
+      line([P(.5+i,4.51,20),P(.5+i,4.51,82)],'#e9aa7a66',2);
+    }
+    // Glazed circulation gallery on the visible right facade.
+    for(let i=0;i<5;i++){
+      const y=1.9+i*.54;
+      const a=P(4.51,y,20),b=P(4.51,y+.49,20),d=P(4.51,y,133),e=P(4.51,y+.49,133);
+      poly([a,b,e,d],gradient(d.x,d.y,b.x,b.y,'#bce5df','#3d7888'),'#d5e5da',3);
+      line([P(4.52,y,77),P(4.52,y+.49,77)],'#dcecdf',3);
+      line([P(4.53,y+.12,122),P(4.53,y+.37,99)],'#edfff154',3);
+    }
+    // Flat roof with projecting light edges, a planted terrace and a slatted canopy.
+    // Restore facade below the thin roof edge: roof is drawn as a plane, no solid cover.
+    const roof=[P(.3,1.3,177),P(4.7,1.3,177),P(4.7,4.7,177),P(.3,4.7,177)];
+    poly(roof,'#e6e5d4');line([roof[1],roof[2],roof[3]],'#fff5df',7);
+    for(let i=0;i<5;i++)line([P(1.2+i*.47,2.2,186),P(1.2+i*.47,3.7,186)],'#3d716f',9);
+    // This upper plane is deliberately light; its supports terminate on the roof.
+    for(const x of [1.2,3.08])line([P(x,3.7,177),P(x,3.7,186)],'#326465',4);
+    const garden=P(3.5,2.6,180);round(garden.x-29,garden.y-11,58,16,6,'#597e64');for(let i=0;i<5;i++)oval(garden.x-22+i*11,garden.y-13,8,10,i%2?'#83ba7b':'#9ec989');
+    // Entrance canopy is below the roof, so the doorway and columns read separately.
+    const entry=P(3.0,4.51);c.save();c.transform(1,.5,0,1,entry.x,entry.y);
+    round(-22,-65,44,64,3,'#214e59','#e9e6d1');round(-17,-61,34,57,2,gradient(0,-60,0,0,'#8fc5cb','#356a7a'));line([{x:0,y:-59},{x:0,y:-4}],'#d9eae0',3);round(4,-30,3,13,1,'#f6d381');c.restore();
+    const can=[P(2.35,4.45,73),P(3.65,4.45,73),P(3.65,5.04,73),P(2.35,5.04,73)];poly(can,'#ed965d','#fbcb8d',3);
+    const sign=P(2.5,4.52,157);c.save();c.transform(1,.5,0,1,sign.x,sign.y);round(-83,-22,166,29,3,'#194e58');c.font='750 15px system-ui';c.textAlign='center';c.fillStyle='#fff8df';c.fillText('ESCOLA CONEXA',0,-3);c.restore();
+    const panel=P(4.54,2.4,148);c.save();c.transform(1,-.5,0,1,panel.x,panel.y);c.font='800 17px system-ui';c.fillStyle='#fff4d7';c.textAlign='center';c.fillText('200 ETT',0,0);c.restore();
+    plant(.9,4.7,.7,true);plant(4.25,4.65,.65,false);
+  }
+  function kiosk(){
+    const p=P(10.5,3);oval(p.x+12,p.y+15,102,33,'#244c3a28');
+    prism(10,2,2,2,16,'#e0d8bd','#b8a68e','#95aba2');
+    const a=P(10,3.5);line([{x:a.x-47,y:a.y+1},{x:a.x-47,y:a.y-143}],'#294f5b',10);line([{x:a.x+106,y:a.y+76},{x:a.x+106,y:a.y-66}],'#294f5b',10);
+    c.save();c.transform(1,.5,0,1,a.x-67,a.y-162);
+    round(2,5,184,148,9,'#214857','#143a49');round(9,10,170,134,6,gradient(0,0,150,150,'#f3f7e9','#d4e4df'));
+    round(17,18,154,25,4,'#255b68');c.fillStyle='#e9f9e8';c.font='750 10px system-ui';c.textAlign='left';c.fillText('CONEXA / NA REDE',25,34);oval(161,30,3,3,'#9cdb9e');
+    round(17,50,84,65,4,'#edb560');c.fillStyle='#bd7829';c.beginPath();c.moveTo(40,63);c.quadraticCurveTo(59,95,78,63);c.lineTo(74,80);c.quadraticCurveTo(59,98,44,80);c.closePath();c.fill();round(54,88,9,12,1,'#a96c2c');round(44,101,29,5,1,'#a96c2c');
+    for(let i=0;i<3;i++)round(112,56+i*14,49-i*6,5,2,'#8da6a1');
+    for(let i=0;i<3;i++){oval(23+i*17,128,4,4,['#e17c5a','#73a5a6','#7e9570'][i]);}round(82,125,77,4,2,'#9ab2aa');c.restore();
+    // Floating asymmetric canopy, no new building or gameplay location.
+    const canopy=[P(9.55,1.55,177),P(11.6,1.55,177),P(11.6,3.8,177),P(9.55,3.8,177)];poly(canopy,'#efad66','#f9d59b',3);line([canopy[1],canopy[2],canopy[3]],'#cb7049',7);
+    plant(11.3,2.6,.65,false);
+  }
+  function house(x,y,variant){
+    const warm=variant===0;prism(x,y,2,2,115,warm?'#f6d58f':'#c2e4d3',warm?'#eeb77c':'#e8d0ae',warm?'#d49666':'#c4a78f');prism(x,y,2,2,12,'#c7b894','#ae9678','#b7a282');
+    for(let i=0;i<2;i++){windowAt(x-.1+i*.9,y+1.5,64,1,30,37);windowAt(x+1.5,y-.1+i*.9,64,-1,26,37);}
+    const a=P(x-.7,y-.7,119),b=P(x+1.7,y-.7,119),d=P(x-.7,y+1.7,119),e=P(x+1.7,y+1.7,119),r=P(x+.5,y+.5,164);
+    poly([a,b,r],warm?'#5d9c9b':'#e78366');poly([b,e,r],warm?'#317e84':'#bc5f52');poly([e,d,r],warm?'#448e91':'#d7725b');poly([d,a,r],warm?'#73aeaa':'#eb9a75');line([a,b,e,d,a],warm?'#2f7377':'#b25c4c',5);
+    const aw=P(x+.5,y+1.5,39);for(let i=0;i<7;i++)poly([{x:aw.x-47+i*14,y:aw.y-18+i*7},{x:aw.x-33+i*14,y:aw.y-11+i*7},{x:aw.x-40+i*14,y:aw.y+8+i*7},{x:aw.x-54+i*14,y:aw.y+1+i*7}],i%2?'#fff2d0':warm?'#efbe5c':'#5c9d8a',null);
+    plant(x+.1,y+1.4,.65,true);
+  }
+  function tree(x,y,kind=0){
+    const p=P(x,y);oval(p.x+12,p.y+9,57,23,'#2f5d3f25');
+    line([{x:p.x-3,y:p.y},{x:p.x+1,y:p.y-79},{x:p.x-12,y:p.y-103}],'#9f7650',13);line([{x:p.x+1,y:p.y-53},{x:p.x+19,y:p.y-88}],'#a57b53',8);
+    const hues=[['#2d8564','#78bd76'],['#3a9664','#a4ce77'],['#318b78','#78b88b']][kind%3];
+    c.beginPath();c.moveTo(p.x-44,p.y-77);c.bezierCurveTo(p.x-76,p.y-106,p.x-46,p.y-141,p.x-23,p.y-140);c.bezierCurveTo(p.x-10,p.y-184,p.x+39,p.y-164,p.x+43,p.y-134);c.bezierCurveTo(p.x+77,p.y-118,p.x+60,p.y-77,p.x+31,p.y-71);c.bezierCurveTo(p.x+13,p.y-53,p.x-21,p.y-62,p.x-44,p.y-77);c.closePath();c.fillStyle=gradient(p.x-40,p.y-150,p.x+36,p.y-59,hues[1],hues[0]);c.fill();
+    oval(p.x-18,p.y-125,28,24,hues[1]);oval(p.x+8,p.y-144,22,17,hues[1]);line([{x:p.x-39,y:p.y-112},{x:p.x-31,y:p.y-126},{x:p.x-20,y:p.y-130}],'#c4e09c88',4);
+    oval(p.x+3,p.y+1,18,5,'#66955e');
+  }
+  function fountain(){
+    const p=P(7.5,7.5);oval(p.x+7,p.y+12,99,44,'#244c3c24');oval(p.x,p.y+3,93,44,'#c4a783');oval(p.x,p.y-5,94,43,'#fff0ce');oval(p.x,p.y-7,80,33,gradient(p.x,p.y-40,p.x,p.y+15,'#68bfd0','#b2e4df'));oval(p.x,p.y-7,75,28,'#53bcca');
+    line([{x:p.x-61,y:p.y-18},{x:p.x-40,y:p.y-28},{x:p.x-17,y:p.y-30}],'#daf8eb',4);line([{x:p.x+15,y:p.y+12},{x:p.x+51,y:p.y+5}],'#b8ecdf',3);
+    round(p.x-12,p.y-63,24,56,8,'#d6be93');oval(p.x,p.y-64,39,17,'#c8b28b');oval(p.x,p.y-69,39,16,'#f7e5bd');oval(p.x,p.y-70,30,10,'#7bcbd4');round(p.x-6,p.y-99,12,32,4,'#376c77');c.save();c.translate(p.x,p.y-112);c.scale(1,.64);c.beginPath();c.arc(0,0,22,.4,Math.PI*1.8);c.strokeStyle='#e68b53';c.lineWidth=9;c.stroke();oval(14,-15,6,6,'#f8d9a2');c.restore();
+  }
+  function bench(x,y){for(const dx of [-.55,.55]){line([P(x+dx,y-.18),P(x+dx,y-.18,43)],'#497565',5);line([P(x+dx,y+.18),P(x+dx,y+.18,22)],'#497565',5);}prism(x-.35,y+.15,1.4,.45,23,'#d0a16c','#b08156','#9f784d');for(const z of [32,41])line([P(x-.85,y-.35,z),P(x+.55,y-.35,z)],'#cc9b64',7);}
+  function lamp(x,y){const p=P(x,y);oval(p.x+12,p.y+5,24,9,'#254a3822');round(p.x-6,p.y-118,12,120,5,'#3c7161');round(p.x-15,p.y-133,30,25,6,'#fff0a9','#477a63');poly([{x:p.x-20,y:p.y-133},{x:p.x,y:p.y-149},{x:p.x+20,y:p.y-133}],'#3b7468');oval(p.x,p.y+1,13,5,'#436e59');}
+  function avatar(x,y,id,moving=false){
+    const p=P(x,y),mine=id===ownId,look=ConexaAvatarVisual.profile(id),step=moving?Math.sin(elapsed/85):0,bob=moving?Math.abs(step)*1.7:0;
+    const {skin,hair,outfit:baseCoat,style,hairStyle,accessory}=look,coat=mine?'#ed6943':baseCoat,facing=mine?pose:(id%2?1:-1),swing=step*7;
+    oval(p.x+2,p.y+2,18,7,'#173d3840');
+    if(mine){oval(p.x,p.y+1,25,11,'#f6d37755');c.beginPath();c.ellipse(p.x,p.y+1,25,11,0,0,Math.PI*2);c.strokeStyle='#fff4c9';c.lineWidth=3;c.stroke();}
+    const entry=atlas&&atlas.entries.get(id);if(entry){c.drawImage(atlas.image,...entry,p.x-31,p.y-106-bob,62,118);return;}
+    c.save();c.translate(p.x,p.y-bob);
+    const trouser=style===3?'#b2a68e':style===1?'#2c394f':style===4?'#516775':'#344b60';
+    // Longer legs, smaller head and varied shoulder widths keep teenage proportions.
+    const shoulder=style===0?17:style===2?14:16;
+    if(hairStyle===2||hairStyle===5){round(-14,-94,28,46,10,hair);if(hairStyle===5)oval(-15*facing,-77,8,13,hair);}
+    line([{x:-7,y:-34},{x:-9+swing,y:-7+bob}],trouser,style===3?12:10);line([{x:7,y:-34},{x:9-swing,y:-7+bob}],trouser,style===3?12:10);
+    round(-15+swing,-8+bob,14,7,2,'#f1eee0');round(3-swing,-8+bob,14,7,2,style===1?'#e3a860':'#f1eee0');
+    line([{x:-shoulder,y:-59},{x:-20-swing*.4,y:-36}],style===2?skin:coat,8);line([{x:shoulder,y:-59},{x:20+swing*.4,y:-36}],style===2?skin:coat,8);
+    oval(-20-swing*.4,-32,4,5,skin);oval(20+swing*.4,-32,4,5,skin);
+    round(-shoulder,-66,shoulder*2,37,style===1?10:5,coat);round(shoulder-6,-62,6,29,2,'#142b3126');
+    if(style===0){poly([{x:-13,y:-65},{x:-3,y:-65},{x:0,y:-31},{x:-11,y:-31}],'#f7e6be',null);line([{x:2,y:-63},{x:2,y:-31}],'#ffe7bf',1.5);round(6,-56,6,7,1,'#f7dfae');}
+    if(style===1){line([{x:-7,y:-59},{x:-3,y:-49}],'#e5d6bb',2);line([{x:5,y:-59},{x:7,y:-49}],'#e5d6bb',2);round(-10,-39,20,5,2,'#213a4935');}
+    if(style===2){round(-8,-57,16,3,1,'#f8e5b1');round(-5,-51,10,2,1,'#f8e5b1');}
+    if(style===3){line([{x:-12,y:-61},{x:10,y:-35}],'#e7d8b1',5);round(6,-43,13,15,3,'#4b6864');}
+    if(style===4){round(-11,-62,22,8,2,'#f1e6ce');line([{x:0,y:-53},{x:0,y:-32}],'#cadad2',2);}
+    round(-4,-73,8,10,2,skin);oval(0,-83,10.5,12,skin);oval(10*facing,-81,2.5,4,skin);
+    if(hairStyle===0){c.beginPath();c.moveTo(-11,-84);c.bezierCurveTo(-17,-103,14,-107,12,-86);c.lineTo(5,-91);c.lineTo(-5,-92);c.lineTo(-9,-81);c.closePath();c.fillStyle=hair;c.fill();}
+    if(hairStyle===1||hairStyle===4){for(let i=0;i<7;i++)oval(-10+i*3.5,-94+(i%2)*2,5,5,hair);round(-12,-92,5,11,2,hair);if(hairStyle===4)oval(6,-100,8,6,hair);}
+    if(hairStyle===2){oval(0,-94,13,8,hair);line([{x:-10,y:-92},{x:-11,y:-77}],hair,5);line([{x:10,y:-92},{x:12,y:-73}],hair,5);}
+    if(hairStyle===3){round(-12,-98,26,11,4,'#819891');round(-4,-90,23,4,2,'#526e73');}
+    if(hairStyle===5){oval(-2,-94,12,8,hair);line([{x:-11,y:-91},{x:-8,y:-79}],hair,7);}
+    oval(3*facing,-83,1.1,1.4,'#293136');oval(7*facing,-82,1,1.3,'#293136');line([{x:3*facing,y:-76},{x:6*facing,y:-76}],'#9a5f4b',1.2);
+    if(accessory===0||mine){c.beginPath();c.arc(0,-85,13,Math.PI,Math.PI*2);c.strokeStyle='#33444c';c.lineWidth=3;c.stroke();round(-14,-86,5,11,2,'#eecc80');round(10,-86,5,11,2,'#eecc80');}
+    if(accessory===3){round(-2,-87,7,6,2,'#b9dfdf66','#354d56');round(5,-86,7,6,2,'#b9dfdf66','#354d56');}
+    if(accessory===5){round(-19,-61,7,24,3,'#d4a65a');line([{x:-12,y:-63},{x:-11,y:-34}],'#eac681',3);}
+    c.restore();
+  }
+  function presenceAvatar(a){const p=P(a.x,a.y);c.save();c.translate(p.x,p.y);cached('avatar-'+a.id,()=>avatar(0,0,a.id),{x:-31,y:-106,w:62,h:118});c.restore();}
+  function cached(name,draw,bounds){if(!caches.has(name)){const image=document.createElement('canvas');image.width=bounds.w;image.height=bounds.h;const save=c;c=image.getContext('2d');c.translate(-bounds.x,-bounds.y);draw();c=save;caches.set(name,{image,...bounds});}const a=caches.get(name);c.drawImage(a.image,a.x,a.y);}
+  function staticObject(name,fn,x,y,w,h){return()=>cached(name,fn,{x,y,w,h});}
+  const objects=[
+    {key:'school',depth:9,draw:staticObject('school',school,-280,-270,500,540)},
+    {key:'mural',depth:14,draw:staticObject('mural',kiosk,245,80,300,370)},
+    {key:'fountain',depth:16,draw:staticObject('fountain',fountain,-110,220,230,210)},
+    {key:'house-a',depth:10,draw:staticObject('house-a',()=>house(0,7,0),-490,10,300,310)},
+    {key:'house-b',depth:26,draw:staticObject('house-b',()=>house(12,11,1),-90,370,340,350)}
+  ];
+  W.trees.forEach(([x,y],i)=>{const p=P(x,y);objects.push({key:'tree'+i,depth:x+y+.4,draw:staticObject('tree'+i,()=>tree(x,y,i),p.x-82,p.y-190,175,230)});});
+  for(const [i,x,y] of [[0,5,11.8],[1,9.8,10.8],[2,4.7,6.1]]){const p=P(x,y);objects.push({key:'bench'+i,depth:x+y+.3,draw:staticObject('bench'+i,()=>bench(x,y),p.x-100,p.y-60,200,140)});}
+  for(const [i,x,y] of [[0,0,6.5],[1,13.4,8],[2,6,13.5]]){const p=P(x,y);objects.push({key:'lamp'+i,depth:x+y+.3,draw:staticObject('lamp'+i,()=>lamp(x,y),p.x-35,p.y-160,90,190)});}
+  function terrain(){
+    for(let depth=-6;depth<35;depth++)for(let x=-3;x<18;x++){const y=depth-x;if(y< -3||y>17)continue;const inside=x>=0&&x<14&&y>=0&&y<14;const paved=inside&&((x>=5&&x<=10)||(y>=5&&y<=9));tilePoly(x,y,paved?((x+y)%3?'#e1d8c0':'#eee5cf'):((x*7+y*3)%3?'#8cb682':'#a4c58e'));
+      if(paved){const q=P(x,y);line([{x:q.x-42,y:q.y+1},{x:q.x,y:q.y+22},{x:q.x+43,y:q.y+1}],'#d4b98a44',1);line([{x:q.x,y:q.y-22},{x:q.x,y:q.y+22}],'#e4c99c55',1);}
+      else if((x*13+y*7)%4===0){const q=P(x,y);for(let j=0;j<3;j++)line([{x:q.x-15+j*12,y:q.y+5},{x:q.x-19+j*12,y:q.y-3}],'#719f6840',2);}
+    }
+    const q=P(7.5,7.5);oval(q.x,q.y,152,76,'#e7c59a');oval(q.x,q.y,139,68,'#f6e3ba');c.beginPath();c.ellipse(q.x,q.y,146,72,0,0,Math.PI*2);c.strokeStyle='#fff2d2';c.lineWidth=4;c.stroke();
+    // A network of voices in the plaza paving: authored decoration, no new mission.
+    const hub=P(7.5,7.5);for(let i=0;i<12;i++){const a=i*Math.PI/6,rx=Math.cos(a)*128,ry=Math.sin(a)*62;line([{x:hub.x+rx*.76,y:hub.y+ry*.76},{x:hub.x+rx,y:hub.y+ry}],'#527e7c88',2);oval(hub.x+rx,hub.y+ry,4,2.5,i%3===0?'#d78356':'#528384');}
+    const mark=P(7,10);c.save();c.transform(1,.5,-1,.5,mark.x,mark.y);c.textAlign='center';c.font='800 18px system-ui';c.fillStyle='#5c807970';c.fillText('200 ETT',0,0);c.restore();
+    for(const [x,y] of [[3,6],[10,8],[5,12],[1,1],[12,6],[10,10]]){const p=P(x,y);oval(p.x,p.y,31,16,'#87b873');for(let i=0;i<8;i++){const a=i*2.39;oval(p.x+Math.cos(a)*20,p.y+Math.sin(a)*10,4,3,i%2?'#f8d07f':'#e78a75');}}
+    line([P(-.5,13.6),P(13.6,13.6),P(13.6,-.5)],'#789f7680',5);
+  }
+  function toScreen(p){const anchor=view==='teacher'&&width>700?width*.65:width*.5;return{x:anchor+(p.x-camera.x)*zoom,y:height*.50+(p.y-camera.y)*zoom};}
+  function toWorld(x,y){const anchor=view==='teacher'&&width>700?width*.65:width*.5;const a=(x-anchor)/zoom+camera.x,b=(y-height*.5)/zoom+camera.y;return{x:Math.round((a/48+b/24)/2),y:Math.round((b/24-a/48)/2)};}
+  function draw(time){
+    renderCount++;c=main;c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,width,height);c.fillStyle=gradient(0,0,width,height,'#bed9bf','#91b9ac');c.fillRect(0,0,width,height);
+    const anchor=view==='teacher'&&width>700?width*.65:width*.5;
+    c.save();c.translate(anchor-camera.x*zoom,height*.5-camera.y*zoom);c.scale(zoom,zoom);
+    cached('terrain',terrain,{x:-1050,y:-150,w:2100,h:1100});
+    if(segment||route.length){const points=[P(point.x,point.y),...(segment?[P(segment.to.x,segment.to.y)]:[]),...route.map(t=>P(t.x,t.y))];c.setLineDash([4,11]);line(points,'#fffbe2d9',5);c.setLineDash([]);}
+    if(clickPulse){const q=P(clickPulse.x,clickPulse.y),progress=Math.min(1,(time-clickPulse.time)/650);c.beginPath();c.ellipse(q.x,q.y,15+progress*24,7+progress*12,0,0,Math.PI*2);c.strokeStyle='rgba(255,250,220,'+(1-progress)+')';c.lineWidth=4;c.stroke();if(progress===1)clickPulse=null;}
+    const list=[...objects];for(const p of presences){if(p.id!==ownId)list.push({depth:p.x+p.y+.5,draw:()=>presenceAvatar(p)});}
+    for(const [i,p] of questPoints.entries()){if(i===0)continue;const x=p.x+.26,y=p.y-.26;list.push({depth:x+y+.55,draw:()=>{avatar(x,y,100+i);const q=P(x,y,120);round(q.x-12,q.y-15,24,24,8,p.collected?'#3d8772':p.released?'#edb35b':'#74878a','#fff5d5');c.font='800 15px system-ui';c.textAlign='center';c.textBaseline='middle';c.fillStyle='#fffbe9';c.fillText(p.collected?'✓':p.released?'!':'…',q.x,q.y-2);}});}
+    if(worldState){const done=worldState.me?worldState.me.done:worldState.completed.reduce((n,v,i)=>n|(v?1<<i:0),0);for(let i=0;i<3;i++){if(!(done&(1<<i)))continue;const [x,y]=[[10,4],[6,10],[12,6]][i];list.push({depth:x+y+.7,draw:()=>{const q=P(x,y,44);round(q.x-63,q.y-15,126,28,8,'#245e55','#f2d289');c.font='700 11px system-ui';c.textAlign='center';c.textBaseline='middle';c.fillStyle='#fff6d8';c.fillText(['CONTEXTO ADICIONADO','COOPERAÇÃO ABERTA','FONTE VERIFICADA'][i],q.x,q.y);}});}}
+    if(ownId)list.push({depth:point.x+point.y+.6,draw:()=>avatar(point.x,point.y,ownId,!!segment)});list.sort((a,b)=>a.depth-b.depth).forEach(o=>o.draw());
+    c.restore();
+    // Labels use screen pixels; only local player and two landmarks are named.
+    if(view==='student'&&ownId){const p=toScreen(P(point.x,point.y,114));round(p.x-23,p.y-11,46,22,9,'#173f39fa','#fff7d6');c.font='750 10px system-ui';c.textAlign='center';c.textBaseline='middle';c.fillStyle='#fff7dd';c.fillText('VOCÊ',p.x,p.y);}
+    avatarHits=presences.filter(a=>a.id!==ownId).map(a=>{const p=toScreen(P(a.x,a.y));return{id:a.id,x:p.x-22*zoom,y:p.y-102*zoom,w:44*zoom,h:100*zoom,depth:a.x+a.y+.5};});
+    if(identified&&performance.now()<identified.until){const a=presences.find(a=>a.id===identified.id),p=toScreen(P(a.x,a.y,118));round(p.x-70,p.y-12,140,24,8,'#203f49f2','#f5d48a');c.fillStyle='#fff9df';c.font='650 10px system-ui';c.textAlign='center';c.fillText('Participante '+String(a.id).padStart(2,'0'),p.x,p.y+1);}
+    landmarkHits=[];for(const [name,key,z] of [['Escola','school',213],['Mural','feed',206]]){const loc=W.locations[key],p=toScreen(P(loc.x-1,loc.y-1,z));if(p.x<0||p.x>width||p.y<60||p.y>height-80)continue;const active=destination===key;c.font='750 12px system-ui';const w=c.measureText(name).width+30;p.x=Math.max(w/2+10,Math.min(width-w/2-10,p.x));round(p.x-w/2,p.y-15,w,29,10,active?'#a94c32':'#fff9e8',active?'#fff0c5':'#648e6d45');c.fillStyle=active?'white':'#28584c';c.textAlign='center';c.fillText(name,p.x,p.y);landmarkHits.push({x:p.x-w/2,y:p.y-15,w,h:29,key});}
+  }
+  function identifyAt(x,y){
+    const hit=avatarHits.filter(a=>{if(!(x>=a.x&&x<=a.x+a.w&&y>=a.y&&y<=a.y+a.h))return false;const cache=caches.get('avatar-'+a.id),p=presences.find(p=>p.id===a.id),q=toScreen(P(p.x,p.y));if(!cache)return false;const px=Math.floor((x-q.x)/zoom-cache.x),py=Math.floor((y-q.y)/zoom-cache.y);return px>=0&&py>=0&&px<cache.w&&py<cache.h&&cache.image.getContext('2d').getImageData(px,py,1,1).data[3]>190;}).sort((a,b)=>b.depth-a.depth)[0];
+    if(!hit)return false;
+    // Check cached object alpha at the clicked world point: an occluding tree/building wins.
+    const anchor=view==='teacher'&&width>700?width*.65:width*.5,wx=(x-anchor)/zoom+camera.x,wy=(y-height*.5)/zoom+camera.y;
+    for(const object of objects){if(object.depth<=hit.depth)continue;const cache=caches.get(object.key);if(!cache)continue;const px=Math.floor(wx-cache.x),py=Math.floor(wy-cache.y);if(px>=0&&py>=0&&px<cache.w&&py<cache.h&&cache.image.getContext('2d').getImageData(px,py,1,1).data[3]>190)return false;}
+    identified={id:hit.id,until:performance.now()+2400};dirty=true;onHint('Participante '+String(hit.id).padStart(2,'0')+' · posição confirmada pela placa.');return true;
+  }
+  function mobileView(){return view==='student'&&width<=900;}
+  function aim(){const p=P(point.x,point.y);if(mobileView())return{x:p.x+(height>width?128:0),y:p.y-(height>width?100:160)};return view==='projector'?{x:0,y:265}:view==='teacher'?{x:0,y:260}:{x:p.x,y:p.y-120/zoom};}
+  function tick(time){frame=null;if(document.hidden)return;const dt=last?Math.min(70,time-last):0;if(dt<30&&last){frame=requestAnimationFrame(tick);return;}last=time;elapsed+=dt;const prior={...camera},wasMoving=!!segment||route.length>0;
+    if(!modal&&canMove){if(!segment&&route.length&&predicted.length<4)segment={from:{...tile},to:route.shift(),t:0};if(segment){segment.t=Math.min(1,segment.t+dt/250);const t=reduced.matches?(segment.t===1?1:0):segment.t;point={x:segment.from.x+(segment.to.x-segment.from.x)*t,y:segment.from.y+(segment.to.y-segment.from.y)*t};pose=segment.to.x>segment.from.x||segment.to.y<segment.from.y?1:-1;if(segment.t===1){tile={...segment.to};point={...tile};predicted.push({...tile});segment=null;canvas.dataset.tile=tile.x+','+tile.y;if(!route.length){canvas.dataset.moving='false';onArrival(destination,tile);}}}}
+    if(time>manualUntil){const target=aim();if(!ready||reduced.matches){camera=target;ready=true;}else{const smooth=1-Math.exp(-dt/110);camera.x+=(target.x-camera.x)*smooth;camera.y+=(target.y-camera.y)*smooth;}}
+    canvas.dataset.camera=camera.x.toFixed(2)+','+camera.y.toFixed(2);canvas.dataset.cameraMode=manualUntil===Infinity?'manual':'follow';
+    if(identified&&time>=identified.until){identified=null;dirty=true;}
+    if(dirty||wasMoving||clickPulse||Math.hypot(prior.x-camera.x,prior.y-camera.y)>.01){draw(time);dirty=false;}
+    frame=requestAnimationFrame(tick);
+  }
+  function go(x,y,place=null){if(!canMove){onHint(ownId?'Aguarde o início ou a retomada pelo professor e a conexão com a placa.':'Entre com seu código para explorar a cidade.');return false;}const start=segment?segment.to:tile;const next=W.path(start,{x,y});if(next===null){onHint('Esse trecho está ocupado. Escolha um caminho livre.');return false;}destination=place;route=next;manualUntil=0;dirty=true;clickPulse=reduced.matches?null:{x,y,time:performance.now()};canvas.dataset.moving=String(!!segment||route.length>0);if(!segment&&!route.length)onArrival(destination,tile);document.dispatchEvent(new CustomEvent('conexa-v1-motion'));return true;}
+  function visit(place){const l=W.locations[place];return go(l.x,l.y,place);}
+  function step(direction){const d={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]}[direction],p=segment?segment.to:tile;go(p.x+d[0],p.y+d[1]);}
+  function resize(){dirty=true;width=canvas.clientWidth;height=canvas.clientHeight;dpr=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);zoom=(mobileView()?(height>width?Math.max(.54,Math.min(.68,width/610)):Math.max(.44,Math.min(.60,height/850))):view==='projector'?Math.min(width/1630,height/1020):width<701?1.05:Math.max(.78,Math.min(width/1640,height/1020)))*zoomBias;zoom=Math.max(.38,Math.min(1.4,zoom));ready=false;canvas.dataset.zoom=zoom.toFixed(3);}
+  canvas.addEventListener('pointerdown',e=>{pointer={x:e.clientX,y:e.clientY,cx:camera.x,cy:camera.y,dragged:false};canvas.setPointerCapture(e.pointerId);});
+  canvas.addEventListener('pointermove',e=>{if(!pointer)return;const dx=e.clientX-pointer.x,dy=e.clientY-pointer.y;if(Math.hypot(dx,dy)>8){pointer.dragged=true;dirty=true;camera.x=Math.max(-624,Math.min(624,pointer.cx-dx/zoom));camera.y=Math.max(0,Math.min(624,pointer.cy-dy/zoom));manualUntil=Infinity;}});
+  canvas.addEventListener('pointerup',e=>{if(!pointer)return;if(!pointer.dragged){const rect=canvas.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,hit=landmarkHits.find(a=>x>=a.x&&x<=a.x+a.w&&y>=a.y&&y<=a.y+a.h);if(hit)visit(hit.key);else if(identifyAt(x,y)){/* context only, no movement */}else{const target=toWorld(x,y);if(target.x>=1&&target.x<=4&&target.y>=2&&target.y<=4)visit('school');else if(target.x>=10&&target.x<=11&&target.y>=2&&target.y<=3)visit('feed');else go(target.x,target.y);}}pointer=null;});
+  canvas.addEventListener('pointercancel',()=>{pointer=null;});canvas.addEventListener('keydown',e=>{const d={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right'}[e.key];if(d){e.preventDefault();step(d);}});
+  window.addEventListener('resize',resize);document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame!==null)cancelAnimationFrame(frame);frame=null;last=0;}else if(frame===null)frame=requestAnimationFrame(tick);});
+  function stop(){route=[];segment=null;predicted=[];if(confirmed){tile={...confirmed};point={...tile};}canvas.dataset.tile=tile.x+','+tile.y;canvas.dataset.moving='false';dirty=true;}
+  function updateWorld(world,enabled){
+    const id=world&&world.me&&world.me.joined?world.me.id:0,key=world?world.boot+':'+world.epoch:null;
+    const next=world&&world.me&&world.me.joined?{x:world.me.x,y:world.me.y}:null;
+    if(key!==session||id!==ownId){confirmed=next;stop();ready=false;manualUntil=0;identified=null;}
+    else if(next&&confirmed&&(next.x!==confirmed.x||next.y!==confirmed.y)){
+      let at=-1;predicted.forEach((p,i)=>{if(p.x===next.x&&p.y===next.y)at=i;});confirmed=next;
+      if(at>=0)predicted.splice(0,at+1);else stop();
+    }
+    confirmed=next;ownId=id;session=key;worldState=world;canMove=!!(enabled&&id&&world&&world.phase==='open');if(!canMove)stop();
+    presences=[];if(world)for(let i=0;i<44;i++){const pair=world.positions.slice(i*2,i*2+2);if(pair!=='--')presences.push({id:i+1,x:parseInt(pair[0],16),y:parseInt(pair[1],16)});}
+    if(identified&&!presences.some(p=>p.id===identified.id))identified=null;
+    canvas.dataset.positions=world?world.positions:'--'.repeat(44);canvas.dataset.ownId=String(id);canvas.dataset.presenceCount=String(presences.length);canvas.dataset.confirmed=confirmed?confirmed.x+','+confirmed.y:'';canvas.dataset.phase=world?world.phase:'unknown';dirty=true;
+  }
+  function setAtlas(value){atlas=value;for(const key of caches.keys())if(key.startsWith('avatar-'))caches.delete(key);canvas.dataset.avatarIds=value?[...value.entries.keys()].join(','):'';dirty=true;}
+  resize();canvas.dataset.tile='7,9';canvas.dataset.moving='false';frame=requestAnimationFrame(tick);
+  return {visit,step,updateWorld,stop,setAtlas,settleNoop(){if(confirmed&&tile.x===confirmed.x&&tile.y===confirmed.y){predicted=[];return true;}return false;},navigate:go,setQuest(points){questPoints=points||[];dirty=true;},focus(){manualUntil=0;ready=false;dirty=true;},setZoom(delta){zoomBias=Math.max(.65,Math.min(1.6,zoomBias+delta));resize();},setView(value){view=value;resize();},setModal(value){modal=value;},getState(){return{tile:{...tile},confirmed:confirmed&&{...confirmed},moving:!!segment||route.length>0,predicted:predicted.length,point:{...point},camera:{...camera},zoom,renderCount,presenceCount:presences.length,ownId,visualContract:ConexaAvatarVisual.contract,presences:presences.map(a=>({id:a.id,x:a.x,y:a.y})),canvasBytes:canvas.width*canvas.height*4,cacheBytes:[...caches.values()].reduce((n,a)=>n+a.w*a.h*4,0)};},screenTile(x,y){return toScreen(P(x,y));}};
+}
+
+/* UI adapter only: P0 application owns all authenticated state and writes. */
+function createWorldScene(view){
+  const $=id=>document.getElementById(id),canvas=$('iso-world');
+  let active='square',authenticated=false,lastSnapshot=null,opener=null,toastTimer=null,v1=null;
+  function hint(message){$('toast').textContent=message;$('toast').hidden=false;$('world-status').textContent=message;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,2600);}
+  function arrive(place,tile){active=place||Object.keys(ConexaWorld.locations).find(k=>{const p=ConexaWorld.locations[k];return Math.abs(p.x-tile.x)+Math.abs(p.y-tile.y)<=1;})||'square';context();$('world-status').textContent='Você chegou: '+ConexaWorld.locations[active].title;if(v1&&authenticated){const near=v1.getPointsOfInterest().find(p=>Math.abs(p.x-tile.x)+Math.abs(p.y-tile.y)<=1);$('interact').textContent=near?'Investigar ↗':'Diário ↗';}}
+  const city=createCity(canvas,arrive,hint);
+  if(city)city.setView(view);else{canvas.hidden=true;$('canvas-fallback').hidden=false;document.body.classList.add('canvas-fallback');}
+  const mobile=matchMedia('(max-width:900px)');
+  function compact(){return view==='student'&&mobile.matches;}
+  function closeMenus(){$('view-menu').hidden=true;$('views-button').setAttribute('aria-expanded','false');$('camera-tools').hidden=!compact();$('camera-toggle').setAttribute('aria-expanded','false');}
+  function arrangeTools(){if(compact())$('mobile-tools').append($('camera-tools'));else $('game').insertBefore($('camera-tools'),$('dpad'));$('camera-tools').hidden=!compact();$('dpad').hidden=true;$('dpad-toggle').setAttribute('aria-expanded','false');closeMenus();}
+  mobile.addEventListener('change',arrangeTools);arrangeTools();
+  function support(show){$('dpad').hidden=!show;$('dpad-toggle').setAttribute('aria-expanded',String(show));$('dpad-toggle').textContent=show?'Recolher direcional':'Mostrar direcional';closeMenus();if(show)$('dpad-close').focus({preventScroll:true});else $('views-button').focus({preventScroll:true});}
+  $('dpad-toggle').addEventListener('click',()=>support($('dpad').hidden));$('dpad-close').addEventListener('click',()=>support(false));
+  function returnToPlayer(){if(city)city.focus();canvas.focus({preventScroll:true});}
+  // Direct manipulation after a pan: touch release need not wait for a compatibility click.
+  $('camera-return').addEventListener('pointerup',e=>{if(e.pointerType==='touch'&&e.isPrimary)returnToPlayer();});
+  $('camera-return').addEventListener('click',returnToPlayer);
+  $('mission-shortcut').addEventListener('click',()=>v1?v1.openJournal():visit('feed'));
+  function context(){const names={square:['PRAÇA CONEXA','Um lugar para cada voz.','Explorar'],school:['ESCOLA CONEXA','Quem é você na rede?','Entrar'],feed:['MURAL DA PRAÇA','Vitrine e contexto','Interagir']},[label,title,action]=names[active];$('place-name').textContent=label;$('context-label').textContent=label;$('context-title').textContent=title;$('location-title').textContent=ConexaWorld.locations[active].title;$('location-description').textContent=ConexaWorld.locations[active].text;$('interact').textContent=view==='student'&&!authenticated&&active==='square'?'Entrar na praça':action+' ↗';$('quest-peek').querySelector('p').textContent=active==='feed'?'Você chegou ao mural.':'Encontre o mural da praça.';document.querySelectorAll('[data-destination]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.destination===active)));}
+  function visit(place){closeMenus();if(city)city.visit(place);else arrive(place,ConexaWorld.locations[place]);$('world-status').textContent='Caminhando até '+ConexaWorld.locations[place].title;}
+  function open(dialog){opener=document.activeElement;if(opener instanceof HTMLElement&&opener.closest('#view-menu'))opener=$('views-button');closeMenus();if(city)city.setModal(true);dialog.showModal();dialog.scrollTop=0;}
+  document.querySelectorAll('dialog').forEach(dialog=>{dialog.addEventListener('close',()=>{const another=document.querySelector('dialog[open]');if(city)city.setModal(!!another);if(!another&&opener instanceof HTMLElement)opener.focus({preventScroll:true});});dialog.querySelector('[data-close]').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}});});
+  function mission(resultsOnly=false){document.body.classList.toggle('results-view',resultsOnly);open($('mission-dialog'));}
+  function information(){const school=active==='school';$('info-kicker').textContent=school?'ESCOLA CONEXA':'PRAÇA CONEXA';$('info-title').textContent=school?'Quem é você na rede?':'A cidade começa com uma conversa.';$('info-text').textContent=school?'O avatar é uma representação de você, não sua identidade inteira. Na rede, uma imagem também mostra apenas parte de uma pessoa. Ao explorar o mural, pense no que uma publicação mostra — e no que ela deixa de fora.':'Encontre a escola para pensar sobre identidade virtual. Depois, visite o mural: Lia publicou uma conquista. Será que um post conta a história inteira?';open($('info-dialog'));}
+  document.querySelectorAll('[data-destination]').forEach(b=>b.addEventListener('click',()=>visit(b.dataset.destination)));
+  document.querySelectorAll('[data-step]').forEach(b=>{b.disabled=!city;b.addEventListener('click',()=>{if(city)city.step(b.dataset.step);});});
+  $('quest-button').addEventListener('click',()=>v1?v1.openJournal():visit('feed'));
+  $('interact').addEventListener('click',()=>{if(view==='student'&&!authenticated){open($('account-dialog'));return;}if(v1){const state=city&&city.getState(),points=v1.getPointsOfInterest(),near=state&&points.findIndex(p=>Math.abs(p.x-state.tile.x)+Math.abs(p.y-state.tile.y)<=1);if(near>=0)v1.interact(near);else v1.openJournal();}else information();});
+  $('profile-button').addEventListener('click',()=>open($('account-dialog')));
+  $('mission-login').addEventListener('click',()=>{$('mission-dialog').close();open($('account-dialog'));});
+  $('info-mural').addEventListener('click',()=>{$('info-dialog').close();visit('feed');});
+  $('profile-button').hidden=view!=='student';
+  $('teacher-mission').addEventListener('click',()=>mission());
+  $('projector-mission').addEventListener('click',()=>v1?v1.openJournal():mission());
+  $('projector-results').addEventListener('click',()=>{if(v1)v1.openSummary();else if(lastSnapshot&&lastSnapshot.phase==='closed')mission(true);});
+  $('teacher-panel').hidden=view!=='teacher';$('projector-controls').hidden=view!=='projector';
+  for(const [button,panel] of [['views-button','view-menu'],['camera-toggle','camera-tools']])$(button).addEventListener('click',()=>{const opening=$(panel).hidden;closeMenus();$(panel).hidden=!opening;$(button).setAttribute('aria-expanded',String(opening));});
+  $('camera-home').addEventListener('click',()=>{if(city)city.focus();closeMenus();canvas.focus({preventScroll:true});hint(view==='student'?'Câmera acompanhando seu avatar.':'Visão geral da praça.');});
+  $('zoom-out').addEventListener('click',()=>{if(city)city.setZoom(-.1);});$('zoom-in').addEventListener('click',()=>{if(city)city.setZoom(.1);});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){const expanded=[$('views-button'),$('camera-toggle')].find(b=>b.getAttribute('aria-expanded')==='true');closeMenus();if(expanded)expanded.focus();else if(!$('dpad').hidden&&!document.querySelector('dialog[open]'))support(false);}});
+  canvas.addEventListener('pointerdown',closeMenus);
+  if(view==='student')$('phase-slot').append($('phase-badge'));
+  const marker=document.createElement('div');marker.id='scene-metadata';marker.hidden=true;document.body.append(marker);
+  document.addEventListener('conexa-v1-modal',e=>{closeMenus();if(city)city.setModal(e.detail.open||!!document.querySelector('dialog[open]'));});
+  return {city,hint,bindV1(ui){v1=ui;},update(snapshot,status){
+    authenticated=!!(view==='student'&&status.authenticated&&snapshot&&snapshot.me.joined);lastSnapshot=snapshot;
+    if(!city){canvas.dataset.joined=snapshot?snapshot.joined:'0'.repeat(44);canvas.dataset.presenceCount=String(snapshot?snapshot.participants:0);}
+    document.body.dataset.authenticated=String(authenticated);
+    $('connection-short').textContent=status.online?'LAN':snapshot?'Offline':'…';
+    $('connection-detail').textContent=$('connection-text').textContent;
+    $('connection').title=$('connection-text').textContent;
+    $('mission-login').hidden=view!=='student'||authenticated;
+    $('projector-results').disabled=!v1&&(!snapshot||snapshot.phase!=='closed');
+    if(!snapshot||snapshot.phase!=='closed')document.body.classList.remove('results-view');
+    marker.dataset.presenceIds=snapshot?Array.from(snapshot.joined,(f,i)=>f==='1'?i+1:null).filter(i=>i!==null).join(','):'';
+    context();if(v1&&authenticated){const state=city&&city.getState(),near=state&&v1.getPointsOfInterest().find(p=>Math.abs(p.x-state.tile.x)+Math.abs(p.y-state.tile.y)<=1);$('interact').textContent=near?'Investigar ↗':'Diário ↗';$('context-title').textContent=near?near.person:v1.getMission().title;}
+  }};
+}
+
+/* AVATAR_SCENE_END */
+/* PROTOCOL_CORE_BEGIN */
+  const ConexaProtocol = (() => {
+    const phases = ['lobby', 'open', 'paused', 'closed'];
+    const integer = (value, min, max) => Number.isInteger(value) && value >= min && value <= max;
+    const count = flags => Array.from(flags).filter(value => value === '1').length;
+    function validateSnapshot(s) {
+      if (!s || s.protocol !== 1 || !/^[0-9a-f]{16}$/i.test(s.boot) || !integer(s.round, 1, 4294967295) || !integer(s.revision, 1, Number.MAX_SAFE_INTEGER)) throw new Error('A placa retornou um estado incompatível.');
+      if (!phases.includes(s.phase) || !['visitor', 'student', 'teacher'].includes(s.role) || !/^[01]{44}$/.test(s.joined) || !/^[01]{44}$/.test(s.voted)) throw new Error('O estado da rodada está incompleto.');
+      if (s.participants !== count(s.joined) || s.answer_count !== count(s.voted) || Array.from(s.voted).some((value, i) => value === '1' && s.joined[i] !== '1')) throw new Error('As contagens da placa estão inconsistentes.');
+      if (s.phase === 'closed') {
+        if (!Array.isArray(s.totals) || s.totals.length !== 3 || !s.totals.every(value => integer(value, 0, 44)) || s.totals.reduce((sum, value) => sum + value, 0) !== s.answer_count) throw new Error('As contagens do encerramento estão incompletas.');
+      } else if (s.totals !== null) throw new Error('A placa revelou contagens antes do encerramento.');
+      if (s.role === 'student') {
+        const m = s.me;
+        if (!m || !integer(m.id, 1, 44) || typeof m.joined !== 'boolean' || !integer(m.choice, -1, 2) || !integer(m.last_seq, 0, 2147483647)) throw new Error('Não foi possível confirmar seu lugar na atividade.');
+        if (m.joined !== (s.joined[m.id - 1] === '1') || (m.choice !== -1) !== (s.voted[m.id - 1] === '1') || (m.choice === -1) !== (m.last_seq === 0)) throw new Error('Seu estado individual está inconsistente.');
+      } else if (s.me !== null) throw new Error('O estado público contém dados individuais inesperados.');
+      return s;
+    }
+    function buildVote(s, choice) {
+      validateSnapshot(s);
+      if (s.role !== 'student' || !s.me.joined || s.phase !== 'open' || !integer(choice, 0, 2) || s.me.last_seq >= 2147483647) throw new Error('A rodada não permite uma nova escolha agora.');
+      return {boot:s.boot, round:s.round, choice, seq:s.me.last_seq + 1};
+    }
+    function reconcile(pending, s) {
+      if (!pending) return 'none';
+      if (pending.kind === 'join') return s.role === 'student' && s.me.joined ? 'confirmed' : 'retry';
+      const body = pending.body;
+      if (body.boot !== s.boot || body.round !== s.round) return 'session_changed';
+      if (pending.kind === 'vote') {
+        if (s.role !== 'student' || !s.me.joined) return 'cancelled';
+        if (s.me.last_seq === body.seq && s.me.choice === body.choice) return 'confirmed';
+        if (s.me.last_seq !== body.seq - 1 || s.phase !== 'open') return 'cancelled';
+        return 'retry';
+      }
+      if (pending.kind === 'control') {
+        const target = {open:'open', pause:'paused', resume:'open', close:'closed'}[body.action];
+        if (target === s.phase) return 'confirmed';
+        const allowed = {open:['lobby'], pause:['open'], resume:['paused'], close:['open', 'paused'], reset:phases};
+        return allowed[body.action] && allowed[body.action].includes(s.phase) ? 'retry' : 'cancelled';
+      }
+      return 'cancelled';
+    }
+    return {validateSnapshot, buildVote, reconcile};
+  })();
+  /* PROTOCOL_CORE_END */
+/* EMBED_SESSION_V1_JS_BEGIN */
+/* GAME_V1_PROTOCOL_BEGIN — validated public snapshots; tokens stay in P0 controller. */
+const ConexaWorldProtocol = (() => {
+  const integer = (n, min, max) => Number.isInteger(n) && n >= min && n <= max;
+  const studentOps = ['move', 'inspect', 'resolve'];
+  const teacherOps = ['start', 'pause', 'resume', 'release', 'next', 'finish', 'reset'];
+  const phases = ['lobby', 'open', 'paused', 'closed'];
+  const object = x => x !== null && typeof x === 'object' && !Array.isArray(x);
+  const fields = (x, names) => object(x) && Object.keys(x).length === names.length && names.every(k => Object.prototype.hasOwnProperty.call(x, k));
+  const vector = (x, length, min, max) => Array.isArray(x) && x.length === length && x.every(n => integer(n, min, max));
+  const walkable = (x, y) => integer(x, 0, 13) && integer(y, 0, 13) && ConexaWorld.walkable(x, y);
+  const fail = () => { throw new Error('O mundo recebido está incompleto ou inconsistente. Aguarde a sincronização.'); };
+  function receipt(x, ops) {
+    if (!integer(x.seq, 0, 2147483647) || !integer(x.last_arg, 0, 4294967295)) return false;
+    return x.seq === 0 ? x.last_op === null && x.last_arg === 0 : ops.includes(x.last_op);
+  }
+  function masks(clues, done, mission) {
+    if (!vector(clues, 3, 0, 15) || !integer(done, 0, 7)) return false;
+    for (let m = 0; m < 3; m++) {
+      if (m > mission && (clues[m] || (done & (1 << m)))) return false;
+      if ((done & (1 << m)) && clues[m] !== 15) return false;
+    }
+    return true;
+  }
+  function actionArgument(op, arg) {
+    if (!integer(arg, 0, 4294967295)) return false;
+    if (op === 'move') return arg < 196 && walkable(arg % 14, Math.floor(arg / 14));
+    if (op === 'inspect') return Math.floor(arg / 8) < 3 && arg % 8 < 4;
+    if (op === 'resolve') return Math.floor(arg / 4096) < 3 && Math.floor((arg % 4096) / 256) < 3;
+    return teacherOps.includes(op) && arg === 0;
+  }
+  function validate(s) {
+    if (!fields(s, ['v', 'boot', 'epoch', 'rev', 'role', 'phase', 'mission', 'released', 'positions', 'completed', 'decisions', 'me', 'teacher']) || s.v !== 1 || typeof s.boot !== 'string' || !/^[0-9a-f]{16}$/i.test(s.boot) || !integer(s.epoch, 1, 4294967295) || !integer(s.rev, 1, 4294967295)) fail();
+    if (!['visitor', 'student', 'teacher'].includes(s.role) || !phases.includes(s.phase) || !integer(s.mission, 0, 2) || !integer(s.released, 0, 7) || typeof s.positions !== 'string' || !/^(?:[0-9a-d]{2}|--){44}$/.test(s.positions)) fail();
+    const past = (1 << s.mission) - 1;
+    if ((s.released & past) !== past || s.released > (1 << (s.mission + 1)) - 1) fail();
+    let joined = 0;
+    for (let id = 0; id < 44; id++) {
+      const pair = s.positions.slice(id * 2, id * 2 + 2);
+      if (pair !== '--') {
+        if (!walkable(parseInt(pair[0], 16), parseInt(pair[1], 16))) fail();
+        joined++;
+      }
+    }
+    if (!vector(s.completed, 3, 0, joined) || s.completed.some((n, m) => m > s.mission && n !== 0)) fail();
+    if (s.role === 'teacher' || s.phase === 'closed') {
+      if (!Array.isArray(s.decisions) || s.decisions.length !== 3 || s.decisions.some((row, m) => !vector(row, 3, 0, joined) || row.reduce((a, b) => a + b, 0) !== s.completed[m])) fail();
+    } else if (s.decisions !== null) fail();
+    if (s.role === 'student') {
+      const p = s.me;
+      if (!fields(p, ['id', 'joined', 'seq', 'last_op', 'last_arg', 'x', 'y', 'clues', 'done', 'decisions']) || !integer(p.id, 1, 44) || typeof p.joined !== 'boolean' || !receipt(p, studentOps) || !walkable(p.x, p.y) || !masks(p.clues, p.done, s.mission) || !vector(p.decisions, 3, -1, 2)) fail();
+      const pair = s.positions.slice((p.id - 1) * 2, p.id * 2);
+      if (p.joined !== (pair !== '--') || (p.joined && pair !== p.x.toString(16) + p.y.toString(16))) fail();
+      if (!p.joined && (p.seq || p.done || p.clues.some(Boolean))) fail();
+      if (p.seq > 0 && !actionArgument(p.last_op, p.last_arg)) fail();
+      if (p.last_op === 'move' && p.last_arg !== p.y * 14 + p.x) fail();
+      for (let m = 0; m < 3; m++) {
+        const done = Boolean(p.done & (1 << m));
+        if (done !== (p.decisions[m] >= 0) || (done && s.completed[m] === 0) || (p.clues[m] & 8) && !(s.released & (1 << m))) fail();
+        if (done && s.decisions && s.decisions[m][p.decisions[m]] === 0) fail();
+      }
+      if (s.teacher !== null) fail();
+    } else if (s.me !== null) fail();
+    if (s.role === 'teacher') {
+      const t = s.teacher;
+      if (!fields(t, ['seq', 'last_op', 'last_arg', 'progress']) || !receipt(t, teacherOps) || t.last_arg !== 0 || typeof t.progress !== 'string' || !/^(?:[0-9a-f]{3}[0-7]|----){44}$/.test(t.progress)) fail();
+      const totals = [0, 0, 0];
+      for (let i = 0; i < 44; i++) {
+        const group = t.progress.slice(i * 4, i * 4 + 4);
+        if ((group !== '----') !== (s.positions.slice(i * 2, i * 2 + 2) !== '--')) fail();
+        if (group === '----') continue;
+        const clues = [...group.slice(0, 3)].map(c => parseInt(c, 16)), done = parseInt(group[3], 16);
+        if (!masks(clues, done, s.mission)) fail();
+        for (let m = 0; m < 3; m++) {
+          if ((clues[m] & 8) && !(s.released & (1 << m))) fail();
+          if (done & (1 << m)) totals[m]++;
+        }
+      }
+      if (totals.some((n, m) => n !== s.completed[m])) fail();
+    } else if (s.teacher !== null) fail();
+    if (s.phase === 'lobby' && (s.mission !== 0 || s.released !== 0 || s.completed.some(Boolean))) fail();
+    return s;
+  }
+  function reconcile(pending, s) {
+    validate(s);
+    if (!pending) return 'none';
+    const b = pending.body;
+    if (!fields(b, ['boot', 'epoch', 'seq', 'op', 'arg']) || !integer(b.seq, 1, 2147483647) || !actionArgument(b.op, b.arg)) return 'cancelled';
+    if (b.boot !== s.boot || b.epoch !== s.epoch) return 'session_changed';
+    if ((pending.role && pending.role !== s.role) || (pending.studentId && pending.studentId !== s.me?.id)) return 'cancelled';
+    const student = studentOps.includes(b.op), own = student ? s.me : s.teacher;
+    if (!own || s.role !== (student ? 'student' : 'teacher') || (student && !own.joined)) return 'cancelled';
+    if (own.seq === b.seq && own.last_op === b.op && own.last_arg === b.arg) return 'confirmed';
+    // A later receipt proves another action, never this pending operation.
+    if (own.seq !== b.seq - 1) return 'cancelled';
+    if (student) {
+      if (s.phase !== 'open') return 'cancelled';
+      if (b.op === 'inspect' && (Math.floor(b.arg / 8) > s.mission || (b.arg % 8 === 3 && !(s.released & (1 << Math.floor(b.arg / 8)))))) return 'cancelled';
+      if (b.op === 'resolve' && (Math.floor(b.arg / 4096) > s.mission || (own.done & (1 << Math.floor(b.arg / 4096))))) return 'cancelled';
+      return 'retry';
+    }
+    const allowed = { start: ['lobby'], pause: ['open'], resume: ['paused'], release: ['open'], next: ['open'], finish: ['open', 'paused'], reset: phases };
+    if (!allowed[b.op]?.includes(s.phase)) return 'cancelled';
+    if (b.op === 'next' && (s.mission === 2 || !(s.released & (1 << s.mission)))) return 'cancelled';
+    return 'retry';
+  }
+  return Object.freeze({ validate, reconcile, actionArgument });
+})();
+/* GAME_V1_PROTOCOL_END */
+
+/* GAME_V1_AVATARS_BEGIN — no student images are bundled until explicitly imported. */
+const ConexaAvatarProtocol = (() => {
+  const integer = (n, low, high) => Number.isInteger(n) && n >= low && n <= high;
+  const keys = (o, names) => o && typeof o === 'object' && !Array.isArray(o) && Object.keys(o).length === names.length && names.every(k => Object.prototype.hasOwnProperty.call(o, k));
+  const same = (a, b) => Array.isArray(a) && a.length === b.length && a.every((x, i) => x === b[i]);
+  function validate(m) {
+    if (!keys(m, ['version', 'anchor', 'logical', 'scale', 'atlas', 'entries']) || m.version !== 1 || m.anchor !== 'feet-center' || ![1, 2].includes(m.scale) || !keys(m.logical, ['width', 'height', 'pivot', 'footprint']) || m.logical.width !== 62 || m.logical.height !== 118 || !same(m.logical.pivot, [31, 106]) || !same(m.logical.footprint, [34, 14]) || !Array.isArray(m.entries) || m.entries.length > 44) throw new Error('Contrato de cartoons incompatível.');
+    if (m.atlas === null) {
+      if (m.entries.length !== 0) throw new Error('Atlas ausente.');
+      return m;
+    }
+    const a = m.atlas;
+    if (!keys(a, ['url', 'width', 'height', 'sha256']) || a.url !== '/avatars.webp' || !integer(a.width, 1, 992) || !integer(a.height, 1, 1416) || a.width * a.height * 4 > 6 * 1024 * 1024 || typeof a.sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(a.sha256) || !m.entries.length) throw new Error('Atlas fora do orçamento.');
+    const seen = new Set(), rectangles = [];
+    for (const e of m.entries) {
+      if (!keys(e, ['id', 'rect']) || !integer(e.id, 1, 44) || seen.has(e.id) || !Array.isArray(e.rect) || e.rect.length !== 4) throw new Error('ID de cartoon inválido.');
+      const [x, y, w, h] = e.rect;
+      if (!integer(x, 0, a.width) || !integer(y, 0, a.height) || w !== 62 * m.scale || h !== 118 * m.scale || x + w > a.width || y + h > a.height || rectangles.some(r => x < r[0] + r[2] && x + w > r[0] && y < r[1] + r[3] && y + h > r[1])) throw new Error('Recorte de cartoon inválido.');
+      seen.add(e.id); rectangles.push(e.rect);
+    }
+    return m;
+  }
+  function dimensions(bytes) {
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    const text = (offset, n) => String.fromCharCode(...bytes.slice(offset, offset + n));
+    if (bytes.length < 20 || text(0, 4) !== 'RIFF' || text(8, 4) !== 'WEBP' || view.getUint32(4, true) + 8 !== bytes.length) throw new Error('WebP incompleto.');
+    for (let offset = 12; offset + 8 <= bytes.length;) {
+      const type = text(offset, 4), n = view.getUint32(offset + 4, true), p = offset + 8;
+      if (p + n > bytes.length) throw new Error('WebP truncado.');
+      if (type === 'VP8X' && n >= 10) {
+        if (bytes[p] & 2) throw new Error('Atlas animado não suportado.');
+        return [1 + bytes[p + 4] + (bytes[p + 5] << 8) + (bytes[p + 6] << 16), 1 + bytes[p + 7] + (bytes[p + 8] << 8) + (bytes[p + 9] << 16)];
+      }
+      if (type === 'VP8 ' && n >= 10 && text(p + 3, 3) === '\x9d\x01\x2a') return [view.getUint16(p + 6, true) & 16383, view.getUint16(p + 8, true) & 16383];
+      if (type === 'VP8L' && n >= 5 && bytes[p] === 47) return [1 + ((bytes[p + 1] | (bytes[p + 2] << 8)) & 16383), 1 + (((bytes[p + 2] >> 6) | (bytes[p + 3] << 2) | (bytes[p + 4] << 10)) & 16383)];
+      offset = p + n + (n & 1);
+    }
+    throw new Error('Cabeçalho WebP inválido.');
+  }
+  return Object.freeze({ validate, dimensions });
+})();
+
+async function loadConexaAvatars(onLoaded) {
+  let asset = null, image = null;
+  const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 8000);
+  async function read(url, budget) {
+    const response = await fetch(url, { credentials: 'omit', redirect: 'error', cache: 'no-store', signal: controller.signal });
+    if (!response.ok) throw new Error('Recurso indisponível.');
+    if (Number(response.headers.get('content-length')) > budget) throw new Error('Recurso excedeu o orçamento.');
+    const reader = response.body?.getReader();
+    if (!reader) {
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      if (bytes.length > budget) throw new Error('Recurso excedeu o orçamento.');
+      return bytes;
+    }
+    let length = 0; const chunks = [];
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      length += value.length;
+      if (length > budget) { await reader.cancel(); throw new Error('Recurso excedeu o orçamento.'); }
+      chunks.push(value);
+    }
+    const bytes = new Uint8Array(length); let offset = 0;
+    for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
+    return bytes;
+  }
+  try {
+    const manifest = ConexaAvatarProtocol.validate(JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(await read('/api/avatars', 8192))));
+    if (manifest.atlas) {
+      const bytes = await read('/avatars.webp', 128 * 1024), size = ConexaAvatarProtocol.dimensions(bytes);
+      if (size[0] !== manifest.atlas.width || size[1] !== manifest.atlas.height || size[0] * size[1] * 4 > 6 * 1024 * 1024) throw new Error('Dimensões de cartoon incompatíveis.');
+      // SubtleCrypto is often unavailable on the HTTP LAN. Hashes remain in the
+      // build evidence; dimensions/budgets are checked before any image decode.
+      if (globalThis.crypto?.subtle) {
+        const hash = [...new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256', bytes))].map(n => n.toString(16).padStart(2, '0')).join('');
+        if (hash !== manifest.atlas.sha256) throw new Error('Integridade do atlas inválida.');
+      }
+      if (typeof createImageBitmap !== 'function') throw new Error('Decodificador de imagem indisponível.');
+      image = await createImageBitmap(new Blob([bytes], { type: 'image/webp' }));
+      if (image.width !== size[0] || image.height !== size[1]) throw new Error('Imagem incompatível.');
+      asset = { image, manifest, logical: manifest.logical, entries: new Map(manifest.entries.map(entry => [entry.id, entry.rect.slice()])) };
+    }
+  } catch (_) {
+    image?.close?.();
+  } finally {
+    clearTimeout(timer);
+  }
+  if (typeof onLoaded === 'function') onLoaded(asset);
+  return asset;
+}
+/* GAME_V1_AVATARS_END */
+
+/* GAME_V1_SOUND_BEGIN — quiet, synthesized locally, explicitly opt-in. */
+function createConexaSound() {
+  let enabled = false, context = null, last = -Infinity;
+  const playing = new Set();
+  function setEnabled(value) {
+    if (!value) { enabled = false; for (const node of playing) { node.gain.cancelScheduledValues?.(context.currentTime); node.gain.value = 0; } return false; }
+    try {
+      const Audio = globalThis.AudioContext || globalThis.webkitAudioContext;
+      if (!Audio) return false;
+      if (!context || context.state === 'closed') { context = new Audio(); last = -Infinity; }
+      enabled = true;
+      context.resume()?.catch(() => { enabled = false; });
+    } catch (_) { enabled = false; }
+    return enabled;
+  }
+  function play(kind = 'clue') {
+    if (!enabled || !context || context.state !== 'running' || context.currentTime - last < 0.18) return false;
+    const tones = { step: [270, 0.045], clue: [590, 0.10], complete: [740, 0.16], error: [180, 0.08] }, tone = tones[kind];
+    if (!tone) return false;
+    try {
+      const now = context.currentTime, oscillator = context.createOscillator(), gain = context.createGain();
+      oscillator.type = 'sine'; oscillator.frequency.value = tone[0];
+      gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(0.025, now + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, now + tone[1]);
+      oscillator.connect(gain); gain.connect(context.destination); playing.add(gain);
+      oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); playing.delete(gain); };
+      oscillator.start(now); oscillator.stop(now + tone[1] + 0.01); last = now; return true;
+    } catch (_) { return false; }
+  }
+  return { get enabled() { return enabled; }, setEnabled, toggle: () => setEnabled(!enabled), play, close: () => { setEnabled(false); context?.close()?.catch(() => {}); } };
+}
+/* GAME_V1_SOUND_END */
+
+/* EMBED_SESSION_V1_JS_END */
+/* EMBED_GAME_V1_JS_BEGIN */
+/* GAME_V1_MISSIONS_BEGIN — authored, fictional classroom scenarios; no personal data. */
+const ConexaMissions = (() => {
+  const freeze = value => {
+    if (value && typeof value === 'object') {
+      Object.values(value).forEach(freeze);
+      Object.freeze(value);
+    }
+    return value;
+  };
+  const points = [
+    { x: 10, y: 4, place: 'Mural', person: 'Mural da comunidade', kind: 'object', color: '#e97550' },
+    { x: 5, y: 5, place: 'Escola', person: 'Lia · oficina de mídia', kind: 'npc', color: '#4c88b6' },
+    { x: 6, y: 10, place: 'Praça', person: 'Caio · coletivo da praça', kind: 'npc', color: '#bd785c' },
+    { x: 12, y: 6, place: 'Arquivo', person: 'Nara · memória da cidade', kind: 'npc', color: '#8276b8' }
+  ];
+  return freeze([
+    {
+      id: 0, number: '01', title: 'Identidade e realidade', short: 'Além da vitrine',
+      question: 'Uma publicação mostra uma pessoa inteira?',
+      brief: 'Ravi publicou uma foto de uma conquista. Investigue o que aparece na vitrine e o que ficou fora do enquadramento antes de responder à publicação.',
+      release: 'Nara recebeu o registro completo da apresentação. O arquivo agora pode ser consultado.',
+      teacher: 'Peça que distingam o que a foto permite afirmar do que foi imaginado a partir dela. Uma conquista pode ser verdadeira e a representação ainda ser parcial. Libere o arquivo depois de uma primeira visita ao mural, à escola e à praça.',
+      clues: [
+        { ...points[0], title: 'A publicação recortada', source: 'Publicação de Ravi',
+          dialogue: '“Mais um prêmio. Parece fácil quando a gente nasceu para isso.” A imagem mostra Ravi sozinho com um troféu. O enquadramento não mostra o restante do palco. É uma publicação fictícia desta história.',
+          evidence: 'A foto publicada mostra apenas Ravi e o troféu. Não mostra a equipe, os ensaios nem a data do evento.',
+          prompt: 'Observe o que a publicação mostra e quais informações ela não fornece.' },
+        { ...points[1], title: 'Os créditos da apresentação', source: 'Ficha da oficina',
+          dialogue: 'Lia abre a ficha da oficina: “O projeto reuniu Ravi, Bia e Tom. Ravi apresentou; Bia produziu o vídeo; Tom pesquisou. Os três aparecem nos créditos. A foto não conta esse trabalho coletivo.”',
+          evidence: 'A ficha de produção credita Ravi, Bia e Tom, com tarefas diferentes no mesmo projeto.',
+          prompt: 'Quem contribuiu para a conquista que apareceu como individual?' },
+        { ...points[2], title: 'O caminho até o palco', source: 'Diário de ensaios',
+          dialogue: 'Caio mostra o diário autorizado da equipe: “Foram seis ensaios. Na primeira tentativa o vídeo não abriu; na terceira, o tempo acabou. O resultado veio depois de ajustes, ajuda e prática.”',
+          evidence: 'O diário registra seis ensaios, duas dificuldades e as correções feitas pela equipe antes da apresentação.',
+          prompt: 'Que parte do processo ficou invisível na legenda?' },
+        { ...points[3], title: 'O registro completo', source: 'Arquivo do evento',
+          dialogue: 'Nara apresenta o registro integral: “A apresentação aconteceu no mês anterior à postagem. A foto aberta mostra os três integrantes juntos. O prêmio é real dentro da história; a legenda omitiu o contexto.”',
+          evidence: 'O registro integral identifica a apresentação no mês anterior à postagem e mostra os três integrantes no palco.',
+          prompt: 'A data da postagem e a data do acontecimento são a mesma coisa?', locked: true }
+      ],
+      claims: [
+        'A conquista teve contribuição de mais de uma pessoa.',
+        'Houve dificuldades e preparação antes do resultado.',
+        'O recorte da postagem omite informações sobre o processo.',
+        'O acontecimento foi anterior à publicação e há um registro mais amplo.'
+      ],
+      links: [1, 2, 0, 3],
+      facts: 'A conquista existiu, foi coletiva e exigiu preparação. A publicação destacou uma pessoa e um momento; ela não descreve toda a identidade nem toda a experiência de Ravi.',
+      decisions: [
+        { label: 'Publicar um comentário com contexto', action: 'Reconhecer a conquista, citar o trabalho coletivo e indicar o registro completo.', consequence: 'O mural passa a exibir uma nota de contexto junto da publicação, com crédito à equipe.' },
+        { label: 'Propor uma publicação de bastidores', action: 'Convidar a equipe a mostrar tentativas, colaboração e aprendizado.', consequence: 'A escola abre uma mostra de bastidores: processo, colaboração e resultado aparecem juntos.' },
+        { label: 'Conversar antes de compartilhar', action: 'Perguntar à equipe sobre o recorte e compartilhar apenas a versão contextualizada.', consequence: 'A praça recebe um ponto de conversa: verificar o contexto passa a preceder o compartilhamento.' }
+      ]
+    },
+    {
+      id: 1, number: '02', title: 'Reputação digital', short: 'Quem pode participar?',
+      question: 'Um número de curtidas deve decidir quem tem acesso?',
+      brief: 'Uma regra experimental do mural reserva os melhores horários do estúdio aos perfis mais curtidos. Investigue as consequências para personagens fictícios e proponha uma regra de participação.',
+      release: 'Chegou o relatório da semana do estúdio. Nara pode mostrar quem teve acesso e quais projetos ficaram de fora.',
+      teacher: 'A popularidade é de personagens fictícios. Não peça avaliações, rankings ou comparações entre os alunos reais. Discuta critérios de acesso, efeitos não previstos e como revisar uma regra com evidências.',
+      clues: [
+        { ...points[0], title: 'A regra do mural', source: 'Regulamento experimental',
+          dialogue: 'O mural anuncia: “Os três perfis com mais curtidas escolhem primeiro os horários do estúdio. Os demais recebem as vagas restantes.” O sistema conta curtidas, sem avaliar necessidade ou contribuição.',
+          evidence: 'O regulamento experimental usa quantidade de curtidas como primeiro critério para escolher horários do estúdio.',
+          prompt: 'O que essa regra mede? O que ela deixa de considerar?' },
+        { ...points[1], title: 'O acordo da comunidade', source: 'Acordo do estúdio',
+          dialogue: 'Lia mostra o acordo original: “O estúdio pertence à comunidade. Cada grupo deve ter oportunidade de produzir e aprender. Este acordo foi aprovado antes da regra experimental; não prometia privilégio por fama.”',
+          evidence: 'O acordo do estúdio garante oportunidade de participação aos grupos e não condiciona o acesso à popularidade.',
+          prompt: 'Qual compromisso deve orientar uma regra de acesso?' },
+        { ...points[2], title: 'O projeto que não entrou', source: 'Registro do atendimento',
+          dialogue: 'Caio relata o caso fictício de Jo: “O perfil era novo e tinha poucas curtidas. O pedido para gravar um tutorial acessível foi recusado porque os horários já tinham sido escolhidos pelos mesmos perfis. O atendimento registrou esse motivo.”',
+          evidence: 'O atendimento de Jo registra falta de horário após a escolha dos perfis mais curtidos; o mérito do projeto não foi analisado.',
+          prompt: 'A recusa revela falta de qualidade ou um efeito da regra?' },
+        { ...points[3], title: 'Uma semana de consequências', source: 'Relatório de acesso',
+          dialogue: 'Nara compara as reservas: “Os mesmos três perfis ficaram com todos os horários mais procurados. Dois grupos novos desistiram. A regra ampliou a vantagem de quem já era conhecido; isso não prova que os outros projetos fossem piores.”',
+          evidence: 'O relatório registra concentração dos horários em três perfis e desistência de dois grupos novos durante a experiência.',
+          prompt: 'Que consequência aparece quando se observa o conjunto, além de um caso?', locked: true }
+      ],
+      claims: [
+        'Um projeto ficou sem horário por efeito da prioridade dada aos perfis populares.',
+        'A regra usa curtidas como critério de acesso, sem medir a qualidade do projeto.',
+        'A experiência concentrou oportunidades e afastou grupos novos.',
+        'Uma regra de participação deve respeitar o acordo de oportunidade para os grupos.'
+      ],
+      links: [2, 0, 3, 1],
+      facts: 'Curtidas não medem o valor de uma pessoa nem, sozinhas, a qualidade de um projeto. A regra experimental concentrou acesso. A comunidade pode mudar a regra sem transformar seus integrantes em um ranking.',
+      decisions: [
+        { label: 'Criar um rodízio transparente', action: 'Garantir uma primeira oportunidade a cada grupo e publicar a ordem de uso.', consequence: 'O estúdio troca a fila por curtidas por um rodízio visível de oportunidades.' },
+        { label: 'Reservar acesso para novos projetos', action: 'Separar horários para quem ainda não participou e revisar o resultado com a comunidade.', consequence: 'A escola sinaliza horários de acolhimento para projetos que ainda não tiveram acesso.' },
+        { label: 'Abrir uma agenda por necessidade', action: 'Combinar critérios públicos de prazo e acessibilidade, com revisão e possibilidade de contestação.', consequence: 'A praça abre um conselho de revisão: a agenda passa a explicar os critérios e aceitar pedidos de revisão.' }
+      ]
+    },
+    {
+      id: 2, number: '03', title: 'Desinformação', short: 'Antes de repassar',
+      question: 'O que precisamos verificar antes de agir sobre uma notícia?',
+      brief: 'Circula uma mensagem dizendo que a escola ficará fechada amanhã por água contaminada. Reconstrua a origem, confira a data e compare a imagem com o aviso completo antes de orientar a comunidade.',
+      release: 'O arquivo de datas foi localizado. Nara pode comparar o aviso antigo com a programação atual da escola.',
+      teacher: 'O roteiro trata de uma notícia fictícia. Diferencie “não encontrei prova” de “provei que é falso”. Neste caso há documentos que identificam o aviso antigo e a foto de outro local. A votação sobre como agir nunca altera esses fatos.',
+      clues: [
+        { ...points[0], title: 'A mensagem que circulou', source: 'Mensagem encaminhada',
+          dialogue: 'No mural: “ESCOLA FECHADA AMANHÃ! Água contaminada. Repasse!” A mensagem contém uma foto de uma torneira com água escura e um recorte sem data nem endereço. Não há assinatura ou link para um aviso completo.',
+          evidence: 'A mensagem encaminhada não identifica autor, data ou endereço; junta uma chamada urgente a uma imagem sem contexto.',
+          prompt: 'Quais informações essenciais desapareceram no encaminhamento?' },
+        { ...points[1], title: 'Quem publicou o aviso?', source: 'Aviso integral da escola',
+          dialogue: 'Lia apresenta o aviso integral do arquivo escolar: “Este comunicado foi emitido pela secretaria para uma manutenção programada de duas horas, em uma data anterior. Não anunciava contaminação nem fechamento no dia seguinte à mensagem atual.”',
+          evidence: 'O aviso integral identifica a secretaria como origem e descreve uma manutenção programada de duas horas, sem anúncio de contaminação.',
+          prompt: 'Compare a afirmação original com a versão que foi encaminhada.' },
+        { ...points[2], title: 'O que a imagem documenta?', source: 'Ficha original da fotografia',
+          dialogue: 'Caio abre a ficha da imagem: “A foto pertence a uma demonstração com pigmento numa oficina do centro comunitário. A legenda e a sequência completa identificam o experimento e o local. Ela não registra a água da escola.”',
+          evidence: 'A ficha e a sequência original situam a foto em uma oficina com pigmento no centro comunitário, e não na escola.',
+          prompt: 'Uma imagem verdadeira pode sustentar uma legenda enganosa?' },
+        { ...points[3], title: 'As datas em ordem', source: 'Arquivo e agenda atual',
+          dialogue: 'Nara alinha os documentos: “O aviso de manutenção é do semestre anterior. A agenda atual mantém as atividades de amanhã. A data foi cortada do encaminhamento; um aviso antigo ganhou aparência de urgência atual.”',
+          evidence: 'O arquivo data a manutenção no semestre anterior; a agenda atual mantém as atividades do dia seguinte à mensagem.',
+          prompt: 'A que momento cada documento se refere?', locked: true }
+      ],
+      claims: [
+        'A origem identificada descreve uma manutenção, sem anunciar contaminação.',
+        'O aviso é antigo e não corresponde à agenda atual.',
+        'O encaminhamento omite dados necessários e mistura uma imagem sem contexto.',
+        'A imagem documenta uma oficina em outro local, não a água da escola.'
+      ],
+      links: [1, 3, 0, 2],
+      facts: 'A mensagem reuniu um aviso antigo, uma imagem de outro local e uma conclusão que os documentos não sustentam. Os registros desta história não anunciam contaminação nem o fechamento atual da escola.',
+      decisions: [
+        { label: 'Corrigir com fontes e contexto', action: 'Publicar uma correção respeitosa que apresente origem, data e a ficha da imagem.', consequence: 'O mural recebe uma correção com fontes e contexto ao lado da mensagem original.' },
+        { label: 'Interromper o repasse e orientar', action: 'Parar a circulação da mensagem e explicar à comunidade como conferir o aviso completo.', consequence: 'A praça ganha um ponto de verificação: origem, data, contexto e evidências passam a acompanhar os avisos.' },
+        { label: 'Pedir uma atualização à origem', action: 'Solicitar um aviso atual à secretaria, anexando a verificação já realizada, sem repetir a acusação como fato.', consequence: 'A escola publica um aviso atualizado com data, autoria e referência aos documentos consultados.' }
+      ]
+    }
+  ]);
+})();
+/* GAME_V1_MISSIONS_END */
+
+/* UI consumes confirmed snapshots only. Network, authentication and rules belong to the host. */
+function createGameV1UI({ view, send, navigate, onSound = () => {} }) {
+  const teacher = view === 'teacher';
+  const projector = view === 'projector';
+  let world = null, status = {}, selectedMission = 0, activeClue = null;
+  let sessionKey = '', lastKey = '', pending = false, muted = true, originFocus = null;
+  let confirmAction = null, confirmFingerprint = null;
+  const drafts = ConexaMissions.map(() => ({ links: ['', '', '', ''], decision: '' }));
+  const roots = [];
+  const phaseNames = { lobby: 'Aguardando início', open: 'Exploração liberada', paused: 'Experiência pausada', closed: 'Experiência encerrada' };
+  const el = (tag, className, text) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = String(text);
+    return node;
+  };
+  const button = (label, action, className = 'v1-button') => {
+    const node = el('button', className, label); node.type = 'button';
+    if (action) node.addEventListener('click', action);
+    return node;
+  };
+  const append = (parent, ...nodes) => { nodes.forEach(node => parent.append(node)); return parent; };
+  const countBits = mask => [0, 1, 2, 3].filter(i => (mask || 0) & (1 << i)).length;
+  const mission = () => ConexaMissions[selectedMission];
+  const own = () => world && world.me && world.me.joined !== false && status.authenticated ? world.me : null;
+  const mask = (id = selectedMission) => own() ? Number(own().clues[id]) || 0 : 0;
+  const done = (id = selectedMission) => Boolean(own() && (own().done & (1 << id)));
+  const released = (id = selectedMission) => Boolean(world && (world.released & (1 << id)));
+  const joined = () => world && typeof world.positions === 'string' ? (world.positions.match(/.{2}/g) || []).filter(p => p !== '--').length : 0;
+  const ready = () => Boolean(world && status.online && !status.busy && !pending);
+  const canPlay = () => Boolean(ready() && own() && world.phase === 'open' && selectedMission <= world.mission && !done());
+  const at = point => {
+    const position = status.position || own();
+    return Boolean(position && Number.isInteger(position.x) && Number.isInteger(position.y) && Math.abs(position.x - point.x) + Math.abs(position.y - point.y) <= 1);
+  };
+  const notices = [];
+  function makeNotice() {
+    const node = el('p', 'v1-notice'); node.setAttribute('role', 'status'); node.setAttribute('aria-live', 'polite');
+    notices.push(node); return node;
+  }
+  const notice = makeNotice();
+  function signal(name) { if (!muted) onSound(name); }
+  function report(text) { notices.forEach(node => { node.textContent = text; }); }
+  function issue(op, arg) {
+    if (!ready()) return false;
+    const accepted = send(op, arg);
+    if (accepted !== false) {
+      pending = true;
+      report('Solicitação enviada. Aguardando confirmação da cidade.');
+      renderAll();
+      signal('action');
+      return true;
+    }
+    report('A ação não pôde ser enviada agora. Confira a conexão e tente novamente.');
+    return false;
+  }
+  function modalEvent() {
+    document.dispatchEvent(new CustomEvent('conexa-v1-modal', { detail: { open: roots.some(n => n.tagName === 'DIALOG' && n.isConnected && n.open) } }));
+  }
+  function dialog(id, label) {
+    const node = el('dialog', 'v1-dialog'); node.id = id; node.setAttribute('aria-label', label);
+    const close = button('Fechar', () => node.close(), 'v1-close'); close.setAttribute('aria-label', 'Fechar ' + label.toLowerCase());
+    append(node, close); document.body.append(node); roots.push(node);
+    node.addEventListener('close', () => {
+      modalEvent();
+      if (!roots.some(n => n.tagName === 'DIALOG' && n.open)) {
+        const target = originFocus && originFocus.isConnected && originFocus.getClientRects().length ? originFocus : document.getElementById('iso-world');
+        if (target) target.focus({ preventScroll: true });
+      }
+    });
+    return node;
+  }
+  function open(node) {
+    originFocus = document.activeElement;
+    roots.filter(n => n.tagName === 'DIALOG' && n.open && n !== node).forEach(n => n.close());
+    if (!node.open) node.showModal();
+    modalEvent();
+  }
+  function leaveFor(point) {
+    roots.filter(n => n.tagName === 'DIALOG' && n.open).forEach(n => n.close());
+    navigate(point.x, point.y);
+  }
+  const journal = dialog('v1-journal', 'Diário de investigação');
+  const journalBody = el('div', 'v1-journal-body'); append(journal, journalBody, notice);
+  const conversation = dialog('v1-conversation', 'Conversa e evidência');
+  const conversationBody = el('div'); append(conversation, conversationBody, makeNotice());
+  const summary = dialog('v1-summary', 'Acontecimentos da cidade');
+  const summaryBody = el('div', 'v1-summary-body'); append(summary, summaryBody, makeNotice());
+  const confirmation = dialog('v1-confirmation', 'Confirmar controle da experiência');
+  const confirmText = el('p', 'v1-confirm-text');
+  const confirmButtons = el('div', 'v1-actions');
+  append(confirmButtons, button('Cancelar', () => confirmation.close()), button('Confirmar', () => {
+    if (!confirmAction || !confirmFingerprint || confirmFingerprint !== controlFingerprint() || !ready()) {
+      cancelConfirmation('O estado da sessão mudou. Revise a cidade e solicite a ação novamente.');
+      return;
+    }
+    const action = confirmAction; confirmAction = null; confirmFingerprint = null; confirmation.close(); issue(action, 0);
+  }, 'v1-button v1-primary'));
+  append(confirmation, el('h2', '', 'Confirmar ação'), confirmText, confirmButtons);
+  confirmation.addEventListener('close', () => { if (!confirmation.open) { confirmAction = null; confirmFingerprint = null; } });
+  function controlFingerprint() { return world && world.teacher ? JSON.stringify([world.boot, world.epoch, world.teacher.seq]) : null; }
+  function cancelConfirmation(message) {
+    confirmAction = null; confirmFingerprint = null;
+    if (confirmation.open) confirmation.close();
+    if (message) report(message);
+  }
+  function ask(op, text) {
+    if (!world || !world.teacher || !ready()) return;
+    confirmAction = op; confirmFingerprint = controlFingerprint(); confirmText.textContent = text; open(confirmation);
+  }
+  const journalButton = button(projector ? 'Acontecimentos' : 'Diário de missões', () => projector ? openSummary() : openJournal(), 'v1-menu-button');
+  journalButton.id = 'v1-journal-button';
+  const journalHost = document.getElementById(projector ? 'projector-controls' : 'view-menu') || document.querySelector('.game') || document.body;
+  if (projector) journalHost.append(journalButton); else journalHost.prepend(journalButton);
+  roots.push(journalButton);
+  const teacherPanel = el('section', 'v1-teacher-panel'); teacherPanel.id = 'v1-teacher-panel'; teacherPanel.setAttribute('aria-label', 'Controle do jogo completo');
+  const teacherFeedback = makeNotice();
+  if (teacher) { (document.getElementById('teacher-panel') || document.body).prepend(teacherPanel); roots.push(teacherPanel); }
+
+  function heading(parent, eyebrow, title, description) {
+    append(parent, el('p', 'v1-eyebrow', eyebrow), el('h2', '', title));
+    if (description) parent.append(el('p', 'v1-lead', description));
+  }
+  function availability() {
+    if (!world) return 'Aguardando o estado da cidade.';
+    if (!status.online) return 'Conexão interrompida. As pistas confirmadas continuam no diário; ações aguardam reconexão.';
+    if (!own()) return 'Entre com seu código pelo menu para registrar pistas e concluir missões.';
+    if (world.phase === 'lobby') return 'O professor ainda vai iniciar a experiência.';
+    if (world.phase === 'paused') return 'O professor pausou a experiência. Você pode revisar as pistas já reunidas.';
+    if (world.phase === 'closed') return 'A experiência foi encerrada. Seu diário e os resultados continuam disponíveis nesta execução.';
+    if (selectedMission > world.mission) return 'Esta missão ainda não foi liberada pelo professor.';
+    if (done()) return 'Missão concluída e confirmada pela cidade.';
+    if (pending || status.busy) return 'Aguardando confirmação de uma ação.';
+    return 'Explore, escute os personagens e registre as evidências antes de decidir.';
+  }
+  function preserveFocus(container, render) {
+    const focused = container.contains(document.activeElement) ? document.activeElement.id : '';
+    const scroll = container.closest('dialog')?.scrollTop;
+    render();
+    if (focused) document.getElementById(focused)?.focus({ preventScroll: true });
+    if (scroll !== undefined) container.closest('dialog').scrollTop = scroll;
+  }
+  function renderJournal() {
+    preserveFocus(journalBody, () => {
+      journalBody.replaceChildren();
+      const item = mission();
+      heading(journalBody, 'CONEXA 200 · HISTÓRIA FICTÍCIA', 'Diário de investigação', 'Uma cidade, três investigações. Seu diário acompanha as pistas reunidas e as ações realizadas.');
+      const tabs = el('nav', 'v1-tabs'); tabs.setAttribute('aria-label', 'Missões');
+      ConexaMissions.forEach((entry, index) => {
+        const tab = button(entry.number + ' ' + entry.short + (done(index) ? ' ✓' : ''), () => {
+          selectedMission = index; activeClue = null; report(''); renderAll();
+        });
+        tab.id = 'v1-tab-' + index; tab.disabled = !world || index > world.mission;
+        tab.setAttribute('aria-current', index === selectedMission ? 'true' : 'false'); tabs.append(tab);
+      });
+      journalBody.append(tabs);
+      heading(journalBody, 'MISSÃO ' + item.number, item.title, item.brief);
+      journalBody.append(el('p', 'v1-availability', availability()));
+      const objectives = el('ol', 'v1-objectives');
+      append(objectives,
+        el('li', countBits(mask()) === 4 ? 'v1-done' : '', 'Reunir quatro evidências: ' + countBits(mask()) + '/4.'),
+        el('li', done() ? 'v1-done' : '', 'No mural, relacionar cada afirmação à fonte que a sustenta.'),
+        el('li', done() ? 'v1-done' : '', 'Escolher uma ação responsável e observar sua consequência.'));
+      journalBody.append(objectives);
+      const cards = el('div', 'v1-clue-grid');
+      item.clues.forEach((clue, index) => {
+        const collected = Boolean(mask() & (1 << index));
+        const card = el('article', 'v1-clue-card' + (collected ? ' v1-collected' : ''));
+        append(card, el('span', 'v1-clue-state', collected ? '✓ Pista registrada' : clue.locked && !released() ? 'Aguardando acontecimento' : 'Pista a investigar'), el('h3', '', clue.title), el('p', 'v1-source', clue.person + ' · ' + clue.place));
+        card.append(el('p', '', collected ? clue.evidence : 'Visite este ponto e converse para conhecer a evidência.'));
+        const actions = el('div', 'v1-actions');
+        const go = button('Ir até ' + clue.place, () => leaveFor(clue)); go.id = 'v1-go-' + index;
+        go.disabled = !canPlay() || (clue.locked && !released());
+        actions.append(go);
+        if (collected) actions.append(button('Rever pista', () => interact(index), 'v1-text-button'));
+        card.append(actions); cards.append(card);
+      });
+      journalBody.append(cards);
+      if (done()) renderConsequence(journalBody, item);
+      else renderBoard(journalBody, item);
+      const options = el('div', 'v1-journal-options');
+      const sound = button(muted ? 'Som: desligado' : 'Som: ligado', () => { muted = !muted; signal('action'); renderJournal(); }, 'v1-text-button');
+      sound.id = 'v1-sound'; sound.setAttribute('aria-pressed', String(!muted));
+      append(options, sound, button('Acontecimentos coletivos', openSummary, 'v1-text-button'));
+      journalBody.append(options);
+    });
+  }
+  function renderBoard(parent, item) {
+    const board = el('section', 'v1-board');
+    append(board, el('h3', '', 'Reconstruir a história no mural'), el('p', '', 'Ligue cada afirmação à fonte que a sustenta mais diretamente. Depois escolha como agir. As ações finais têm efeitos diferentes; os fatos são os mesmos.'));
+    if (mask() !== 15) {
+      board.append(el('p', 'v1-availability', 'O quadro de evidências será liberado quando as quatro pistas estiverem registradas.'));
+      parent.append(board); return;
+    }
+    const draft = drafts[selectedMission];
+    item.claims.forEach((claim, index) => {
+      const field = el('label', 'v1-match-field'); field.htmlFor = 'v1-match-' + index;
+      field.append(el('span', '', (index + 1) + '. ' + claim));
+      const select = el('select'); select.id = 'v1-match-' + index;
+      const empty = el('option', '', 'Escolha a fonte'); empty.value = ''; select.append(empty);
+      item.clues.forEach((clue, sourceIndex) => { const option = el('option', '', clue.source); option.value = String(sourceIndex); select.append(option); });
+      select.value = draft.links[index]; select.disabled = !canPlay();
+      select.addEventListener('change', () => { draft.links[index] = select.value; updateResolveButton(); });
+      field.append(select); board.append(field);
+    });
+    const fieldset = el('fieldset', 'v1-decisions');
+    fieldset.append(el('legend', '', 'Com as evidências reunidas, como você vai agir?'));
+    item.decisions.forEach((decision, index) => {
+      const label = el('label', 'v1-decision');
+      const input = el('input'); input.type = 'radio'; input.name = 'v1-decision'; input.value = String(index); input.id = 'v1-decision-' + index;
+      input.checked = draft.decision === String(index); input.disabled = !canPlay();
+      input.addEventListener('change', () => { draft.decision = input.value; updateResolveButton(); });
+      const text = el('span'); append(text, el('strong', '', decision.label), el('small', '', decision.action));
+      append(label, input, text); fieldset.append(label);
+    });
+    board.append(fieldset);
+    if (!at(item.clues[0])) board.append(button('Voltar ao mural para concluir', () => leaveFor(item.clues[0]), 'v1-button'));
+    const submit = button('Confirmar investigação e ação', () => {
+      const links = draft.links.reduce((value, source, index) => value | (Number(source) << (index * 2)), 0);
+      issue('resolve', selectedMission * 4096 + Number(draft.decision) * 256 + links);
+    }, 'v1-button v1-primary'); submit.id = 'v1-resolve';
+    board.append(submit); parent.append(board); updateResolveButton();
+  }
+  function updateResolveButton() {
+    const submit = document.getElementById('v1-resolve'); if (!submit) return;
+    const draft = drafts[selectedMission];
+    submit.disabled = !canPlay() || mask() !== 15 || !at(mission().clues[0]) || draft.links.some(v => v === '') || draft.decision === '';
+  }
+  function renderConsequence(parent, item) {
+    const box = el('section', 'v1-consequence');
+    const selected = own() && Number(own().decisions[item.id]);
+    append(box, el('h3', '', '✓ Investigação concluída'), el('p', '', item.facts));
+    if (Number.isInteger(selected) && selected >= 0 && selected < item.decisions.length) {
+      append(box, el('h4', '', item.decisions[selected].label), el('p', '', item.decisions[selected].consequence));
+    }
+    box.append(el('p', 'v1-facts-note', 'As escolhas indicam como agir. Nenhuma maioria transforma uma afirmação sem evidência em fato.'));
+    parent.append(box);
+  }
+  function renderConversation() {
+    if (activeClue === null) { conversationBody.replaceChildren(); return; }
+    preserveFocus(conversationBody, () => {
+      conversationBody.replaceChildren();
+      const item = mission(), clue = item.clues[activeClue], collected = Boolean(mask() & (1 << activeClue));
+      heading(conversationBody, 'MISSÃO ' + item.number + ' · ' + clue.place.toUpperCase(), clue.person, clue.title);
+      if (clue.locked && !released() && !collected) {
+        append(conversationBody, el('p', 'v1-dialogue', '“Ainda estou reunindo o documento completo. O professor vai avisar quando o arquivo chegar. Enquanto isso, investigue os outros pontos da cidade.”'), el('p', 'v1-availability', 'Aguardando liberação deste acontecimento.'));
+      } else if (!at(clue) && !collected) {
+        append(conversationBody, el('p', 'v1-dialogue', 'Aproxime-se deste ponto para conversar e conhecer a evidência.'), button('Caminhar até ' + clue.place, () => leaveFor(clue), 'v1-button v1-primary'));
+      } else {
+        append(conversationBody, el('p', 'v1-dialogue', clue.dialogue), el('p', 'v1-reflection', clue.prompt));
+        if (collected) conversationBody.append(el('p', 'v1-confirmed', '✓ Evidência já registrada no seu diário.'));
+        else {
+          const collect = button('Registrar esta pista', () => issue('inspect', selectedMission * 8 + activeClue), 'v1-button v1-primary');
+          collect.id = 'v1-collect'; collect.disabled = !canPlay() || !at(clue); conversationBody.append(collect);
+        }
+      }
+      const actions = el('div', 'v1-actions'); append(actions, button('Abrir diário', openJournal), button('Voltar à cidade', () => conversation.close()));
+      conversationBody.append(actions);
+      if (!canPlay() && !done()) conversationBody.append(el('p', 'v1-availability', availability()));
+    });
+  }
+  function renderSummary() {
+    preserveFocus(summaryBody, () => {
+      summaryBody.replaceChildren();
+      heading(summaryBody, 'CIDADE CONEXA · ACONTECIMENTOS', world && world.phase === 'closed' ? 'O que a comunidade construiu' : 'Investigações em andamento', 'Personagens e acontecimentos desta história são fictícios. As decisões da turma definem ações; as evidências definem os fatos.');
+      if (!world) { summaryBody.append(el('p', '', 'Aguardando estado confirmado da cidade.')); return; }
+      const participantCount = joined();
+      summaryBody.append(el('p', 'v1-summary-status', phaseNames[world.phase] + ' · ' + participantCount + (participantCount === 1 ? ' participante na sessão' : ' participantes na sessão')));
+      ConexaMissions.forEach((item, index) => {
+        const section = el('section', 'v1-summary-mission');
+        const completedCount = world.completed[index] || 0;
+        append(section, el('h3', '', item.number + ' · ' + item.title), el('p', 'v1-summary-count', completedCount + (completedCount === 1 ? ' investigação concluída' : ' investigações concluídas')));
+        if (index <= world.mission && (world.released & (1 << index))) section.append(el('p', 'v1-event', item.release));
+        if (world.phase === 'closed' || index < world.mission) section.append(el('p', 'v1-facts-note', item.facts));
+        if (Array.isArray(world.decisions) && Array.isArray(world.decisions[index])) {
+          const results = el('ul', 'v1-decision-results');
+          item.decisions.forEach((action, actionIndex) => {
+            const row = el('li'); append(row, el('span', '', action.label), el('strong', '', String(world.decisions[index][actionIndex] || 0))); results.append(row);
+          });
+          section.append(results);
+        } else section.append(el('p', 'v1-source', 'A distribuição das decisões será apresentada no encerramento.'));
+        summaryBody.append(section);
+      });
+      summaryBody.append(el('p', 'v1-facts-note', 'Não há ranking de popularidade dos alunos. Os totais descrevem ações escolhidas para personagens fictícios.'));
+    });
+  }
+  function renderTeacher() {
+    if (!teacher) return;
+    const detailsOpen = teacherPanel.querySelector('details')?.open || false;
+    preserveFocus(teacherPanel, () => {
+      teacherPanel.replaceChildren();
+      heading(teacherPanel, 'JOGO COMPLETO · V1', 'Condução da experiência');
+      teacherPanel.append(teacherFeedback);
+      if (!world) { teacherPanel.append(el('p', '', 'Aguardando estado da cidade.')); return; }
+      const current = ConexaMissions[world.mission];
+      append(teacherPanel, el('p', 'v1-teacher-phase', phaseNames[world.phase] + ' · Missão ' + current.number), el('p', '', current.title));
+      if (!world.teacher) {
+        teacherPanel.append(el('p', 'v1-availability', 'Use a autenticação do professor abaixo para habilitar os controles.'));
+        return;
+      }
+      const authorized = Boolean(world.teacher && ready());
+      const controls = el('div', 'v1-teacher-controls');
+      const add = (label, op, allowed, confirmationText) => {
+        const control = button(label, () => confirmationText ? ask(op, confirmationText) : issue(op, 0));
+        control.id = 'v1-control-' + op; control.disabled = !authorized || !allowed; controls.append(control);
+      };
+      add('Iniciar experiência', 'start', world.phase === 'lobby');
+      add('Pausar', 'pause', world.phase === 'open');
+      add('Retomar', 'resume', world.phase === 'paused');
+      add('Liberar acontecimento', 'release', world.phase === 'open' && !(world.released & (1 << world.mission)));
+      const incomplete = (world.completed[world.mission] || 0) < joined();
+      add('Próxima missão', 'next', world.phase === 'open' && world.mission < 2 && Boolean(world.released & (1 << world.mission)), incomplete ? 'Há participantes que ainda não concluíram esta missão. Avançar libera a próxima investigação; as anteriores continuam disponíveis para recuperação. Continuar?' : 'Liberar a próxima missão para a turma? As pistas registradas permanecem disponíveis.');
+      add('Encerrar experiência', 'finish', world.phase === 'open' || world.phase === 'paused', 'Encerrar interrompe novas ações e exibe os resultados coletivos. Revise a situação dos participantes antes de confirmar.');
+      add('Reiniciar experiência', 'reset', true, 'Reiniciar apaga o progresso das três missões e as posições desta experiência para toda a turma. Os códigos de acesso são preservados. Esta ação não pode recuperar o progresso apagado. Confirmar?');
+      teacherPanel.append(controls);
+      const summaryList = el('ul', 'v1-teacher-progress');
+      ConexaMissions.forEach((item, index) => summaryList.append(el('li', '', item.number + ' · ' + (world.completed[index] || 0) + '/' + joined() + ' concluíram')));
+      teacherPanel.append(summaryList);
+      const note = el('details', 'v1-guide'); note.open = detailsOpen;
+      append(note, el('summary', '', 'Orientação pedagógica e participantes'), el('p', '', current.teacher));
+      if (world.teacher && typeof world.teacher.progress === 'string') {
+        const table = el('table', 'v1-participant-table');
+        table.append(el('caption', '', 'Progresso por código numérico — sem respostas individuais'));
+        const head = el('thead'), row = el('tr'); ['ID', 'Pistas 1/2/3', 'Concluídas'].forEach(text => row.append(el('th', '', text))); head.append(row); table.append(head);
+        const body = el('tbody');
+        for (let index = 0; index < 44; index++) {
+          if (world.positions.slice(index * 2, index * 2 + 2) === '--') continue;
+          const raw = world.teacher.progress.slice(index * 4, index * 4 + 4);
+          if (!/^[0-9a-f]{4}$/i.test(raw)) continue;
+          const values = Array.from(raw, character => parseInt(character, 16));
+          const participant = el('tr');
+          append(participant, el('th', '', String(index + 1).padStart(2, '0')), el('td', '', values.slice(0, 3).map(countBits).join(' / ')), el('td', '', [0, 1, 2].filter(bit => values[3] & (1 << bit)).map(bit => bit + 1).join(', ') || '—'));
+          body.append(participant);
+        }
+        table.append(body); note.append(table);
+      }
+      teacherPanel.append(note);
+      const collective = button('Ver acontecimentos e resultados', openSummary); collective.id = 'v1-teacher-summary'; teacherPanel.append(collective);
+      teacherPanel.append(el('p', 'v1-facts-note', 'As decisões finais são modos de agir. A contagem não muda os fatos documentados no roteiro.'));
+    });
+  }
+  function renderAll() { renderJournal(); renderConversation(); renderSummary(); renderTeacher(); }
+  function openJournal() { renderJournal(); open(journal); }
+  function openSummary() { renderSummary(); open(summary); }
+  function interact(index) {
+    if (!Number.isInteger(index) || index < 0 || index > 3) return false;
+    if (projector) { openSummary(); return true; }
+    activeClue = index; renderConversation(); open(conversation); signal('talk'); return true;
+  }
+  function update(next, nextStatus) {
+    if (next === null) {
+      const hadConfirmation = confirmation.open;
+      cancelConfirmation();
+      world = null; status = nextStatus || {}; pending = false;
+      selectedMission = 0; activeClue = null; sessionKey = ''; lastKey = '';
+      drafts.forEach(draft => { draft.links = ['', '', '', '']; draft.decision = ''; });
+      report('');
+      if (conversation.open) conversation.close();
+      renderAll();
+      if (hadConfirmation) report('O acesso ou a sessão mudou. A confirmação anterior foi cancelada. Solicite a ação novamente após entrar.');
+      journalButton.dataset.mission = '0'; journalButton.dataset.completed = '0';
+      return;
+    }
+    if (!next || next.v !== 1 || !Array.isArray(next.completed)) return;
+    const newSession = String(next.boot) + ':' + String(next.epoch) + ':' + String(next.me ? next.me.id : 0);
+    const previousDone = own() ? own().done : 0;
+    const previousMask = mask();
+    const previousMission = world && world.mission;
+    const wasPending = pending;
+    const previousConfirmation = confirmation.open ? confirmFingerprint : null;
+    world = next; status = nextStatus || {}; pending = false;
+    const confirmationChanged = previousConfirmation !== null && previousConfirmation !== controlFingerprint();
+    if (confirmationChanged) cancelConfirmation();
+    if (sessionKey !== newSession) {
+      sessionKey = newSession; selectedMission = Math.min(2, Math.max(0, world.mission));
+      activeClue = null;
+      drafts.forEach(draft => { draft.links = ['', '', '', '']; draft.decision = ''; });
+      report('');
+      if (conversation.open) conversation.close();
+    } else if (previousMission !== world.mission && !journal.open && !conversation.open) selectedMission = world.mission;
+    // Other players walking changes world.rev frequently; it must not rebuild an open form.
+    const presence = typeof next.positions === 'string' ? (next.positions.match(/.{2}/g) || []).map(position => position === '--' ? 0 : 1).join('') : '';
+    const personal = next.me ? [next.me.id, next.me.clues, next.me.done, next.me.decisions] : null;
+    const key = JSON.stringify([next.boot, next.epoch, next.phase, next.mission, next.released, presence, next.completed, next.decisions, personal, next.teacher ? next.teacher.progress : null, status.online, status.authenticated, status.busy, status.position || (next.me ? [next.me.x, next.me.y] : null)]);
+    if (key !== lastKey || wasPending) { lastKey = key; renderAll(); }
+    if (confirmationChanged) report('O estado da sessão mudou. A confirmação anterior foi cancelada. Revise a cidade e solicite a ação novamente.');
+    if (own() && own().done !== previousDone) { report('Investigação concluída e confirmada pela cidade.'); signal('complete'); }
+    else if (mask() !== previousMask) { report('Pista confirmada e registrada no diário.'); signal('clue'); }
+    journalButton.dataset.mission = String(world.mission);
+    journalButton.dataset.completed = String(own() ? own().done : 0);
+  }
+  renderAll();
+  return {
+    update, interact, openJournal, openSummary,
+    showMessage: text => { pending = false; report(String(text)); renderAll(); },
+    getMission: mission,
+    getMissionIndex: () => selectedMission,
+    getPointsOfInterest: () => mission().clues.map((clue, index) => ({ ...clue, index, collected: Boolean(mask() & (1 << index)), released: !clue.locked || released() })),
+    hasOpenDialog: () => roots.some(node => node.tagName === 'DIALOG' && node.isConnected && node.open),
+    destroy: () => { roots.forEach(node => { if (node.tagName === 'DIALOG' && node.open) node.close(); node.remove(); }); modalEvent(); }
+  };
+}
+
+/* EMBED_GAME_V1_JS_END */
+  (() => {
+    const $ = id => document.getElementById(id);
+    const route = window.location.pathname.replace(/\/+$/, '') || '/';
+    const view = route === '/professor' ? 'teacher' : route === '/projetor' ? 'projector' : 'student';
+    const phaseLabels = {lobby:'Esperando começar', open:'Escolhas abertas', paused:'Pausa para conversar', closed:'Rodada encerrada'};
+    const letters = ['A', 'B', 'C'];
+    const model = {world:null,worldPending:null,worldSync:true,worldNextMove:0,worldRetryAt:0,snapshot:null, token:'', pending:null, busy:false, online:false, failures:0, needsSync:true, healthRequested:false, health:null, timer:null, notice:'', noticeKind:'info', lastReceived:0};
+    document.body.className = view;
+    const worldScene = createWorldScene(view);
+    const sound=createConexaSound();
+    const gameUI=createGameV1UI({view,send:sendWorld,navigate:(x,y)=>worldScene.city&&worldScene.city.navigate(x,y),onSound:cue=>{sound.setEnabled(true);sound.play(cue);}});
+    worldScene.bindV1(gameUI);
+    loadConexaAvatars(asset=>{if(worldScene.city)worldScene.city.setAtlas(asset);});
+
+    const pollButton=document.createElement('button');pollButton.type='button';pollButton.id='legacy-poll';pollButton.textContent='Enquete de leitura';pollButton.addEventListener('click',()=>{$('teacher-mission').click();});$('view-menu').append(pollButton);
+    function makeWorldAction(op,arg){const w=model.world,receipt=w&&(w.role==='teacher'?w.teacher:w.me);if(!receipt||receipt.seq>=2147483647)return null;return{role:w.role,studentId:w.me&&w.me.id,body:{boot:w.boot,epoch:w.epoch,seq:receipt.seq+1,op,arg}};}
+    function sendWorld(op,arg){
+      if(!canAct()||!signedIn()||!model.world||model.worldSync||model.worldPending)return false;
+      const action=makeWorldAction(op,arg);if(!action)return false;
+      model.worldPending=action;render();schedule(0);return true;
+    }
+    function applySession(raw){
+      if(!raw||!raw.p0||!raw.world)throw new Error('A placa não confirmou a sessão do jogo.');
+      const w=ConexaWorldProtocol.validate(raw.world),p=ConexaProtocol.validateSnapshot(raw.p0);
+      if(w.boot!==p.boot||w.role!==p.role||Array.from({length:44},(_,i)=>w.positions.slice(i*2,i*2+2)==='--'?'0':'1').join('')!==p.joined)throw new Error('Estado de presença inconsistente.');
+      if(!applySnapshot(p))return;
+      if(model.worldPending){const result=ConexaWorldProtocol.reconcile(model.worldPending,w);if(result==='confirmed')model.worldPending=null;else if(result==='cancelled'||result==='session_changed'){model.worldPending=null;if(worldScene.city)worldScene.city.stop();announce('O estado da sessão mudou. Sua posição e seu diário foram sincronizados.', 'info');}}
+      model.world=w;model.worldSync=false;
+    }
+    function renderWorld(){
+      const w=model.world,authenticated=signedIn(),city=worldScene.city;
+      if(city)city.updateWorld(w,model.online&&authenticated&&!model.worldSync);
+      gameUI.update(w,{online:model.online,authenticated,busy:model.busy||!!model.worldPending||!!model.pending||model.needsSync||model.worldSync,ownId:w&&w.me?w.me.id:0,position:w&&w.me&&w.me.joined?{x:w.me.x,y:w.me.y}:null});
+      if(city)city.setQuest(gameUI.getPointsOfInterest());$('quest-peek').querySelector('strong').textContent=gameUI.getMission().title;$('quest-peek').querySelector('small').textContent='MISSÃO '+gameUI.getMission().number;
+      if(w){$('phase-label').textContent={lobby:'Aguardando início',open:'Missão '+(w.mission+1),paused:'Exploração pausada',closed:'Jornada concluída'}[w.phase];$('round-label').textContent='CONEXA • três missões';$('projector-results').disabled=false;}
+    }
+    document.addEventListener('conexa-v1-motion',()=>{if(!model.busy&&!model.worldPending&&model.timerDue>Date.now()+1000)schedule(Math.max(1000,model.worldNextMove-Date.now()));});
+    $('nav-' + view).setAttribute('aria-current', 'page');
+    $('teacher-section').hidden = view !== 'teacher';
+    $('student-section').hidden = view !== 'student';
+    $('public-section').hidden = view === 'student';
+    const places = [];
+    for (let i = 1; i <= 44; i++) {
+      const place = document.createElement('div');
+      place.className = 'place';
+      place.setAttribute('role', 'listitem');
+      place.textContent = String(i).padStart(2, '0');
+      place.setAttribute('aria-label', 'Lugar ' + i + ': estado ainda não recebido');
+      $('places').appendChild(place);
+      places.push(place);
+    }
+    function setText(id, value) { const node = $(id); if (node.textContent !== String(value)) node.textContent = String(value); }
+    function announce(message, kind) {
+      model.notice = message;
+      model.noticeKind = kind || 'info';
+      renderNotice();
+      clearTimeout(model.noticeTimer);if(model.noticeKind==='info'){const shown=model.notice;model.noticeTimer=setTimeout(()=>{if(model.notice===shown){model.notice='';renderNotice();}},5000);}
+    }
+    function renderNotice() {
+      $('notice').hidden = !model.notice;
+      $('notice').className = 'notice' + (model.noticeKind === 'info' ? ' info' : '');
+      setText('notice-text', model.notice);
+      $('retry-button').hidden = model.online || model.failures === 0;
+      $('retry-button').disabled = model.busy;
+      $('dismiss-button').hidden = !model.online;
+    }
+    function signedIn() { return !!(model.token && model.snapshot && model.snapshot.role === (view === 'teacher' ? 'teacher' : 'student')); }
+    function canAct() { return model.online && !model.busy && !model.pending && !model.worldPending && !model.needsSync; }
+    function render() {
+      const s = model.snapshot;
+      const authenticated = signedIn();
+      const ready = canAct();
+      $('connection').dataset.state = model.online ? 'online' : model.failures ? 'offline' : 'connecting';
+      setText('connection-text', model.online ? 'Placa conectada · rede local' : model.failures ? 'Conexão interrompida · último estado recebido' : 'Conectando à placa…');
+      $('student-auth').hidden = view === 'student' && authenticated;
+      $('student-workspace').hidden = view !== 'student' || !authenticated;
+      $('teacher-auth').hidden = view === 'teacher' && authenticated;
+      $('teacher-workspace').hidden = view !== 'teacher' || !authenticated;
+      $('health-card').hidden = view !== 'teacher' || !authenticated;
+      $('student-login-button').disabled = model.busy || !!model.pending || !!model.token;
+      $('teacher-login-button').disabled = model.busy || !!model.pending || !!model.token;
+      $('student-logout').disabled = model.busy;
+      $('teacher-logout').disabled = model.busy;
+      $('health-refresh').disabled = !authenticated || !ready || model.healthRequested;
+      if (s) {
+        $('phase-badge').dataset.phase = s.phase;
+        setText('phase-label', phaseLabels[s.phase]);
+        setText('round-label', 'Rodada ' + s.round);
+        setText('participants-count', s.participants);
+        setText('answers-count', s.answer_count);
+        places.forEach((place, index) => {
+          const entered = s.joined[index] === '1';
+          const voted = s.voted[index] === '1';
+          const mine = authenticated && s.role === 'student' && s.me.id === index + 1;
+          const classes = 'place' + (entered ? ' joined' : '') + (voted ? ' voted' : '') + (mine ? ' is-me' : '');
+          if (place.className !== classes) place.className = classes;
+          const label = 'Lugar ' + (index + 1) + ': ' + (voted ? 'respondeu' : entered ? 'entrou na atividade' : 'aguardando entrada') + (mine ? ', seu lugar' : '');
+          if (place.getAttribute('aria-label') !== label) place.setAttribute('aria-label', label);
+        });
+        const instructions = {lobby:'Leia a situação e converse. As escolhas abrem quando o professor iniciar.', open:'As escolhas estão abertas nos dispositivos dos alunos. As contagens por alternativa aparecem no encerramento.', paused:'Pause os cliques. É hora de ouvir os colegas e considerar outros pontos de vista.', closed:'A rodada foi encerrada. Conversem sobre as interpretações, além das contagens.'};
+        setText('public-instruction', instructions[s.phase]);
+        $('results').hidden = s.phase !== 'closed';
+        if (s.phase === 'closed') {
+          s.totals.forEach((total, index) => {
+            setText('total-' + index, total + (total === 1 ? ' escolha' : ' escolhas'));
+            $('bar-' + index).style.width = (s.answer_count ? total / s.answer_count * 100 : 0) + '%';
+          });
+        }
+      } else {
+        setText('phase-label', 'Aguardando placa');
+        setText('round-label', 'Aguardando estado');
+        setText('participants-count', '—');
+        setText('answers-count', '—');
+        $('results').hidden = true;
+        places.forEach((place, index) => { place.className = 'place'; place.setAttribute('aria-label', 'Lugar ' + (index + 1) + ': estado ainda não recebido'); });
+      }
+      if (view === 'student' && authenticated) {
+        const m = s.me;
+        setText('student-number', String(m.id).padStart(2, '0'));
+        setText('student-name', 'Participante ' + String(m.id).padStart(2, '0'));
+        setText('student-presence', m.joined ? 'Seu lugar está confirmado' : 'Confirmando sua entrada…');
+        document.querySelectorAll('[data-choice]').forEach(button => {
+          const selected = Number(button.dataset.choice) === m.choice;
+          button.classList.toggle('selected', selected);
+          button.setAttribute('aria-pressed', String(selected));
+          button.disabled = !ready || !m.joined || s.phase !== 'open' || m.last_seq >= 2147483647;
+        });
+        let status = '';
+        if (!model.online) status = model.pending && model.pending.kind === 'vote' ? 'Envio sem confirmação. Vamos consultar a placa antes de repetir a mesma escolha.' : 'Sem conexão com a placa. Novas escolhas ficam bloqueadas até a reconexão.';
+        else if (model.pending && model.pending.kind === 'vote') status = 'Enviando sua escolha. Aguarde a confirmação da placa.';
+        else if (model.needsSync) status = 'Conferindo seu estado na placa…';
+        else if (s.phase === 'lobby') status = 'Leia o caso. O professor abrirá as escolhas após a conversa.';
+        else if (s.phase === 'paused') status = (m.choice >= 0 ? 'Sua escolha ' + letters[m.choice] + ' está registrada. ' : '') + 'A rodada está pausada para conversar.';
+        else if (s.phase === 'closed') status = m.choice >= 0 ? 'Sua escolha ' + letters[m.choice] + ' foi registrada. A rodada está encerrada.' : 'A rodada encerrou sem uma escolha sua registrada.';
+        else if (m.choice >= 0) status = 'Escolha ' + letters[m.choice] + ' confirmada pela placa. Você pode mudá-la enquanto a rodada estiver aberta.';
+        else status = 'Escolha uma interpretação. Pense no que a publicação permite concluir.';
+        setText('answer-status', status);
+        $('answer-status').classList.toggle('confirmed', m.choice >= 0 && !model.pending && model.online && !model.needsSync);
+      }
+      const validPhases = {open:['lobby'], pause:['open'], resume:['paused'], close:['open', 'paused'], reset:['lobby', 'open', 'paused', 'closed']};
+      document.querySelectorAll('[data-control]').forEach(button => { button.disabled = !authenticated || !ready || !s || !validPhases[button.dataset.control].includes(s.phase); });
+      if (view === 'teacher' && authenticated) {
+        let status = 'Abrir → conversar → encerrar. Nova rodada apaga as escolhas atuais e preserva quem entrou.';
+        if (model.pending) status = model.online ? 'Ação em andamento. Aguardando confirmação da placa.' : 'Ação sem confirmação. A reconexão vai conferir o estado antes de repetir o envio.';
+        else if (!model.online) status = 'Controles bloqueados enquanto a placa está desconectada.';
+        else if (model.needsSync) status = 'Sincronizando o estado antes de liberar os controles.';
+        setText('control-status', status);
+      }
+      renderWorld();
+      worldScene.update(s,{authenticated,online:model.online,busy:model.busy,needsSync:model.needsSync});
+      renderNotice();
+    }
+    function clearAuthentication(message) {
+      model.world=null;model.worldPending=null;model.worldSync=true;
+      model.token = '';
+      model.pending = null;
+      model.snapshot = null;
+      model.health = null;
+      model.healthRequested = false;
+      model.needsSync = true;
+      $('health-grid').hidden = true;
+      if (message) announce(message, 'warning');
+    }
+    function applySnapshot(raw) {
+      const s = ConexaProtocol.validateSnapshot(raw);
+      const expected = view === 'teacher' ? 'teacher' : 'student';
+      if (model.token && s.role !== expected) {
+        clearAuthentication(view === 'teacher' ? 'Essa chave não é de professor. Use a chave separada da atividade.' : 'Esse código não é de aluno. Use o código entregue pelo professor.');
+        return false;
+      }
+      const previous = model.snapshot;
+      const changed = previous && (previous.boot !== s.boot || previous.round !== s.round);
+      if (changed) {
+        const rebooted = previous.boot !== s.boot;
+        if (model.pending && model.pending.kind !== 'join') model.pending = null;
+        if (rebooted) { model.health = null; $('health-grid').hidden = true; }
+        announce(rebooted ? 'A placa reiniciou. A partida anterior foi encerrada; as escolhas antigas não serão reenviadas.' : 'Uma nova rodada começou. As escolhas anteriores foram limpas e não serão reenviadas.', 'info');
+      }
+      model.snapshot = s;
+      model.needsSync = false;
+      model.lastReceived = Date.now();
+      if (model.pending) {
+        const decision = ConexaProtocol.reconcile(model.pending, s);
+        if (decision === 'confirmed') {
+          const kind = model.pending.kind;
+          model.pending = null;
+          if (!changed && kind === 'join') announce('Seu lugar foi confirmado. Leia o caso e acompanhe a rodada.', 'info');
+        } else if (decision === 'session_changed') {
+          model.pending = null;
+          announce('A partida mudou. A ação anterior foi descartada; o estado atual está na tela.', 'info');
+        } else if (decision === 'cancelled') {
+          model.pending = null;
+          announce('A rodada ou sua escolha mudou durante o envio. O estado confirmado pela placa está na tela.', 'info');
+        }
+      }
+      if (view === 'student' && model.token && s.role === 'student' && !s.me.joined && !model.pending) model.pending = {kind:'join', path:'/api/join', body:{}};
+      return true;
+    }
+    function renderHealth(data) {
+      const fields = [['version','Firmware',''],['chip','Chip',''],['ip','IP na rede',''],['uptime_s','Ligada há',' s'],['active_students','Alunos ativos nos últimos 20 s',''],['rssi','Sinal Wi-Fi',' dBm'],['heap_free','Memória livre',' bytes'],['heap_min','Mínimo de memória livre',' bytes'],['heap_largest','Maior bloco livre',' bytes'],['requests','Requisições',''],['errors','Erros',''],['boot','Identificador da execução','']];
+      $('health-grid').replaceChildren();
+      fields.forEach(([key, label, unit]) => {
+        const item = document.createElement('div');
+        const term = document.createElement('dt');
+        const definition = document.createElement('dd');
+        term.textContent = label;
+        definition.textContent = data[key] === undefined || data[key] === null ? 'Não informado' : String(data[key]) + unit;
+        item.appendChild(term); item.appendChild(definition); $('health-grid').appendChild(item);
+      });
+      $('health-grid').hidden = false;
+      setText('health-note', 'Consulta recebida às ' + new Date().toLocaleTimeString('pt-BR') + '. Alunos ativos não são o total de dispositivos conectados ao roteador.');
+    }
+    async function request(path, method, body) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6500);
+      const headers = {Accept:'application/json'};
+      if (model.token) headers.Authorization = 'Bearer ' + model.token;
+      if (body !== undefined) headers['Content-Type'] = 'application/json';
+      try {
+        const response = await fetch(path, {method, headers, body:body === undefined ? undefined : JSON.stringify(body), cache:'no-store', credentials:'omit', signal:controller.signal, redirect:'error'});
+        const text = await response.text();
+        let data;
+        try { data = JSON.parse(text); } catch (_) { throw new Error('A placa não devolveu uma resposta JSON válida.'); }
+        if (!response.ok) {
+          const error = new Error(typeof data.message === 'string' ? data.message : 'A placa recusou a solicitação.');
+          error.status = response.status;error.code=data.error;
+          throw error;
+        }
+        return data;
+      } finally { clearTimeout(timeout); }
+    }
+    function schedule(delay) {
+      if (model.timer !== null) clearTimeout(model.timer);
+      model.timerDue=Date.now()+delay;model.timer = setTimeout(tick, delay);
+    }
+    async function tick() {
+      model.timer = null;
+      if (model.busy) return;
+      const local=worldScene.city&&worldScene.city.getState();
+      if(!model.worldPending&&!model.worldSync&&!model.needsSync&&!model.pending&&model.online&&model.world&&model.world.phase==='open'&&local&&local.predicted&&Date.now()>=model.worldNextMove){if(!worldScene.city.settleNoop())model.worldPending=makeWorldAction('move',local.tile.y*14+local.tile.x);}
+      model.busy = true;
+      render();
+      let action = null;
+      let healthQuery = false;
+      try {
+        // Read after an uncertain write before deciding whether the SAME payload needs a retry.
+        if (model.pending && !model.needsSync) {
+          action = model.pending;
+          const data = await request(action.path, 'POST', action.body);
+          applySnapshot(data);model.worldSync=true;
+        } else if (model.worldPending&&!model.needsSync&&!model.worldSync&&Date.now()>=model.worldRetryAt) {
+          action=model.worldPending;model.worldNextMove=Date.now()+1050;
+          const data=await request('/api/world/action','POST',action.body);applySession(data);
+        } else if (model.healthRequested && !model.needsSync && !model.pending) {
+          healthQuery = true;
+          const data = await request('/api/health', 'GET');
+          if (!data || typeof data.boot !== 'string') throw new Error('A placa não confirmou as medições.');
+          model.health = data;
+          model.healthRequested = false;
+          renderHealth(data);
+          if (model.snapshot && data.boot !== model.snapshot.boot) model.needsSync = true;
+        } else {
+          const data = await request('/api/session', 'GET');
+          applySession(data);
+        }
+        const recovered = model.failures > 0;
+        model.online = true;
+        model.failures = 0;
+        if (recovered && model.noticeKind === 'warning' && !model.pending && !model.needsSync) announce('Conexão restabelecida. A tela mostra o estado recebido da placa.', 'info');
+      } catch (error) {
+        model.needsSync = true;model.worldSync=true;
+        if (error.status&&error.status<500) {
+          model.online = true;
+          model.failures = 0;
+          if (error.status === 401) clearAuthentication('Acesso não confirmado. Confira seu código ou chave e entre novamente.');
+          else {
+            if(action&&action.body&&action.body.op){if(error.status===429||error.status>=500)model.worldRetryAt=Date.now()+1100;else{model.worldPending=null;if(worldScene.city)worldScene.city.stop();}if(gameUI.showMessage)gameUI.showMessage(error.message);}else if (action) model.pending = null;
+            if (healthQuery) model.healthRequested = false;
+            announce(error.message + (error.status === 409 ? ' Vamos consultar o estado atual.' : ''), 'warning');
+          }
+        } else {
+          model.online = false;
+          model.failures++;
+          announce(model.pending ? 'Conexão interrompida. Ainda não há confirmação desta ação. Na reconexão, vamos conferir o estado antes de repetir o mesmo envio.' : 'Não foi possível receber o estado da placa. Confira a rede da atividade e se a ESP32 continua ligada.', 'warning');
+        }
+      } finally {
+        model.busy = false;
+        render();
+        const local=worldScene.city&&worldScene.city.getState();
+        const delay = model.failures ? Math.min(15000, 2300 * Math.pow(2, Math.min(model.failures - 1, 3))) + Math.random() * 500 : model.pending || model.needsSync || model.worldSync || model.healthRequested ? 150+Math.random()*100 : model.worldPending ? Math.max(150,model.worldRetryAt-Date.now()) : local&&(local.moving||local.predicted) ? Math.max(100,model.worldNextMove-Date.now(),1000) : 2200+Math.random()*600;
+        schedule(delay);
+      }
+    }
+    function authenticate(event, inputId) {
+      event.preventDefault();
+      if (model.busy || model.pending || model.token) return;
+      const enteredToken = $(inputId).value;
+      const token = inputId === 'student-code' ? enteredToken.trim().toUpperCase() : enteredToken;
+      if (!token) return;
+      model.token = token;
+      $(inputId).value = '';
+      model.needsSync = true;model.worldSync=true;
+      model.health = null;
+      model.notice = '';
+      // Tokens live only in this tab's memory and are sent only in Authorization headers.
+      if (view === 'student') model.pending = {kind:'join', path:'/api/join', body:{}};
+      render();
+      schedule(0);
+    }
+    $('student-auth').addEventListener('submit', event => authenticate(event, 'student-code'));
+    $('teacher-auth').addEventListener('submit', event => authenticate(event, 'teacher-key'));
+    function logout() {
+      if (model.busy) return;
+      clearAuthentication('Acesso encerrado neste navegador. O estado da atividade continua na placa.');
+      render(); schedule(0);
+    }
+    $('student-logout').addEventListener('click', logout);
+    $('teacher-logout').addEventListener('click', logout);
+    document.querySelectorAll('[data-choice]').forEach(button => button.addEventListener('click', () => {
+      if (!canAct() || !signedIn()) return;
+      try {
+        const body = ConexaProtocol.buildVote(model.snapshot, Number(button.dataset.choice));
+        model.pending = {kind:'vote', path:'/api/vote', body};
+        render(); schedule(0);
+      } catch (error) { announce(error.message, 'warning'); }
+    }));
+    document.querySelectorAll('[data-control]').forEach(button => button.addEventListener('click', () => {
+      if (!canAct() || !signedIn() || view !== 'teacher') return;
+      const action = button.dataset.control;
+      if (action === 'reset' && !window.confirm('Iniciar uma nova rodada? As escolhas atuais serão apagadas da memória da placa. Quem já entrou manterá seu lugar.')) return;
+      const s = model.snapshot;
+      model.pending = {kind:'control', path:'/api/control', body:{boot:s.boot, round:s.round, action}};
+      render(); schedule(0);
+    }));
+    $('health-refresh').addEventListener('click', () => {
+      if (!canAct() || !signedIn() || view !== 'teacher') return;
+      model.healthRequested = true; render(); schedule(0);
+    });
+    $('retry-button').addEventListener('click', () => { if (!model.busy) schedule(0); });
+    $('dismiss-button').addEventListener('click', () => { model.notice = ''; renderNotice(); });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && !model.busy) { model.needsSync = true; render(); schedule(0); } });
+    window.addEventListener('online', () => { if (!model.busy) { model.needsSync = true; schedule(0); } });
+    render();
+    schedule(0);
+  })();
+  </script>
+</body>
+</html>
